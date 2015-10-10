@@ -21,7 +21,7 @@ namespace tao
       template< typename S, std::size_t... Is >
       struct exclusive_scan< S, index_sequence< Is... > >
       {
-        using type = integer_sequence< typename S::value_type, seq::partial_sum< Is, S >::value... >;
+        using type = integer_sequence< typename S::value_type, partial_sum< Is, S >::value... >;
       };
     }
 
