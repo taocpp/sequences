@@ -4,18 +4,15 @@
 #ifndef TAOCPP_SEQUENCES_INCLUDE_INTEGER_SEQUENCE_HPP
 #define TAOCPP_SEQUENCES_INCLUDE_INTEGER_SEQUENCE_HPP
 
-#if __cplusplus >= 201402L
-#include <utility>
-#else
 #include <cstddef>
-#endif
+#include <utility>
 
 namespace tao
 {
   namespace seq
   {
 
-#if __cplusplus >= 201402L
+#ifdef __cpp_lib_integer_sequence
 
     using std::integer_sequence;
     using std::index_sequence;
