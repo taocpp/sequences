@@ -72,7 +72,7 @@ matrix:
 
     - os: linux
       compiler: clang
-      env: COMPILER=clang++ CXXSTD=c++14
+      env: COMPILER=clang++ CXXSTD=c++1y
 
     - os: linux
       compiler: clang
@@ -88,15 +88,7 @@ matrix:
         apt:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.5']
           packages: ['clang-3.5']
-      env: COMPILER=clang++-3.5 CXXSTD=c++14
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.7']
-          packages: ['clang-3.5']
-      env: COMPILER=clang++-3.5 CXXSTD=c++1z
+      env: COMPILER=clang++-3.5 CXXSTD=c++1y
 
     - os: linux
       compiler: clang
@@ -113,14 +105,6 @@ matrix:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.6']
           packages: ['clang-3.6']
       env: COMPILER=clang++-3.6 CXXSTD=c++14
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.7']
-          packages: ['clang-3.6']
-      env: COMPILER=clang++-3.6 CXXSTD=c++1z
 
     - os: linux
       compiler: clang
