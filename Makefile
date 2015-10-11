@@ -10,14 +10,8 @@ else
 UNAME_S := $(shell uname -s)
 endif
 
-ifeq ($(CXXSTD),)
-CXXSTD := -std=c++14
-ifeq ($(UNAME_S),Darwin)
-CXXSTD += -stdlib=libc++
-endif
-endif
-
 CPPFLAGS ?= -pedantic
+CXXSTD ?= c++14
 CXXFLAGS ?= -O3 -Wall -Wextra -Werror
 
 SOURCES := $(shell find -name '*.cpp')
@@ -37,10 +31,10 @@ clean:
 
 build/%.d: %.cpp Makefile
 	@mkdir -p $(@D)
-	$(CXX) $(CXXSTD) -Iinclude $(CPPFLAGS) -MM -MQ $@ $< -o $@
+	$(CXX) -std=$(CXXSTD) -Iinclude $(CPPFLAGS) -MM -MQ $@ $< -o $@
 
 build/%: %.cpp build/%.d
-	$(CXX) $(CXXSTD) -Iinclude $(CPPFLAGS) $(CXXFLAGS) $< -o $@
+	$(CXX) -std=$(CXXSTD) -Iinclude $(CPPFLAGS) $(CXXFLAGS) $< -o $@
 
 ifeq ($(findstring $(MAKECMDGOALS),clean),)
 -include $(DEPENDS)
