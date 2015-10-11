@@ -63,6 +63,20 @@ The Art of C++ / Sequences is a zero-dependency C++11 header-only library that p
 
   * `minus_t< typename SR, typename SL >`
 
+* Header `tao/seq/head.hpp`
+
+  Integral constant to provide the first element of a non-empty sequence.
+
+  * `head< typename T, T... >`
+  * `head< typename S >`
+
+* Header `tao/seq/tail.hpp`
+
+  Removed the first element of a non-empty sequence.
+
+  * `tail_t< typename T, T... >`
+  * `tail_t< typename S >`
+
 # Efficiency
 
 All algorithms have a constant instantiation depth and are implemented in a non-recursive way. The only exception is `make_integer_sequence.hpp`, where the instantiation depth is O(log N).
