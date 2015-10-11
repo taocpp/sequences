@@ -8,7 +8,7 @@ The Art of C++ / Sequences is a zero-dependency C++11 header-only library that p
 
 # Compatibility
 
-* The library support C++11 or newer version.
+* The library support C++11 or newer.
 * On C++11, it provides `tao::seq::integer_sequence` itself.
 * From C++14 on it uses `std::integer_sequence`.
 * It is tested with GCC 4.7+ and Clang 3.4+.
