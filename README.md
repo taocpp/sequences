@@ -123,7 +123,6 @@ Removed the first element of a non-empty sequence.
 * `tail_t< typename T, T... >`
 * `tail_t< typename S >`
 
-
 #### Header `tao/seq/select.hpp`
 
 Integral constant to provide the `I`th element of a non-empty sequence.
@@ -142,6 +141,30 @@ Examples:
 * `using I = index_sequence<1,0,3,2,1,1,3>`
 * `using M = integer_sequence<int,5,6,-7,8,9>`
 * `map_t<I,M>` ➙ `integer_sequence<int,6,5,8,-7,6,6,8>`
+
+#### Header `tao/seq/is_all.hpp`
+
+Integral constant which is true if all boolean parameters are true (logical and).
+
+* `is_all< bool... >`
+
+Examples:
+
+* `is_all<true,true,true,true>::value` ➙ `true`
+* `is_all<true,true,false,true>::value` ➙ `false`
+* `is_all<>::value` ➙ `true`
+
+#### Header `tao/seq/is_any.hpp`
+
+Integral constant which is true if any boolean parameters is true (logical or).
+
+* `is_any< bool... >`
+
+Examples:
+
+* `is_any<false,true,false,false>::value` ➙ `true`
+* `is_any<false,false,false,false>::value` ➙ `false`
+* `is_any<>::value` ➙ `false`
 
 ## More documentation will come soon...
 
