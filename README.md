@@ -6,141 +6,157 @@
 
 The Art of C++ / Sequences is a zero-dependency C++11 header-only library that provides efficient algorithms to generate and work on [`std::integer_sequence`](http://en.cppreference.com/w/cpp/utility/integer_sequence).
 
-# Compatibility
+## Compatibility
 
 * Requires C++11 or newer.
 * Tested with GCC 4.7+ and Clang 3.4+.
 * Provides `tao::seq::integer_sequence`.
 * When available, the above is a type-alias for `std::integer_sequence`.
 
-# Provided algorithms and examples
+## Provided algorithms and examples
 
-* Header `tao/seq/make_integer_sequence.hpp`
+#### Header `tao/seq/make_integer_sequence.hpp`
 
-  Efficient versions of sequence generators.
+Efficient versions of sequence generators.
 
-  * `make_integer_sequence< typename T, T N >`
-  * `make_index_sequence< std::size_t N >`
-  * `index_sequence_for< typename... Ts >`
+* `make_integer_sequence< typename T, T N >`
+* `make_index_sequence< std::size_t N >`
+* `index_sequence_for< typename... Ts >`
 
-  Examples:
+Examples:
 
-  * `make_integer_sequence<int,0>` ➙ `integer_sequence<int>`
-  * `make_integer_sequence<int,1>` ➙ `integer_sequence<int,0>`
-  * `make_integer_sequence<int,3>` ➙ `integer_sequence<int,0,1,2>`
-  * `make_index_sequence<0>` ➙ `index_sequence<>`
-  * `make_index_sequence<1>` ➙ `index_sequence<1>`
-  * `make_index_sequence<5>` ➙ `index_sequence<0,1,2,3,4>`
-  * `index_sequence_for<int,void,long>` ➙ `index_sequence<0,1,2>`
+* `make_integer_sequence<int,0>` ➙ `integer_sequence<int>`
+* `make_integer_sequence<int,1>` ➙ `integer_sequence<int,0>`
+* `make_integer_sequence<int,3>` ➙ `integer_sequence<int,0,1,2>`
+* `make_index_sequence<0>` ➙ `index_sequence<>`
+* `make_index_sequence<1>` ➙ `index_sequence<1>`
+* `make_index_sequence<5>` ➙ `index_sequence<0,1,2,3,4>`
+* `index_sequence_for<int,void,long>` ➙ `index_sequence<0,1,2>`
 
-  Notes:
+Notes:
 
-  The implementation has O(log N) instantiation depth. This allows for very large sequences without the need to increase the compiler's default instantiation depth limits. For example, GCC and Clang generate `index_sequence<10000>` in ~0.15s (on my machine, of course). The standard library version, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
+The implementation has O(log N) instantiation depth. This allows for very large sequences without the need to increase the compiler's default instantiation depth limits. For example, GCC and Clang generate `index_sequence<10000>` in ~0.15s (on my machine, of course). The standard library version, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
 
-* Header `tao/seq/sum.hpp`
+#### Header `tao/seq/sum.hpp`
 
-  Integral constant to provide the sum of `Ns`.
+Integral constant to provide the sum of `Ns`.
 
-  * `sum< typename T, T... Ns >`
-  * `sum< typename S >`
+* `sum< typename T, T... Ns >`
+* `sum< typename S >`
 
-  Examples:
+Examples:
 
-  * `sum<int,1,4,3,1>::value` ➙ `9`
-  * `sum<make_index_sequence<5>>::value` ➙ `10`
+* `sum<int,1,4,3,1>::value` ➙ `9`
+* `sum<make_index_sequence<5>>::value` ➙ `10`
 
-* Header `tao/seq/partial_sum.hpp`
+#### Header `tao/seq/partial_sum.hpp`
 
-  Integral constant to provide the sum of the first `I` elements of `Ns`.
+Integral constant to provide the sum of the first `I` elements of `Ns`.
 
-  * `partial_sum< std::size_t I, typename T, T... Ns >`
-  * `partial_sum< std::size_t I, typename S >`
+* `partial_sum< std::size_t I, typename T, T... Ns >`
+* `partial_sum< std::size_t I, typename S >`
 
-  Examples:
+Examples:
 
-  * `partial_sum<0,int,1,4,3,1>::value` ➙ `0`
-  * `partial_sum<2,int,1,4,3,1>::value` ➙ `5`
-  * `partial_sum<4,make_index_sequence<5>>::value` ➙ `6`
+* `partial_sum<0,int,1,4,3,1>::value` ➙ `0`
+* `partial_sum<2,int,1,4,3,1>::value` ➙ `5`
+* `partial_sum<4,make_index_sequence<5>>::value` ➙ `6`
 
-* Header `tao/seq/exclusive_scan.hpp`
+#### Header `tao/seq/exclusive_scan.hpp`
 
-  Provides a sequence with the exclusive scan of the input sequence.
+Provides a sequence with the exclusive scan of the input sequence.
 
-  * `exclusive_scan_t< typename T, T... Ns >`
-  * `exclusive_scan_t< typename S >`
+* `exclusive_scan_t< typename T, T... Ns >`
+* `exclusive_scan_t< typename S >`
 
-  Examples:
+Examples:
 
-  * `exclusive_scan_t<int,1,4,0,3,1>` ➙ `integer_sequence<int,0,1,5,5,8>`
+* `exclusive_scan_t<int,1,4,0,3,1>` ➙ `integer_sequence<int,0,1,5,5,8>`
 
-* Header `tao/seq/inclusive_scan.hpp`
+#### Header `tao/seq/inclusive_scan.hpp`
 
-  Provides a sequence with the inclusive scan of the input sequence.
+Provides a sequence with the inclusive scan of the input sequence.
 
-  * `inclusive_scan_t< typename T, T... Ns >`
-  * `inclusive_scan_t< typename S >`
+* `inclusive_scan_t< typename T, T... Ns >`
+* `inclusive_scan_t< typename S >`
 
-  Examples:
+Examples:
 
-  * `inclusive_scan_t<int,1,4,0,3,1>` ➙ `integer_sequence<int,1,5,5,8,9>`
+* `inclusive_scan_t<int,1,4,0,3,1>` ➙ `integer_sequence<int,1,5,5,8,9>`
 
-* Header `tao/seq/plus.hpp`
+#### Header `tao/seq/plus.hpp`
 
-  Provides a sequence which is the element-wise sum of its input sequences.
+Provides a sequence which is the element-wise sum of its input sequences.
 
-  * `plus_t< typename L, typename R >`
+* `plus_t< typename L, typename R >`
 
-  Examples:
+Examples:
 
-  * `using A = index_sequence<1,4,0,3,1>`
-  * `using B = make_index_sequence<5>`
-  * `plus_t<A,B>` ➙ `index_sequence<1,5,2,6,5>`
+* `using A = index_sequence<1,4,0,3,1>`
+* `using B = make_index_sequence<5>`
+* `plus_t<A,B>` ➙ `index_sequence<1,5,2,6,5>`
 
-* Header `tao/seq/minus.hpp`
+#### Header `tao/seq/minus.hpp`
 
-  Provides a sequence which is the element-wise sum of its input sequences.
+Provides a sequence which is the element-wise sum of its input sequences.
 
-  * `minus_t< typename L, typename R >`
+* `minus_t< typename L, typename R >`
 
-  Examples:
+Examples:
 
-  * `using A = integer_sequence<int,1,4,0,3,1>`
-  * `using B = integer_sequence<int,0,1,2,3,4>`
-  * `minus_t<A,B>` ➙ `integer_sequence<int,1,3,-2,0,-3>`
-  * `minus_t<B,A>` ➙ `integer_sequence<int,-1,-3,2,0,3>`
+* `using A = integer_sequence<int,1,4,0,3,1>`
+* `using B = integer_sequence<int,0,1,2,3,4>`
+* `minus_t<A,B>` ➙ `integer_sequence<int,1,3,-2,0,-3>`
+* `minus_t<B,A>` ➙ `integer_sequence<int,-1,-3,2,0,3>`
 
-* Header `tao/seq/head.hpp`
+#### Header `tao/seq/head.hpp`
 
-  Integral constant to provide the first element of a non-empty sequence.
+Integral constant to provide the first element of a non-empty sequence.
 
-  * `head< typename T, T... >`
-  * `head< typename S >`
+* `head< typename T, T... >`
+* `head< typename S >`
 
-* Header `tao/seq/tail.hpp`
+#### Header `tao/seq/tail.hpp`
 
-  Removed the first element of a non-empty sequence.
+Removed the first element of a non-empty sequence.
 
-  * `tail_t< typename T, T... >`
-  * `tail_t< typename S >`
+* `tail_t< typename T, T... >`
+* `tail_t< typename S >`
 
 
-* Header `tao/seq/select.hpp`
+#### Header `tao/seq/select.hpp`
 
-  Integral constant to provide the `I`th element of a non-empty sequence.
+Integral constant to provide the `I`th element of a non-empty sequence.
 
-  * `select< std::size_t I, typename T, T... >`
-  * `select< std::size_t I, typename S >`
+* `select< std::size_t I, typename T, T... >`
+* `select< std::size_t I, typename S >`
 
-* Header `tao/seq/map.hpp`
+#### Header `tao/seq/map.hpp`
 
-  Map a sequence of indices to a sequence of values.
+Map a sequence of indices to a sequence of values.
 
-  * `map_t< typename I, typename M >`
+* `map_t< typename I, typename M >`
 
-  Examples:
+Examples:
 
-  * `using I = index_sequence<1,0,3,2,1,1,3>`
-  * `using M = integer_sequence<int,5,6,-7,8,9>`
-  * `map_t<I,M>` ➙ `integer_sequence<int,6,5,8,-7,6,6,8>`
+* `using I = index_sequence<1,0,3,2,1,1,3>`
+* `using M = integer_sequence<int,5,6,-7,8,9>`
+* `map_t<I,M>` ➙ `integer_sequence<int,6,5,8,-7,6,6,8>`
 
-# More documentation will come soon...
+## More documentation will come soon...
+
+## License
+
+<a href="http://www.opensource.org/"><img height="105" width="75" align="right" src="http://wiki.opensource.org/bin/download/OSI+Operations/Marketing+%26+Promotional+Collateral/OSI_certified_logo_vector.svg"></a>
+
+The Art of C++ is certified [Open Source](http://www.opensource.org/docs/definition.html) software. It may be used for any purpose, including commercial purposes, at absolutely no cost. It is distributed under the terms of the [MIT license](http://www.opensource.org/licenses/mit-license.html) reproduced here.
+
+> Copyright (c) 2015 Daniel Frey
+>
+> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+>
+> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+>
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+This site and software is not affiliated with or endorsed by the Open Source Initiative.
