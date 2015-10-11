@@ -35,7 +35,7 @@ The Art of C++ / Sequences is a zero-dependency C++11 header-only library that p
 
   Notes:
 
-  The implementation has O(log N) instantiation depth. This allows for very large sequences without the need to increase the compiler's default instantiation depth limits. For example, GCC and Clang generate `index_sequence<10000>` in <0.15s (on my machine, of course). The STL's version, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
+  The implementation has O(log N) instantiation depth. This allows for very large sequences without the need to increase the compiler's default instantiation depth limits. For example, GCC and Clang generate `index_sequence<10000>` in ~0.15s (on my machine, of course). The standard library version, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
 
 * Header `tao/seq/sum.hpp`
 
@@ -126,7 +126,7 @@ The Art of C++ / Sequences is a zero-dependency C++11 header-only library that p
 
 * Header `tao/seq/select.hpp`
 
-  Integral constant to provide the 'I'th element of a non-empty sequence.
+  Integral constant to provide the `I`th element of a non-empty sequence.
 
   * `select< std::size_t I, typename T, T... >`
   * `select< std::size_t I, typename S >`
