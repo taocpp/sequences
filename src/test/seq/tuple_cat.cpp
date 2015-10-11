@@ -1,12 +1,13 @@
 // The Art of C++ / Sequences
 // Copyright (c) 2015 Daniel Frey
 
-#include <tao/seq/plus.hpp>
-#include <tao/seq/minus.hpp>
+#include <tao/seq/integer_sequence.hpp>
 #include <tao/seq/sum.hpp>
+#include <tao/seq/make_integer_sequence.hpp>
+#include <tao/seq/inclusive_scan.hpp>
+#include <tao/seq/minus.hpp>
 #include <tao/seq/map.hpp>
 #include <tao/seq/exclusive_scan.hpp>
-#include <tao/seq/inclusive_scan.hpp>
 
 #include <type_traits>
 
