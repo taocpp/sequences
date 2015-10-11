@@ -10,14 +10,6 @@
 #include "integer_sequence.hpp"
 
 #ifndef __cpp_fold_expressions
-#ifdef __clang__
-#if ( __clang_major__ > 3 ) || ( ( __clang_major__ == 3 ) && ( __clang_minor__ >= 6 ) )
-#define __cpp_fold_expressions
-#endif
-#endif
-#endif
-
-#ifndef __cpp_fold_expressions
 #include <cstddef>
 #include "make_integer_sequence.hpp"
 #endif
