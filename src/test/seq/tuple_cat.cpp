@@ -13,21 +13,18 @@
 
 using namespace tao::seq;
 
-template< std::size_t M, typename >
-struct count_less_or_equal;
-
 template< std::size_t M, std::size_t... Ns >
-struct count_less_or_equal< M, index_sequence< Ns... > >
+struct count_less_or_equal
   : sum< std::size_t, ( ( Ns <= M ) ? 1 : 0 )... >
 {};
 
 template< typename, typename >
 struct expand;
 
-template< std::size_t... Is, typename S >
-struct expand< index_sequence< Is... >, S >
+template< std::size_t... Is, std::size_t... Ns >
+struct expand< index_sequence< Is... >, index_sequence< Ns... > >
 {
-  using type = index_sequence< count_less_or_equal< Is, S >::value...  >;
+  using type = index_sequence< count_less_or_equal< Is, Ns... >::value...  >;
 };
 
 template< typename I, typename S >
