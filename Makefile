@@ -32,8 +32,8 @@ all: $(BINARIES)
 
 .PHONY: clean
 clean:
-	rm -rf build
-	find -name '*~' -delete
+	@rm -rf build
+	@find -name '*~' -delete
 
 build/%.d: %.cpp Makefile
 	@mkdir -p $(@D)
