@@ -37,8 +37,6 @@ int main()
   using S = index_sequence< 2, 1, 3, 0, 1, 1, 3 >;
   using I = make_index_sequence< sum< S >::value >;
 
-  static_assert( std::is_same< I, index_sequence< 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 > >::value, "oops" );
-
   using OUTER = expand_t< I, inclusive_scan_t< S > >;
   using INNER = minus_t< I, map_t< OUTER, exclusive_scan_t< S > > >;
 
