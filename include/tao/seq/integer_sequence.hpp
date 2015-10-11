@@ -12,7 +12,7 @@ namespace tao
   namespace seq
   {
 
-#ifdef __cpp_lib_integer_sequence
+#if ( __cplusplus >= 201402L ) && !defined( TAOCPP_NO_STD_INTEGER_SEQUENCE )
 
     using std::integer_sequence;
     using std::index_sequence;
