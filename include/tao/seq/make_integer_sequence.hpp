@@ -29,17 +29,17 @@ namespace tao
 
     namespace impl
     {
-      template< typename S, bool, std::size_t = S::size() >
+      template< typename S, std::size_t, bool >
       struct double_up;
 
       template< typename T, T... Ns, std::size_t N >
-      struct double_up< integer_sequence< T, Ns... >, false, N >
+      struct double_up< integer_sequence< T, Ns... >, N, false >
       {
         using type = integer_sequence< T, Ns..., ( N + Ns )... >;
       };
 
       template< typename T, T... Ns, std::size_t N >
-      struct double_up< integer_sequence< T, Ns... >, true, N >
+      struct double_up< integer_sequence< T, Ns... >, N, true >
       {
         using type = integer_sequence< T, Ns..., ( N + Ns )..., 2 * N >;
       };
@@ -50,9 +50,9 @@ namespace tao
       template< typename T, T N >
       using generate_t = typename generate< T, N >::type;
 
-      template< typename T, T N >
-      struct generate< T, N, typename std::enable_if< ( N > 1 ) >::type >
-        : double_up< generate_t< T, N / 2 >, N % 2 == 1 >
+      template< typename T, T N, typename >
+      struct generate
+        : double_up< generate_t< T, N / 2 >, N / 2, N % 2 == 1 >
       {};
 
       template< typename T, T N >
