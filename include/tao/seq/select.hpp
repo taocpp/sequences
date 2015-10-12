@@ -18,7 +18,7 @@ namespace tao
       template< typename T, T... Ns >
       struct values
       {
-        static constexpr T data[ sizeof...( Ns ) ] = { Ns... };
+        static constexpr T data[] = { Ns... };
       };
     }
 
