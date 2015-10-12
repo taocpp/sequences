@@ -15,7 +15,7 @@ namespace tao
   namespace seq
   {
 
-#ifdef _LIBCXX_VERSION
+#ifdef _LIBCPP_VERSION
 
     // libc++ already has very efficient versions for make_*
 
