@@ -14,10 +14,21 @@ namespace tao
 {
   namespace seq
   {
+
+#ifdef _LIBCXX_VERSION
+
+    // libc++ already has very efficient versions for make_*
+
+    using std::make_integer_sequence;
+    using std::make_index_sequence;
+    using std::index_sequence_for;
+
+#else
+
+    // idea from http://stackoverflow.com/a/13073076
+
     namespace impl
     {
-      // idea from http://stackoverflow.com/a/13073076
-
       template< std::size_t, typename, typename >
       struct combine;
 
@@ -59,6 +70,9 @@ namespace tao
 
     template< typename... Ts >
     using index_sequence_for = make_index_sequence< sizeof...( Ts ) >;
+
+#endif
+
   }
 }
 

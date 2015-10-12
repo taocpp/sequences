@@ -35,7 +35,9 @@ Examples:
 
 Notes:
 
-The implementation has O(log N) instantiation depth. This allows for very large sequences without the need to increase the compiler's default instantiation depth limits. For example, GCC and Clang generate `index_sequence<10000>` in ~0.15s (on my machine, of course). The standard library version, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
+libc++ already has very efficient versions for the above, so they are pulled in with a using-declaration. Only if we don't know if an STL's versions are at least O(log N) we provide our own implementation.
+
+The implementation has O(log N) instantiation depth. This allows for very large sequences without the need to increase the compiler's default instantiation depth limits. For example, GCC and Clang generate `index_sequence<10000>` in ~0.15s (on my machine, of course). The standard library version from libstdc++, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
 
 #### Header `tao/seq/sum.hpp`
 
@@ -156,7 +158,7 @@ Examples:
 
 #### Header `tao/seq/is_any.hpp`
 
-Integral constant which is true if any boolean parameters is true (logical or).
+Integral constant which is true if any boolean parameter is true (logical or).
 
 * `is_any< bool... >`
 
@@ -170,7 +172,7 @@ Examples:
 
 ## License
 
-<a href="http://www.opensource.org/"><img height="105" width="105" align="right" src="http://wiki.opensource.org/bin/download/OSI+Operations/Marketing+%26+Promotional+Collateral/OSI_certified_logo_vector.svg"></a>
+<a href="http://www.opensource.org/"><img height="100" align="right" src="http://wiki.opensource.org/bin/download/OSI+Operations/Marketing+%26+Promotional+Collateral/OSI_certified_logo_vector.svg"></a>
 
 The Art of C++ is certified [Open Source](http://www.opensource.org/docs/definition.html) software. It may be used for any purpose, including commercial purposes, at absolutely no cost. It is distributed under the terms of the [MIT license](http://www.opensource.org/licenses/mit-license.html) reproduced here.
 
