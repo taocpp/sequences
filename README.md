@@ -29,7 +29,7 @@ Examples:
 * `make_integer_sequence<int,1>` ➙ `integer_sequence<int,0>`
 * `make_integer_sequence<int,3>` ➙ `integer_sequence<int,0,1,2>`
 * `make_index_sequence<0>` ➙ `index_sequence<>`
-* `make_index_sequence<1>` ➙ `index_sequence<1>`
+* `make_index_sequence<1>` ➙ `index_sequence<0>`
 * `make_index_sequence<5>` ➙ `index_sequence<0,1,2,3,4>`
 * `index_sequence_for<int,void,long>` ➙ `index_sequence<0,1,2>`
 
