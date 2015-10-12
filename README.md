@@ -1,5 +1,6 @@
 # The Art of C++ / Sequences
 
+[![Release](https://img.shields.io/github/release/taocpp/sequences.svg)](https://github.com/taocpp/sequences/releases/latest)
 [![License](https://img.shields.io/github/license/taocpp/sequences.svg)](#license)
 [![TravisCI](https://travis-ci.org/taocpp/sequences.svg)](https://travis-ci.org/taocpp/sequences)
 [![Issues](https://img.shields.io/github/issues/taocpp/sequences.svg)](https://github.com/taocpp/sequences/issues)
@@ -10,10 +11,24 @@ The Art of C++ / Sequences is a zero-dependency C++11 header-only library that p
 
 * Requires C++11 or newer.
 * Tested with GCC 4.7+ and Clang 3.4+.
-* Provides `tao::seq::integer_sequence`.
-* When available, the above is a type-alias for `std::integer_sequence`.
 
 ## Provided algorithms and examples
+
+* All provided templates are in the nested namespace `tao::seq`.
+* All templates don't use C++14 features, therefore being compatible with C++11. Sometimes, C++14/C++17 features are used conditionally, taking advantage of newer language features when available but providing C++11-compatible implementations otherwise.
+* All templates use `tao::seq::integer_sequence`, etc. internally, therefore being compatible with C++11.
+* All templates use `tao::seq::make_integer_sequence`, etc. internally, therefore using the most scalable solution available.
+
+#### Header `tao/seq/integer_sequence.hpp`
+
+Provides:
+
+* `integer_sequence< typename T, T N >`
+* `index_sequence< std::size_t N >`
+
+Notes:
+
+* When available (C++14 or newer), the above are type-aliases for `std::integer_sequence` and `std::index_sequence`.
 
 #### Header `tao/seq/make_integer_sequence.hpp`
 
