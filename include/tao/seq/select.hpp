@@ -5,10 +5,9 @@
 #define TAOCPP_SEQUENCES_INCLUDE_SELECT_HPP
 
 #include <cstddef>
-#include <utility>
+#include <type_traits>
 
-#include "make_integer_sequence.hpp"
-#include "sum.hpp"
+#include "integer_sequence.hpp"
 
 namespace tao
 {
@@ -16,25 +15,21 @@ namespace tao
   {
     namespace impl
     {
-      template< std::size_t, typename S, typename = make_index_sequence< S::size() > >
-      struct select;
-
-      template< std::size_t I, typename T, T... Ns, std::size_t... Is >
-      struct select< I, integer_sequence< T, Ns... >, index_sequence< Is... > >
-        : seq::sum< T, ( ( Is == I ) ? Ns : 0 )... >
+      template< typename T, T... Ns >
+      struct values
       {
-        static_assert( I < sizeof...( Is ), "tao::seq::select<I, S>: I is out of range" );
+        static constexpr T data[ sizeof...( Ns ) ] = { Ns... };
       };
     }
 
     template< std::size_t I, typename T, T... Ns >
     struct select
-      : impl::select< I, integer_sequence< T, Ns... > >
+      : std::integral_constant< T, impl::values< T, Ns... >::data[ I ] >
     {};
 
     template< std::size_t I, typename T, T... Ns >
     struct select< I, integer_sequence< T, Ns... > >
-      : impl::select< I, integer_sequence< T, Ns... > >
+      : select< I, T, Ns... >
     {};
   }
 }
