@@ -35,9 +35,9 @@ Examples:
 
 Notes:
 
-libc++ already has very efficient versions for the above, so they are pulled in with a using-declaration. Only if we don't know if an STL's versions are at least O(log N) we provide our own implementation.
+libc++ already has very efficient versions for the above, so they are pulled in with a using-declaration. Only if we don't know if the STL's versions are at least O(log N) we provide our own implementations.
 
-The implementation has O(log N) instantiation depth. This allows for very large sequences without the need to increase the compiler's default instantiation depth limits. For example, GCC and Clang generate `index_sequence<10000>` in ~0.15s (on my machine, of course). The standard library version from libstdc++, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
+Our own implementation has O(log N) instantiation depth. This allows for very large sequences without the need to increase the compiler's default instantiation depth limits. For example, GCC and Clang generate `index_sequence<10000>` in ~0.15s (on my machine, of course). The standard library version from libstdc++, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
 
 #### Header `tao/seq/sum.hpp`
 
