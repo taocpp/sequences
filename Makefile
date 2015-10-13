@@ -14,7 +14,7 @@ CPPFLAGS ?= -pedantic
 CXXSTD ?= c++14
 CXXFLAGS ?= -O3 -Wall -Wextra -Werror
 
-SOURCES := $(shell find -name '*.cpp')
+SOURCES := $(shell find . -name '*.cpp')
 DEPENDS := $(SOURCES:./%.cpp=build/%.d)
 BINARIES := $(SOURCES:./%.cpp=build/%)
 
@@ -27,7 +27,7 @@ all: $(BINARIES)
 .PHONY: clean
 clean:
 	@rm -rf build
-	@find -name '*~' -delete
+	@find . -name '*~' -delete
 
 build/%.d: %.cpp Makefile
 	@mkdir -p $(@D)
