@@ -15,7 +15,7 @@ namespace tao
   namespace seq
   {
 
-#if defined( _LIBCPP_VERSION ) && !defined( TAOCPP_NO_STD_INTEGER_SEQUENCE )
+#if ( __cplusplus >= 201402L ) && defined( _LIBCPP_VERSION )
 
     // libc++ already has very efficient versions for make_*
 
