@@ -23,6 +23,7 @@ UNIT_TESTS := $(filter build/src/test/%,$(BINARIES))
 .PHONY: all
 all: $(BINARIES)
 	@set -e; for T in $(UNIT_TESTS); do echo $$T; $$T > /dev/null; done
+	@build/src/test/seq/tester
 
 .PHONY: clean
 clean:
