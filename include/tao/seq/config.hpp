@@ -15,7 +15,7 @@
 
 #if defined(__cpp_fold_expressions)
 # define TAOCPP_FOLD_EXPRESSIONS
-#else
+#elif (__cplusplus > 201402L)
 # if defined(__apple_build_version__) && (__clang_major__ >= 7)
 #  define TAOCPP_FOLD_EXPRESSIONS
 # else
