@@ -20,7 +20,7 @@ namespace tao
 #ifdef TAOCPP_FOLD_EXPRESSIONS
 
     template< bool... Bs >
-    using is_all = std::bool_constant< ( Bs && ... ) >;
+    using is_all = std::integral_constant< bool, ( Bs && ... ) >;
 
 #else
 
