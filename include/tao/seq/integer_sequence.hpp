@@ -14,7 +14,7 @@ namespace tao
   namespace seq
   {
 
-#if TAOCPP_USE_STD_INTEGER_SEQUENCE
+#ifdef TAOCPP_USE_STD_INTEGER_SEQUENCE
 
     using std::integer_sequence;
     using std::index_sequence;
