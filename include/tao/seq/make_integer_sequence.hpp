@@ -8,6 +8,7 @@
 #include <utility>
 #include <type_traits>
 
+#include "config.hpp"
 #include "integer_sequence.hpp"
 
 namespace tao
@@ -15,9 +16,7 @@ namespace tao
   namespace seq
   {
 
-#if ( __cplusplus >= 201402L ) && defined( _LIBCPP_VERSION )
-
-    // libc++ already has very efficient versions for make_*
+#ifdef TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
 
     using std::make_integer_sequence;
     using std::make_index_sequence;
@@ -29,7 +28,7 @@ namespace tao
 
     namespace impl
     {
-      template< typename S, std::size_t, bool >
+      template< typename, std::size_t, bool >
       struct double_up;
 
       template< typename T, T... Ns, std::size_t N >

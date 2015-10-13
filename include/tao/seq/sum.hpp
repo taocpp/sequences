@@ -8,8 +8,9 @@
 #include <utility>
 
 #include "integer_sequence.hpp"
+#include "config.hpp"
 
-#ifndef __cpp_fold_expressions
+#ifndef TAOCPP_FOLD_EXPRESSIONS
 #include <cstddef>
 #include "make_integer_sequence.hpp"
 #endif
@@ -19,7 +20,7 @@ namespace tao
   namespace seq
   {
 
-#ifdef __cpp_fold_expressions
+#ifdef TAOCPP_FOLD_EXPRESSIONS
 
     template< typename T, T... Ns >
     struct sum

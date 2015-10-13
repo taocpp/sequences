@@ -7,12 +7,14 @@
 #include <cstddef>
 #include <utility>
 
+#include "config.hpp"
+
 namespace tao
 {
   namespace seq
   {
 
-#if ( __cplusplus >= 201402L ) && !defined( TAOCPP_NO_STD_INTEGER_SEQUENCE )
+#if TAOCPP_USE_STD_INTEGER_SEQUENCE
 
     using std::integer_sequence;
     using std::index_sequence;

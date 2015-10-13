@@ -4,7 +4,9 @@
 #ifndef TAOCPP_SEQUENCES_INCLUDE_IS_ANY_HPP
 #define TAOCPP_SEQUENCES_INCLUDE_IS_ANY_HPP
 
-#ifndef __cpp_fold_expressions
+#include "config.hpp"
+
+#ifndef TAOCPP_FOLD_EXPRESSIONS
 #include "is_all.hpp"
 #endif
 
@@ -15,7 +17,7 @@ namespace tao
   namespace seq
   {
 
-#ifdef __cpp_fold_expressions
+#ifdef TAOCPP_FOLD_EXPRESSIONS
 
     template< bool... Bs >
     using is_any = std::bool_constant< ( Bs || ... ) >;
