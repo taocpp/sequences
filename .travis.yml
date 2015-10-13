@@ -136,7 +136,7 @@ matrix:
 
     - os: osx
       compiler: clang
-      env: COMPILER=clang++ CXXSTD=c++1y
+      env: COMPILER=clang++ CXXSTD=c++1y CPPFLAGS="-pedantic -DTAOCPP_NO_STD_INTEGER_SEQUENCE"
 
     - os: osx
       osx_image: xcode7
