@@ -101,6 +101,16 @@ Examples:
 
 * `inclusive_scan_t<int,1,4,0,3,1>` ➙ `integer_sequence<int,1,5,5,8,9>`
 
+#### Header `tao/seq/zip.hpp`
+
+Applies a binary operation to elements from two sequences.
+
+* `zip_t< template< typename U, U, U > class OP, typename L, typename R >`
+
+Notes:
+
+Both sequences may have a different element type, the resulting sequence's type is calculated with `std::common_type_t`.
+
 #### Header `tao/seq/plus.hpp`
 
 Provides a sequence which is the element-wise sum of its input sequences.
