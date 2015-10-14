@@ -15,8 +15,8 @@ namespace tao
     template< typename, typename >
     struct concatenate;
 
-    template< typename TA, A... As, typename TB, B... Bs >
-    struct concatenate< integer_sequence< A, As... >, integer_sequence< B, Bs... > >
+    template< typename TA, TA... As, typename TB, TB... Bs >
+    struct concatenate< integer_sequence< TA, As... >, integer_sequence< TB, Bs... > >
     {
       using type = integer_sequence< typename std::common_type< TA, TB >::type, As..., Bs... >;
     };

@@ -5,7 +5,6 @@
 #include <tao/seq/integer_sequence.hpp>
 
 #include <type_traits>
-#include <tuple>
 
 int main()
 {

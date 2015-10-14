@@ -16,7 +16,7 @@ namespace tao
     template< typename, typename >
     struct plus;
 
-    template< typename TA, A... As, typename TB, B... Bs >
+    template< typename TA, TA... As, typename TB, TB... Bs >
     struct plus< integer_sequence< TA, As... >, integer_sequence< TB, Bs... > >
     {
       using type = integer_sequence< typename std::common_type< TA, TB >::type, ( As + Bs )... >;
