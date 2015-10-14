@@ -8,23 +8,15 @@
 #include <type_traits>
 
 #include "integer_sequence.hpp"
+#include "values.hpp"
 
 namespace tao
 {
   namespace seq
   {
-    namespace impl
-    {
-      template< typename T, T... Ns >
-      struct values
-      {
-        static constexpr T data[] = { Ns... };
-      };
-    }
-
     template< std::size_t I, typename T, T... Ns >
     struct select
-      : std::integral_constant< T, impl::values< T, Ns... >::data[ I ] >
+      : std::integral_constant< T, values< T, Ns... >::data[ I ] >
     {};
 
     template< std::size_t I, typename T, T... Ns >
