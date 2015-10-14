@@ -18,10 +18,8 @@
 #elif (__cplusplus > 201402L)
 # if defined(__apple_build_version__) && (__clang_major__ >= 7)
 #  define TAOCPP_FOLD_EXPRESSIONS
-# else
-#  if defined(__clang__) && ((__clang_major__ > 3) || ((__clang_major__ == 3) && (__clang_minor__ >= 6)))
-#   define TAOCPP_FOLD_EXPRESSIONS
-#  endif
+# elif defined(__clang__) && ((__clang_major__ > 3) || ((__clang_major__ == 3) && (__clang_minor__ >= 6)))
+#  define TAOCPP_FOLD_EXPRESSIONS
 # endif
 #endif
 
