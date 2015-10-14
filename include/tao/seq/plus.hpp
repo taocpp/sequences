@@ -4,23 +4,22 @@
 #ifndef TAOCPP_SEQUENCES_INCLUDE_PLUS_HPP
 #define TAOCPP_SEQUENCES_INCLUDE_PLUS_HPP
 
-#include <utility>
 #include <type_traits>
 
-#include "integer_sequence.hpp"
+#include "zip.hpp"
 
 namespace tao
 {
   namespace seq
   {
-    template< typename, typename >
-    struct plus;
-
-    template< typename TA, TA... As, typename TB, TB... Bs >
-    struct plus< integer_sequence< TA, As... >, integer_sequence< TB, Bs... > >
+    namespace impl
     {
-      using type = integer_sequence< typename std::common_type< TA, TB >::type, ( As + Bs )... >;
-    };
+      template< typename T, T A, T B >
+      using plus = std::integral_constant< T, A + B >;
+    }
+
+    template< typename A, typename B >
+    using plus = zip< impl::plus, A, B >;
 
     template< typename A, typename B >
     using plus_t = typename plus< A, B >::type;

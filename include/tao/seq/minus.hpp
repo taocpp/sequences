@@ -4,23 +4,22 @@
 #ifndef TAOCPP_SEQUENCES_INCLUDE_MINUS_HPP
 #define TAOCPP_SEQUENCES_INCLUDE_MINUS_HPP
 
-#include <utility>
 #include <type_traits>
 
-#include "integer_sequence.hpp"
+#include "zip.hpp"
 
 namespace tao
 {
   namespace seq
   {
-    template< typename, typename >
-    struct minus;
-
-    template< typename TA, TA... As, typename TB, TB... Bs >
-    struct minus< integer_sequence< TA, As... >, integer_sequence< TB, Bs... > >
+    namespace impl
     {
-      using type = integer_sequence< typename std::common_type< TA, TB >::type, ( As - Bs )... >;
-    };
+      template< typename T, T A, T B >
+      using minus = std::integral_constant< T, A - B >;
+    }
+
+    template< typename A, typename B >
+    using minus = zip< impl::minus, A, B >;
 
     template< typename A, typename B >
     using minus_t = typename minus< A, B >::type;
