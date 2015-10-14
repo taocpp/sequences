@@ -10,6 +10,7 @@
 #include <tao/seq/exclusive_scan.hpp>
 
 #include <type_traits>
+#include <tuple>
 
 using namespace tao::seq;
 
@@ -30,14 +31,28 @@ struct expand< index_sequence< Is... >, index_sequence< Ns... > >
 template< typename I, typename S >
 using expand_t = typename expand< I, S >::type;
 
-int main()
+template< typename... Tuples >
+struct tuple_helper
 {
-  using S = index_sequence< 2, 1, 3, 0, 1, 1, 3 >;
+  using S = index_sequence< std::tuple_size< Tuples >::value... >;
   using I = make_index_sequence< sum< S >::value >;
 
   using OUTER = expand_t< I, inclusive_scan_t< S > >;
   using INNER = minus_t< I, map_t< OUTER, exclusive_scan_t< S > > >;
+};
 
-  static_assert( std::is_same< OUTER, index_sequence< 0, 0, 1, 2, 2, 2, 4, 5, 6, 6, 6 > >::value, "oops" );
-  static_assert( std::is_same< INNER, index_sequence< 0, 1, 0, 0, 1, 2, 0, 0, 0, 1, 2 > >::value, "oops" );
+int main()
+{
+  using H = tuple_helper< std::tuple< int, long >,
+                          std::tuple< unsigned >,
+                          std::tuple< short, char, int >,
+                          std::tuple<>,
+                          std::tuple< long >,
+                          std::tuple< unsigned char >,
+                          std::tuple< unsigned long, int,int* > >;
+
+  static_assert( std::is_same< H::S, index_sequence< 2, 1, 3, 0, 1, 1, 3 > >::value, "oops" );
+
+  static_assert( std::is_same< H::OUTER, index_sequence< 0, 0, 1, 2, 2, 2, 4, 5, 6, 6, 6 > >::value, "oops" );
+  static_assert( std::is_same< H::INNER, index_sequence< 0, 1, 0, 0, 1, 2, 0, 0, 0, 1, 2 > >::value, "oops" );
 }
