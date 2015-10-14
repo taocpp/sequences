@@ -12,7 +12,6 @@ int main()
 {
   using namespace tao::seq;
 
-  static_assert( fold< add, int >::value == 0, "oops" );
   static_assert( fold< add, int, 1 >::value == 1, "oops" );
   static_assert( fold< add, int, 1, 2 >::value == 3, "oops" );
   static_assert( fold< add, int, 1, 2, 3 >::value == 6, "oops" );

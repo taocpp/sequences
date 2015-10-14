@@ -37,11 +37,6 @@ namespace tao
     template< template< typename U, U, U > class, typename T, T... >
     struct fold;
 
-    template< template< typename U, U, U > class OP, typename T >
-    struct fold< OP, T >
-      : std::integral_constant< T, 0 >
-    {};
-
     template< template< typename U, U, U > class OP, typename T, T N >
     struct fold< OP, T, N >
       : std::integral_constant< T, N >
