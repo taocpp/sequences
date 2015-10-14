@@ -147,6 +147,40 @@ Integral constant to provide the `I`th element of a non-empty sequence.
 * `select< std::size_t I, typename T, T... >`
 * `select< std::size_t I, typename S >`
 
+#### Header `tao/seq/fold.hpp`
+
+Integral constant calculate by "folding" a sequence of values with a given binary operation.
+
+* `fold< template< typename U, U, U > class OP, typename T, T... >`
+* `fold< template< typename U, U, U > class OP, typename S >`
+
+#### Header `tao/seq/min.hpp`
+
+Integral constant to provide the minimum value.
+
+* `min< typename T, T... >`
+* `min< typename S >`
+
+Notes:
+
+Implemented with `fold` like this:
+
+    namespace impl
+    {
+      template< typename T, T A, T B >
+      using min = std::integral_constant< T, ( ( A < B ) ? A : B ) >;
+    }
+
+    template< typename T, T... Ns >
+    using min = fold< impl::min, T, Ns... >;
+
+#### Header `tao/seq/max.hpp`
+
+Integral constant to provide the maximum value.
+
+* `max< typename T, T... >`
+* `max< typename S >`
+
 #### Header `tao/seq/map.hpp`
 
 Map a sequence of indices to a sequence of values.
