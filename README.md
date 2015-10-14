@@ -107,6 +107,10 @@ Provides a sequence which is the element-wise sum of its input sequences.
 
 * `plus_t< typename L, typename R >`
 
+Notes:
+
+Both sequences may have a different element type, the resulting sequence's type is calculated with `std::common_type_t`.
+
 Examples:
 
 * `using A = index_sequence<1,4,0,3,1>`
@@ -118,6 +122,10 @@ Examples:
 Provides a sequence which is the element-wise sum of its input sequences.
 
 * `minus_t< typename L, typename R >`
+
+Notes:
+
+Both sequences may have a different element type, the resulting sequence's type is calculated with `std::common_type_t`.
 
 Examples:
 
@@ -147,9 +155,19 @@ Integral constant to provide the `I`th element of a non-empty sequence.
 * `select< std::size_t I, typename T, T... >`
 * `select< std::size_t I, typename S >`
 
+#### Header `tao/seq/concatenate.hpp`
+
+Concatenate the values.
+
+* `concatenate_t< typename T, typename U >`
+
+Notes:
+
+Both sequences may have a different element type, the resulting sequence's type is calculated with `std::common_type_t`.
+
 #### Header `tao/seq/fold.hpp`
 
-Integral constant calculate by "folding" a sequence of values with a given binary operation.
+Integral constant calculated by "folding" a sequence of values with a given binary operation.
 
 * `fold< template< typename U, U, U > class OP, typename T, T... >`
 * `fold< template< typename U, U, U > class OP, typename S >`
@@ -216,8 +234,6 @@ Examples:
 * `is_any<false,true,false,false>::value` ➙ `true`
 * `is_any<false,false,false,false>::value` ➙ `false`
 * `is_any<>::value` ➙ `false`
-
-## More documentation will come soon...
 
 ## License
 
