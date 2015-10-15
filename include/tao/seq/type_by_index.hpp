@@ -42,7 +42,7 @@ namespace tao
       struct get_nth_helper< index_sequence< Is... > >
       {
         template< typename T, typename... Ts >
-        static T deduce( any< Is >..., T, Ts&&... );
+        static T deduce( any< Is & 0 >..., T, Ts&&... );
       };
     }
 
