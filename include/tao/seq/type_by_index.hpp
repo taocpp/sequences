@@ -26,11 +26,20 @@ namespace tao
       template< typename >
       struct wrapper {};
 
+      template< typename >
+      struct unwrap;
+
+      template< typename T >
+      struct unwrap< wrapper< T > >
+      {
+        using type = T;
+      };
+
       template< std::size_t... Is >
       struct get_nth_helper
       {
         template< typename T, typename... Ts >
-        static T deduce( any< Is >..., wrapper< T >, Ts&&... );
+        static wrapper< T > deduce( any< Is >..., wrapper< T >, Ts&&... );
       };
 
       template< typename... Ts, std::size_t... Is >
@@ -41,7 +50,7 @@ namespace tao
     template< std::size_t I, typename... Ts >
     struct type_by_index
     {
-      using type = decltype( impl::deduce< Ts... >( make_index_sequence< I >() ) );
+      using type = typename impl::unwrap< decltype( impl::deduce< Ts... >( make_index_sequence< I >() ) ) >::type;
     };
 
     template< std::size_t I, typename... Ts >
