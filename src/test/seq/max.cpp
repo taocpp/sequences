@@ -18,4 +18,5 @@ int main()
   static_assert( max< int, -1, 2, 1 >::value == 2, "oops" );
   static_assert( max< int, 2, -1, 1 >::value == 2, "oops" );
   static_assert( max< int, 0, 1, 2, -1, 1, 0, -1, 1 >::value == 2, "oops" );
+  static_assert( max< make_index_sequence< 10 > >::value == 9, "oops" );
 }

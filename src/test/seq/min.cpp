@@ -18,4 +18,5 @@ int main()
   static_assert( min< int, -1, 2, 1 >::value == -1, "oops" );
   static_assert( min< int, 2, -1, 1 >::value == -1, "oops" );
   static_assert( min< int, 0, 1, 2, -1, 1, 0, -1, 1 >::value == -1, "oops" );
+  static_assert( min< make_index_sequence< 10 > >::value == 0, "oops" );
 }

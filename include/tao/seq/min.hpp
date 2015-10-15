@@ -19,7 +19,14 @@ namespace tao
     }
 
     template< typename T, T... Ns >
-    using min = fold< impl::min, T, Ns... >;
+    struct min
+      : fold< impl::min, T, Ns... >
+    {};
+
+    template< typename T, T... Ns >
+    struct min< integer_sequence< T, Ns... > >
+      : min< T, Ns... >
+    {};
   }
 }
 

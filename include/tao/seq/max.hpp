@@ -19,7 +19,14 @@ namespace tao
     }
 
     template< typename T, T... Ns >
-    using max = fold< impl::max, T, Ns... >;
+    struct max
+      : fold< impl::max, T, Ns... >
+    {};
+
+    template< typename T, T... Ns >
+    struct max< integer_sequence< T, Ns... > >
+      : max< T, Ns... >
+    {};
   }
 }
 
