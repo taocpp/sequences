@@ -10,7 +10,7 @@ The Art of C++ / Sequences is a zero-dependency C++11 header-only library that p
 ## Compatibility
 
 * Requires C++11 or newer.
-* Tested with GCC 4.7+ and Clang 3.4+.
+* Tested with GCC 4.8+ and Clang 3.4+.
 
 ## Provided algorithms and examples
 
