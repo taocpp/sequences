@@ -62,16 +62,16 @@ namespace tao
       template< typename... Ts >
       using tuple_cat_result_t = typename tuple_cat_result< Ts... >::type;
 
-      template< typename... Tuples >
-      struct tuple_helper
+      template< typename... Ts >
+      struct tuple_cat_helper
       {
-        using S = index_sequence< std::tuple_size< Tuples >::value... >;
-        using I = make_index_sequence< seq::sum< S >::value >;
+        using tuple_size_sequence = index_sequence< std::tuple_size< Ts >::value... >;
+        using result_index_sequence = make_index_sequence< seq::sum< tuple_size_sequence >::value >;
 
-        using outer_index_sequence = expand_t< I, inclusive_scan_t< S > >;
-        using inner_index_sequence = minus_t< I, map_t< outer_index_sequence, exclusive_scan_t< S > > >;
+        using outer_index_sequence = expand_t< result_index_sequence, inclusive_scan_t< tuple_size_sequence > >;
+        using inner_index_sequence = minus_t< result_index_sequence, map_t< outer_index_sequence, exclusive_scan_t< tuple_size_sequence > > >;
 
-        using result_type = tuple_cat_result_t< outer_index_sequence, inner_index_sequence, Tuples... >;
+        using result_type = tuple_cat_result_t< outer_index_sequence, inner_index_sequence, Ts... >;
       };
 
       template< typename R, std::size_t... Os, std::size_t... Is, typename Tuples >
@@ -81,7 +81,7 @@ namespace tao
       }
     }
 
-    template< typename... Ts, typename H = impl::tuple_helper< Ts... >, typename R = typename H::result_type >
+    template< typename... Ts, typename H = impl::tuple_cat_helper< Ts... >, typename R = typename H::result_type >
     R tuple_cat( Ts&&... ts )
     {
       return impl::tuple_cat< R >( typename H::outer_index_sequence(), typename H::inner_index_sequence(), std::forward_as_tuple( std::forward< Ts >( ts )... ) );
