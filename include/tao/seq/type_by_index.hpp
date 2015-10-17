@@ -30,7 +30,7 @@ namespace tao
       struct unwrap;
 
       template< typename T >
-      struct unwrap< wrapper< T >* >
+      struct unwrap< wrapper< T > >
       {
         using type = T;
       };
@@ -45,7 +45,7 @@ namespace tao
       struct get_nth< index_sequence< Is... > >
       {
         template< typename T >
-        static T deduce( any< Is & 0 >..., T, ... );
+        static T deduce( any< Is & 0 >..., T*, ... );
       };
     }
 
