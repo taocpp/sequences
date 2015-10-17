@@ -35,9 +35,6 @@ namespace tao
         using type = T;
       };
 
-      template< typename T >
-      using unwrap_t = typename unwrap< T >::type;
-
       template< typename >
       struct get_nth;
 
@@ -50,13 +47,10 @@ namespace tao
     }
 
     template< std::size_t I, typename... Ts >
-    using type_by_index_t = impl::unwrap_t< decltype( impl::get_nth< make_index_sequence< I > >::deduce( std::declval< impl::wrapper< Ts >* >()... ) ) >;
+    using type_by_index = impl::unwrap< decltype( impl::get_nth< make_index_sequence< I > >::deduce( std::declval< impl::wrapper< Ts >* >()... ) ) >;
 
     template< std::size_t I, typename... Ts >
-    struct type_by_index
-    {
-      using type = type_by_index_t< I, Ts... >;
-    };
+    using type_by_index_t = typename type_by_index< I, Ts... >::type;
   }
 }
 
