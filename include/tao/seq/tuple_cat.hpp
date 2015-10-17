@@ -81,7 +81,7 @@ namespace tao
       }
     }
 
-    template< typename... Ts, typename H = impl::tuple_cat_helper< Ts... >, typename R = typename H::result_type >
+    template< typename... Ts, typename H = impl::tuple_cat_helper< typename std::remove_reference< Ts >::type... >, typename R = typename H::result_type >
     R tuple_cat( Ts&&... ts )
     {
       return impl::tuple_cat< R >( typename H::outer_index_sequence(), typename H::inner_index_sequence(), std::forward_as_tuple( std::forward< Ts >( ts )... ) );
