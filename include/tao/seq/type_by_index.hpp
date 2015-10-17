@@ -20,7 +20,7 @@ namespace tao
       template< std::size_t >
       struct any
       {
-        any( ... ) {}
+        any( ... );
       };
 
       template< typename >
