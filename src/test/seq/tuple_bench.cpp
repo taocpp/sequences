@@ -6,8 +6,8 @@
 #include <type_traits>
 #include <tuple>
 
-#define USE std
-//#define USE tao::seq
+//#define USE std
+#define USE tao::seq
 
 int main()
 {
