@@ -7,7 +7,7 @@
 #include <tuple>
 
 // #define USE std
-#define USE tao::seq
+#define USE tao
 
 int main()
 {
