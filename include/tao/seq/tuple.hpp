@@ -247,8 +247,8 @@ namespace tao
     struct index_of_impl< seq::index_sequence< Is... >, T, Ts... >
       : seq::sum< std::size_t, ( std::is_same< T, Ts >::value ? Is : 0 )... >
     {
-      static_assert( count_of< T, Ts... >::value > 0, "error: T not found within Ts..." );
-      static_assert( count_of< T, Ts... >::value < 2, "error: T must be unique within Ts..." );
+      static_assert( count_of< T, Ts... >::value > 0, "T not found within Ts..." );
+      static_assert( count_of< T, Ts... >::value < 2, "T must be unique within Ts..." );
     };
 
     template< typename T, typename... Ts >
@@ -329,7 +329,7 @@ namespace tao
   }
 
   // operators
-  template< typename... Ts, typename... Us >
+  template< typename... Ts, typename... Us, typename = typename std::enable_if< sizeof...( Ts ) == sizeof...( Us ) >::type >
   TAOCPP_TUPLE_CONSTEXPR
   bool operator==( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
   {
@@ -343,7 +343,7 @@ namespace tao
     return !( lhs == rhs );
   }
 
-  template< typename... Ts, typename... Us >
+  template< typename... Ts, typename... Us, typename = typename std::enable_if< sizeof...( Ts ) == sizeof...( Us ) >::type >
   TAOCPP_TUPLE_CONSTEXPR
   bool operator<( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
   {
