@@ -1,37 +1,41 @@
 // The Art of C++ / Sequences
 // Copyright (c) 2015 Daniel Frey
 
-#include <tao/seq/tuple_cat.hpp>
+#include <tao/seq/tuple.hpp>
 
 #include <type_traits>
 #include <tuple>
 
-//#define USE std
+// #define USE std
 #define USE tao::seq
 
 int main()
 {
-  auto t = USE::tuple_cat( std::make_tuple( 1, true ),
-			   std::make_tuple( 1.0 ),
-			   std::make_tuple(),
-			   std::make_tuple( 1UL, nullptr ) );
+  auto t = USE::tuple_cat( USE::make_tuple( 1, true ),
+			   USE::make_tuple( 1.0 ),
+			   USE::make_tuple(),
+			   USE::make_tuple( 1UL, nullptr ) );
 
-  static_assert( std::is_same< decltype( t ), std::tuple< int, bool, double, unsigned long, std::nullptr_t > >::value, "oops" );
+  static_assert( std::is_same< decltype( t ), USE::tuple< int, bool, double, unsigned long, std::nullptr_t > >::value, "oops" );
 
-  auto t2 = USE::tuple_cat( t, std::make_tuple( 1, true ),
-			    t, std::make_tuple( 1.0 ),
-			    t, std::make_tuple(),
-			    t, std::make_tuple( 1UL, nullptr ) );
+  auto t2 = USE::tuple_cat( t, USE::make_tuple( 1, true ),
+        		    t, USE::make_tuple( 1.0 ),
+        		    t, USE::make_tuple(),
+        		    t, USE::make_tuple( 1UL, nullptr ) );
 
-  auto t3 = USE::tuple_cat( t2, std::make_tuple( 1, true ),
-			    t2, std::make_tuple( 1.0 ),
-			    t2, std::make_tuple(),
-			    t2, std::make_tuple( 1UL, nullptr ) );
+  static_assert( USE::tuple_size< decltype( t2 ) >::value == 25, "oops" );
 
-  auto t4 = USE::tuple_cat( t3, std::make_tuple( 1, true ),
-			    t2, std::make_tuple( 1.0 ),
-			    t3, std::make_tuple(),
-			    t2, std::make_tuple( 1UL, nullptr ) );
+  // auto t3 = USE::tuple_cat( t2, USE::make_tuple( 1, true ),
+  //       		       t2, USE::make_tuple( 1.0 ),
+  //       		       t2, USE::make_tuple(),
+  //       		       t2, USE::make_tuple( 1UL, nullptr ) );
 
-  static_assert( std::tuple_size< decltype( t4 ) >::value == 265, "oops" );
+  // static_assert( USE::tuple_size< decltype( t3 ) >::value == 105, "oops" );
+
+  // auto t4 = USE::tuple_cat( t3, USE::make_tuple( 1, true ),
+  //       		       t2, USE::make_tuple( 1.0 ),
+  //       		       t3, USE::make_tuple(),
+  //       		       t2, USE::make_tuple( 1UL, nullptr ) );
+
+  // static_assert( USE::tuple_size< decltype( t4 ) >::value == 265, "oops" );
 }
