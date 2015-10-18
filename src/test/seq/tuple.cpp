@@ -44,4 +44,18 @@ int main()
 
   assert( tuple<>() == tuple<>() );
   assert( !( tuple<>() < tuple<>() ) );
+
+#if (__cplusplus >= 201402L)
+
+  static_assert( tuple<>() == tuple<>(), "oops" );
+  static_assert( make_tuple() == make_tuple(), "oops" );
+  static_assert( make_tuple( 0 ) == make_tuple( 0 ), "oops" );
+
+  static_assert( make_tuple( 1, 2, 3 ) > make_tuple( 1, 2, 2 ), "oops" );
+  static_assert( make_tuple( 1, 2, 3 ) < make_tuple( 1, 2, 4 ), "oops" );
+
+  // TODO: More constexpr checks
+
+#endif
+
 }

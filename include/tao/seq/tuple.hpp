@@ -39,8 +39,13 @@ namespace tao
     {
       T value;
 
+      TAOCPP_TUPLE_CONSTEXPR
       tuple_value() : value() {} // TODO: Check for reference-types
+
+      TAOCPP_TUPLE_CONSTEXPR
       explicit tuple_value( const T& v ) : value( v ) {}
+
+      TAOCPP_TUPLE_CONSTEXPR
       explicit tuple_value( T&& v ) : value( std::move( v ) ) {}
 
       bool swap( tuple_value& v ) noexcept( is_nothrow_swappable< T >::value )
@@ -60,14 +65,17 @@ namespace tao
     {
       // 20.4.2.1 Construction [tuple.cnstr]
 
+      TAOCPP_TUPLE_CONSTEXPR
       tuple_base() = default;
-      tuple_base( const tuple_base& ) = default;
-      tuple_base( tuple_base&& ) = default;
 
-      tuple_base& operator=( const tuple_base& ) = default;
-      tuple_base& operator=( tuple_base&& ) = default;
+      TAOCPP_TUPLE_CONSTEXPR
+      explicit tuple_base( const tuple_base& ) = default;
+
+      TAOCPP_TUPLE_CONSTEXPR
+      explicit tuple_base( tuple_base&& ) = default;
 
       template< typename... Us, typename = typename std::enable_if< sizeof...( Us ) == sizeof...( Is ) >::type >
+      TAOCPP_TUPLE_CONSTEXPR
       explicit tuple_base( Us&&... us )
         : tuple_value< Is, Ts >( std::forward< Us >( us ) )...
       {}
@@ -75,6 +83,12 @@ namespace tao
       // TODO: Add more ctors
 
       // 20.4.2.2 Assignment [tuple.assign]
+
+      TAOCPP_TUPLE_CONSTEXPR
+      tuple_base& operator=( const tuple_base& ) = default;
+
+      TAOCPP_TUPLE_CONSTEXPR
+      tuple_base& operator=( tuple_base&& ) = default;
 
       // TODO: Add assignment
 
