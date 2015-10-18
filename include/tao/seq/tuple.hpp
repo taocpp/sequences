@@ -288,23 +288,19 @@ namespace tao
     template< std::size_t... Is >
     struct tuple_equal< seq::index_sequence< Is... > >
     {
-#ifdef TAOCPP_FOLD_EXPRESSIONS
-      template< typename T, typename U >
-      constexpr bool operator()( const T& lhs, const U& rhs ) const
-      {
-        return ( static_cast< bool >( get< Is >( lhs ) == get< Is >( rhs ) ) && ... );
-      }
-#else
       template< typename T, typename U >
       TAOCPP_TUPLE_CONSTEXPR
       bool operator()( const T& lhs, const U& rhs ) const
       {
+#ifdef TAOCPP_FOLD_EXPRESSIONS
+        return ( static_cast< bool >( get< Is >( lhs ) == get< Is >( rhs ) ) && ... );
+#else
         bool result = true;
         using swallow = bool[];
         (void)swallow{ ( result = result && static_cast< bool >( get< Is >( lhs ) == get< Is >( rhs ) ) )..., true };
         return result;
-      }
 #endif
+      }
     };
 
     template< typename >
@@ -313,28 +309,22 @@ namespace tao
     template< std::size_t... Is >
     struct tuple_less< seq::index_sequence< Is... > >
     {
-#ifdef TAOCPP_DUMMY // TAOCPP_FOLD_EXPRESSIONS
-      template< typename T, typename U >
-      constexpr bool operator()( const T& lhs, const U& rhs ) const
-      {
-        bool result = false;
-        // TODO: This fold expression does not work as expected. Why?
-        (void)( ( ( result = static_cast< bool >( get< Is >( lhs ) < get< Is >( rhs ) ) ) || static_cast< bool >( get< Is >( rhs ) < get< Is >( lhs ) ) ) || ... );
-        return result;
-      }
-#else
       template< typename T, typename U >
       TAOCPP_TUPLE_CONSTEXPR
       bool operator()( const T& lhs, const U& rhs ) const
       {
         bool result = false;
+#ifdef TAOCPP_DUMMY // TAOCPP_FOLD_EXPRESSIONS
+        // TODO: This fold expression does not work as expected. Why?
+        (void)( ( ( result = static_cast< bool >( get< Is >( lhs ) < get< Is >( rhs ) ) ) || static_cast< bool >( get< Is >( rhs ) < get< Is >( lhs ) ) ) || ... );
+#else
         bool no_result = false;
         using swallow = bool[];
         (void)swallow{ ( no_result = no_result || ( result = static_cast< bool >( get< Is >( lhs ) < get< Is >( rhs ) ) ) || static_cast< bool >( get< Is >( rhs ) < get< Is >( lhs ) ) )..., true };
         (void)no_result;
+#endif
         return result;
       }
-#endif
     };
   }
 
