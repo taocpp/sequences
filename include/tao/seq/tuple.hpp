@@ -17,6 +17,12 @@
 #include <type_traits>
 #include <utility>
 
+#if (__cplusplus >= 201402L)
+#define TAOCPP_TUPLE_CONSTEXPR constexpr
+#else
+#define TAOCPP_TUPLE_CONSTEXPR
+#endif
+
 namespace tao
 {
   namespace impl
@@ -24,7 +30,6 @@ namespace tao
     // TODO: This is a tuple reference implementation, it is known to be incomplete!
 
     // TODO: Add proper noexcept()-specifications everywhere
-    // TODO: Respect C++11/C++14 differences (e.g., constexpr)
 
     template< typename T >
     using is_nothrow_swappable = std::integral_constant< bool, noexcept( swap( std::declval< T& >(), std::declval< T& >() ) ) >;
@@ -34,7 +39,7 @@ namespace tao
     {
       T value;
 
-      tuple_value() {} // TODO: Check for reference-types
+      tuple_value() : value() {} // TODO: Check for reference-types
       explicit tuple_value( const T& v ) : value( v ) {}
       explicit tuple_value( T&& v ) : value( std::move( v ) ) {}
 
@@ -53,6 +58,8 @@ namespace tao
     struct tuple_base< seq::index_sequence< Is... >, Ts... >
       : tuple_value< Is, Ts >...
     {
+      // 20.4.2.1 Construction [tuple.cnstr]
+
       tuple_base() = default;
       tuple_base( const tuple_base& ) = default;
       tuple_base( tuple_base&& ) = default;
@@ -60,14 +67,18 @@ namespace tao
       tuple_base& operator=( const tuple_base& ) = default;
       tuple_base& operator=( tuple_base&& ) = default;
 
-      // TODO: Add more ctors
-
-      // TODO: Add assignment
-
       template< typename... Us, typename = typename std::enable_if< sizeof...( Us ) == sizeof...( Is ) >::type >
       explicit tuple_base( Us&&... us )
         : tuple_value< Is, Ts >( std::forward< Us >( us ) )...
       {}
+
+      // TODO: Add more ctors
+
+      // 20.4.2.2 Assignment [tuple.assign]
+
+      // TODO: Add assignment
+
+      // 20.4.2.3 swap [tuple.swap]
 
       void swap( tuple_base& v ) noexcept( seq::is_all< impl::is_nothrow_swappable< Ts >::value... >::value )
       {
@@ -90,13 +101,70 @@ namespace tao
     using base = impl::tuple_base< seq::index_sequence_for< Ts... >, Ts... >;
 
   public:
+    // 20.4.2.1 Construction [tuple.cnstr]
+
     using base::base;
+
+    // 20.4.2.2 Assignment [tuple.assign]
+
+    using base::operator=;
+
+    // 20.4.2.3 swap [tuple.swap]
 
     void swap( tuple& v ) noexcept( noexcept( base::swap( v ) ) )
     {
       base::swap( v );
     }
   };
+
+  // 20.4.2.4 Tuple creation functions [tuple.creation]
+
+  // make_tuple helper
+  namespace impl
+  {
+    template< typename T >
+    struct make_tuple_return
+    {
+      using type = T;
+    };
+
+    template< typename T >
+    struct make_tuple_return< std::reference_wrapper< T > >
+    {
+      using type = T&;
+    };
+
+    template< typename T >
+    using make_tuple_return_t = typename make_tuple_return< T >::type;
+  }
+
+  // make_tuple
+  template< typename... Ts, typename R = tuple< impl::make_tuple_return_t< typename std::decay< Ts >::type >... > >
+  TAOCPP_TUPLE_CONSTEXPR
+  R make_tuple( Ts&&... ts )
+  {
+    return R( std::forward< Ts >( ts )... );
+  }
+
+  // forward_as_tuple
+  template< typename... Ts >
+  TAOCPP_TUPLE_CONSTEXPR
+  tuple< Ts&&... > forward_as_tuple( Ts&&... ts ) noexcept
+  {
+    return tuple< Ts&&... >( std::forward< Ts >( ts )... );
+  }
+
+  // tie
+  template< typename... Ts >
+  TAOCPP_TUPLE_CONSTEXPR
+  tuple< Ts&... > tie( Ts&... ts ) noexcept
+  {
+    return tuple< Ts&... >( ts... );
+  }
+
+  // tuple_cat is found at the end, as it requires access to tuple_element_t and get<I>
+
+  // 20.4.2.5 Tuple helper classes [tuple.helper]
 
   // tuple_size
   template< typename T > struct tuple_size;
@@ -120,24 +188,31 @@ namespace tao
     : seq::type_by_index< I, Ts... >
   {};
 
+#if __cplusplus >= 201402L
   template< std::size_t I, typename T >
   using tuple_element_t = typename tuple_element< I, T >::type;
+#endif
+
+  // 20.4.2.6 Element access [tuple.elem]
 
   // get<I>
   template< std::size_t I, typename... Ts >
-  constexpr const seq::type_by_index_t< I, Ts... >& get( const tuple< Ts... >& t ) noexcept
+  TAOCPP_TUPLE_CONSTEXPR
+  const seq::type_by_index_t< I, Ts... >& get( const tuple< Ts... >& t ) noexcept
   {
     return static_cast< const impl::tuple_value< I, seq::type_by_index_t< I, Ts... > >& >( t ).value;
   }
 
   template< std::size_t I, typename... Ts >
-  constexpr seq::type_by_index_t< I, Ts... >& get( tuple< Ts... >& t ) noexcept
+  TAOCPP_TUPLE_CONSTEXPR
+  seq::type_by_index_t< I, Ts... >& get( tuple< Ts... >& t ) noexcept
   {
     return static_cast< impl::tuple_value< I, seq::type_by_index_t< I, Ts... > >& >( t ).value;
   }
 
   template< std::size_t I, typename... Ts >
-  constexpr seq::type_by_index_t< I, Ts... >&& get( tuple< Ts... >&& t ) noexcept
+  TAOCPP_TUPLE_CONSTEXPR
+  seq::type_by_index_t< I, Ts... >&& get( tuple< Ts... >&& t ) noexcept
   {
     using type = seq::type_by_index_t< I, Ts... >;
     return static_cast< type&& >( static_cast< impl::tuple_value< I, type >& >( t ).value );
@@ -175,65 +250,30 @@ namespace tao
 
   // get<T>
   template< typename T, typename... Ts >
-  constexpr const T& get( const tuple< Ts... >& t ) noexcept
+  TAOCPP_TUPLE_CONSTEXPR
+  const T& get( const tuple< Ts... >& t ) noexcept
   {
     return get< impl::index_of< T, Ts... >::value >( t );
   }
 
   template< typename T, typename... Ts >
-  constexpr T& get( tuple< Ts... >& t ) noexcept
+  TAOCPP_TUPLE_CONSTEXPR
+  T& get( tuple< Ts... >& t ) noexcept
   {
     return get< impl::index_of< T, Ts... >::value >( t );
   }
 
   template< typename T, typename... Ts >
-  constexpr T&& get( tuple< Ts... >&& t ) noexcept
+  TAOCPP_TUPLE_CONSTEXPR
+  T&& get( tuple< Ts... >&& t ) noexcept
   {
     return get< impl::index_of< T, Ts... >::value >( std::move( t ) );
   }
 
-  // make_tuple helper
-  namespace impl
-  {
-    template< typename T >
-    struct make_tuple_return
-    {
-      using type = T;
-    };
-
-    template< typename T >
-    struct make_tuple_return< std::reference_wrapper< T > >
-    {
-      using type = T&;
-    };
-
-    template< typename T >
-    using make_tuple_return_t = typename make_tuple_return< T >::type;
-  }
-
-  // make_tuple
-  template< typename... Ts, typename R = tuple< impl::make_tuple_return_t< typename std::decay< Ts >::type >... > >
-  R make_tuple( Ts&&... ts )
-  {
-    return R( std::forward< Ts >( ts )... );
-  }
-
-  // forward_as_tuple
-  template< typename... Ts >
-  tuple< Ts&&... > forward_as_tuple( Ts&&... ts ) noexcept
-  {
-    return tuple< Ts&&... >( std::forward< Ts >( ts )... );
-  }
-
-  // tie
-  template< typename... Ts >
-  tuple< Ts&... > tie( Ts&... ts ) noexcept
-  {
-    return tuple< Ts&... >( ts... );
-  }
-
   // ignore
   impl::ignore_t ignore;
+
+  // 20.4.2.7 Relational operators [tuple.rel]
 
   // operators helper
   namespace impl
@@ -252,6 +292,7 @@ namespace tao
       }
 #else
       template< typename T, typename U >
+      TAOCPP_TUPLE_CONSTEXPR
       bool operator()( const T& lhs, const U& rhs ) const
       {
         bool result = true;
@@ -279,6 +320,7 @@ namespace tao
       }
 #else
       template< typename T, typename U >
+      TAOCPP_TUPLE_CONSTEXPR
       bool operator()( const T& lhs, const U& rhs ) const
       {
         bool result = false;
@@ -294,40 +336,63 @@ namespace tao
 
   // operators
   template< typename... Ts, typename... Us >
-  constexpr bool operator==( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
+  TAOCPP_TUPLE_CONSTEXPR
+  bool operator==( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
   {
     return impl::tuple_equal< seq::index_sequence_for< Ts... > >()( lhs, rhs );
   }
 
   template< typename... Ts, typename... Us >
-  constexpr bool operator!=( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
+  TAOCPP_TUPLE_CONSTEXPR
+  bool operator!=( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
   {
     return !( lhs == rhs );
   }
 
   template< typename... Ts, typename... Us >
-  constexpr bool operator<( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
+  TAOCPP_TUPLE_CONSTEXPR
+  bool operator<( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
   {
     return impl::tuple_less< seq::index_sequence_for< Ts... > >()( lhs, rhs );
   }
 
   template< typename... Ts, typename... Us >
-  constexpr bool operator>=( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
+  TAOCPP_TUPLE_CONSTEXPR
+  bool operator>=( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
   {
     return !( lhs < rhs );
   }
 
   template< typename... Ts, typename... Us >
-  constexpr bool operator>( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
+  TAOCPP_TUPLE_CONSTEXPR
+  bool operator>( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
   {
     return rhs < lhs;
   }
 
   template< typename... Ts, typename... Us >
-  constexpr bool operator<=( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
+  TAOCPP_TUPLE_CONSTEXPR
+  bool operator<=( const tuple< Ts... >& lhs, const tuple< Us... >& rhs )
   {
     return !( rhs < lhs );
   }
+
+  // 20.4.2.8 Tuple traits [tuple.traits]
+
+  // TODO: Specialize uses_allocator is supported by the standard library
+
+  // 20.4.2.9 Tuple specialized algorithms [tuple.special]
+
+  // TODO: Should this be moved to std::? Or have "using std::swap;" somewhere?
+
+  // swap
+  template< typename... Ts >
+  void swap( tuple< Ts... >& lhs, tuple< Ts... >& rhs ) noexcept( noexcept( lhs.swap( rhs ) ) )
+  {
+    lhs.swap( rhs );
+  }
+
+  // (continued:) 20.4.2.4 Tuple creation functions [tuple.creation]
 
   // tuple_cat helper
   namespace impl
@@ -355,7 +420,7 @@ namespace tao
     template< std::size_t... Os, std::size_t... Is, typename... Ts >
     struct tuple_cat_result< seq::index_sequence< Os... >, seq::index_sequence< Is... >, Ts... >
     {
-      using type = tuple< tuple_element_t< Is, seq::type_by_index_t< Os, Ts... > >... >;
+      using type = tuple< typename tuple_element< Is, seq::type_by_index_t< Os, Ts... > >::type... >;
     };
 
     template< typename... Ts >
@@ -374,6 +439,7 @@ namespace tao
     };
 
     template< typename R, std::size_t... Os, std::size_t... Is, typename T >
+    TAOCPP_TUPLE_CONSTEXPR
     R tuple_cat( seq::index_sequence< Os... >, seq::index_sequence< Is... >, T t )
     {
       return R( get< Is >( get< Os >( t ) )... );
@@ -382,17 +448,13 @@ namespace tao
 
   // tuple_cat
   template< typename... Ts, typename H = impl::tuple_cat_helper< typename std::remove_reference< Ts >::type... >, typename R = typename H::result_type >
+  TAOCPP_TUPLE_CONSTEXPR
   R tuple_cat( Ts&&... ts )
   {
     return impl::tuple_cat< R >( typename H::outer_index_sequence(), typename H::inner_index_sequence(), forward_as_tuple( std::forward< Ts >( ts )... ) );
   }
-
-  // swap
-  template< typename... Ts >
-  void swap( tuple< Ts... >& lhs, tuple< Ts... >& rhs ) noexcept( noexcept( lhs.swap( rhs ) ) )
-  {
-    lhs.swap( rhs );
-  }
 }
+
+#undef TAOCPP_TUPLE_CONSTEXPR
 
 #endif // TAOCPP_INCLUDE_TUPLE_HPP
