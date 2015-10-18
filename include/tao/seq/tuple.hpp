@@ -318,10 +318,10 @@ namespace tao
         // TODO: This fold expression does not work as expected. Why?
         (void)( ( ( result = static_cast< bool >( get< Is >( lhs ) < get< Is >( rhs ) ) ) || static_cast< bool >( get< Is >( rhs ) < get< Is >( lhs ) ) ) || ... );
 #else
-        bool no_result = false;
+        bool no_result_yet = false;
         using swallow = bool[];
-        (void)swallow{ ( no_result = no_result || ( result = static_cast< bool >( get< Is >( lhs ) < get< Is >( rhs ) ) ) || static_cast< bool >( get< Is >( rhs ) < get< Is >( lhs ) ) )..., true };
-        (void)no_result;
+        (void)swallow{ ( no_result_yet = no_result_yet || ( result = static_cast< bool >( get< Is >( lhs ) < get< Is >( rhs ) ) ) || static_cast< bool >( get< Is >( rhs ) < get< Is >( lhs ) ) )..., true };
+        (void)no_result_yet;
 #endif
         return result;
       }
