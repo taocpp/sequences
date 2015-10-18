@@ -106,6 +106,8 @@ namespace tao
     };
   }
 
+  // 20.4.2 Class template tuple [tuple.tuple]
+
   // tuple
   template< typename... Ts >
   struct tuple
@@ -147,7 +149,7 @@ namespace tao
   }
 
   // ignore
-  impl::ignore_t ignore;
+  const impl::ignore_t ignore{};
 
   // make_tuple helper
   namespace impl
