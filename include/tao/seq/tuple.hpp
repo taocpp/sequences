@@ -233,10 +233,7 @@ namespace tao
   }
 
   // ignore
-  namespace
-  {
-    impl::ignore_t ignore;
-  }
+  impl::ignore_t ignore;
 
   // operators helper
   namespace impl
