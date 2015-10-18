@@ -75,7 +75,7 @@ namespace tao
 
       constexpr tuple_base() = default;
 
-      template< typename... Us, typename = impl::enable_if_t< sizeof...( Us ) != 0 > >
+      template< typename... Us >
       TAOCPP_TUPLE_CONSTEXPR
       explicit tuple_base( Us&&... us )
         : tuple_value< Is, Ts >( std::forward< Us >( us ) )...
@@ -84,19 +84,11 @@ namespace tao
       tuple_base( const tuple_base& ) = default;
       tuple_base( tuple_base&& ) = default;
 
-      // TODO: Add more ctors
-
-      // 20.4.2.2 Assignment [tuple.assign]
-
       TAOCPP_TUPLE_CONSTEXPR
       tuple_base& operator=( const tuple_base& ) = default;
 
       TAOCPP_TUPLE_CONSTEXPR
       tuple_base& operator=( tuple_base&& ) = default;
-
-      // TODO: Add assignment
-
-      // 20.4.2.3 swap [tuple.swap]
 
       void swap( tuple_base& v )
         noexcept( seq::is_all< impl::is_nothrow_swappable< Ts >::value... >::value )
