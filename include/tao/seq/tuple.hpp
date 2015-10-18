@@ -41,19 +41,29 @@ namespace tao
     template< typename T >
     using is_nothrow_swappable = std::integral_constant< bool, noexcept( swap( std::declval< T& >(), std::declval< T& >() ) ) >;
 
-    template< std::size_t I, typename T >
+    template< std::size_t I, typename T, bool = std::is_empty< T >::value >
     struct tuple_value
     {
       T value;
 
-      TAOCPP_TUPLE_CONSTEXPR
-      tuple_value() : value() {} // TODO: Check for reference-types
+      constexpr tuple_value()
+        noexcept( std::is_nothrow_default_constructible< T >::value )
+        : value()
+      {
+        static_assert( !std::is_reference< T >::value, "attempted to default construct a reference element in a tuple" );
+      }
 
+      template< typename U,
+                typename = impl::enable_if_t< !std::is_same< typename std::decay< U >::type, tuple_value >::value >,
+                typename = impl::enable_if_t< std::is_constructible< T, U >::value > >
       TAOCPP_TUPLE_CONSTEXPR
-      explicit tuple_value( const T& v ) : value( v ) {}
+      explicit tuple_value( U&& u )
+        noexcept( std::is_nothrow_constructible< T, U >::value )
+        : value( std::forward< U >( u ) )
+      {}
 
-      TAOCPP_TUPLE_CONSTEXPR
-      explicit tuple_value( T&& v ) : value( std::move( v ) ) {}
+      tuple_value( const tuple_value& ) = default;
+      tuple_value( tuple_value&& ) = default;
 
       bool swap( tuple_value& v )
         noexcept( is_nothrow_swappable< T >::value )
@@ -61,6 +71,60 @@ namespace tao
         using std::swap;
         swap( value, v.value );
         return true;
+      }
+
+      TAOCPP_TUPLE_CONSTEXPR
+      T& get() noexcept
+      {
+        return value;
+      }
+
+      TAOCPP_TUPLE_CONSTEXPR
+      const T& get() const noexcept
+      {
+        return value;
+      }
+    };
+
+    template< std::size_t I, typename T >
+    struct tuple_value< I, T, true >
+      : private T
+    {
+      constexpr tuple_value()
+        noexcept( std::is_nothrow_default_constructible< T >::value )
+        : T()
+      {}
+
+      template< typename U,
+                typename = impl::enable_if_t< !std::is_same< typename std::decay< U >::type, tuple_value >::value >,
+                typename = impl::enable_if_t< std::is_constructible< T, U >::value > >
+      TAOCPP_TUPLE_CONSTEXPR
+      explicit tuple_value( U&& u )
+        noexcept( std::is_nothrow_constructible< T, U >::value )
+        : T( std::forward< U >( u ) )
+      {}
+
+      tuple_value( const tuple_value& ) = default;
+      tuple_value( tuple_value&& ) = default;
+
+      bool swap( tuple_value& v )
+        noexcept( is_nothrow_swappable< T >::value )
+      {
+        using std::swap;
+        swap( *this, v );
+        return true;
+      }
+
+      TAOCPP_TUPLE_CONSTEXPR
+      T& get() noexcept
+      {
+        return static_cast< T& >( *this );
+      }
+
+      TAOCPP_TUPLE_CONSTEXPR
+      const T& get() const noexcept
+      {
+        return static_cast< const T& >( *this );
       }
     };
 
@@ -308,14 +372,14 @@ namespace tao
   TAOCPP_TUPLE_CONSTEXPR
   const seq::type_by_index_t< I, Ts... >& get( const tuple< Ts... >& t ) noexcept
   {
-    return static_cast< const impl::tuple_value< I, seq::type_by_index_t< I, Ts... > >& >( t.base ).value;
+    return static_cast< const impl::tuple_value< I, seq::type_by_index_t< I, Ts... > >& >( t.base ).get();
   }
 
   template< std::size_t I, typename... Ts >
   TAOCPP_TUPLE_CONSTEXPR
   seq::type_by_index_t< I, Ts... >& get( tuple< Ts... >& t ) noexcept
   {
-    return static_cast< impl::tuple_value< I, seq::type_by_index_t< I, Ts... > >& >( t.base ).value;
+    return static_cast< impl::tuple_value< I, seq::type_by_index_t< I, Ts... > >& >( t.base ).get();
   }
 
   template< std::size_t I, typename... Ts >
@@ -323,7 +387,7 @@ namespace tao
   seq::type_by_index_t< I, Ts... >&& get( tuple< Ts... >&& t ) noexcept
   {
     using type = seq::type_by_index_t< I, Ts... >;
-    return static_cast< type&& >( static_cast< impl::tuple_value< I, type >& >( t.base ).value );
+    return static_cast< type&& >( static_cast< impl::tuple_value< I, type >& >( t.base ).get() );
   }
 
   // get<T> helper
