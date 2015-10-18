@@ -41,4 +41,7 @@ int main()
   assert( t2 <= t3 );
   assert( t2 >= t4 );
   assert( t2 <= t5 );
+
+  assert( tuple<>() == tuple<>() );
+  assert( !( tuple<>() < tuple<>() ) );
 }

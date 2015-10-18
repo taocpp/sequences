@@ -251,8 +251,8 @@ namespace tao
         return ( static_cast< bool >( get< Is >( lhs ) == get< Is >( rhs ) ) && ... );
       }
 #else
-      template< typename... Ts, typename... Us >
-      bool operator()( const tuple< Ts... >& lhs, const tuple< Us... >& rhs ) const
+      template< typename T, typename U >
+      bool operator()( const T& lhs, const U& rhs ) const
       {
         bool result = true;
         using swallow = bool[];
@@ -268,22 +268,24 @@ namespace tao
     template< std::size_t... Is >
     struct tuple_less< seq::index_sequence< Is... > >
     {
-#ifdef TAOCPP_FOLD_EXPRESSIONS
+#ifdef TAOCPP_DUMMY // TAOCPP_FOLD_EXPRESSIONS
       template< typename T, typename U >
       constexpr bool operator()( const T& lhs, const U& rhs ) const
       {
         bool result = false;
-        ( ( ( result = static_cast< bool >( get< Is >( lhs ) < get< Is >( rhs ) ) ) || ( !static_cast< bool >( get< Is >( rhs ) < get< Is >( lhs ) ) ) ) && ... );
+        // TODO: This fold expression does not work as expected. Why?
+        (void)( ( ( result = static_cast< bool >( get< Is >( lhs ) < get< Is >( rhs ) ) ) || static_cast< bool >( get< Is >( rhs ) < get< Is >( lhs ) ) ) || ... );
         return result;
       }
 #else
-      template< typename... Ts, typename... Us >
-      bool operator()( const tuple< Ts... >& lhs, const tuple< Us... >& rhs ) const
+      template< typename T, typename U >
+      bool operator()( const T& lhs, const U& rhs ) const
       {
         bool result = false;
-        bool no_result = true;
+        bool no_result = false;
         using swallow = bool[];
-        (void)swallow{ ( no_result = no_result && ( ( result = static_cast< bool >( get< Is >( lhs ) < get< Is >( rhs ) ) ) || ( !static_cast< bool >( get< Is >( rhs ) < get< Is >( lhs ) ) ) ) )... };
+        (void)swallow{ ( no_result = no_result || ( result = static_cast< bool >( get< Is >( lhs ) < get< Is >( rhs ) ) ) || static_cast< bool >( get< Is >( rhs ) < get< Is >( lhs ) ) )..., true };
+        (void)no_result;
         return result;
       }
 #endif
