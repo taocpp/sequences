@@ -119,6 +119,22 @@ namespace tao
 
   // 20.4.2.4 Tuple creation functions [tuple.creation]
 
+  // ignore helper
+  namespace impl
+  {
+    struct ignore_t
+    {
+      template< typename U >
+      ignore_t& operator=( U&& )
+      {
+        return *this;
+      }
+    };
+  }
+
+  // ignore
+  impl::ignore_t ignore;
+
   // make_tuple helper
   namespace impl
   {
@@ -237,15 +253,6 @@ namespace tao
 
     template< typename T, typename... Ts >
     using index_of = index_of_impl< seq::index_sequence_for< Ts... >, T, Ts... >;
-
-    struct ignore_t
-    {
-      template< typename U >
-      ignore_t& operator=( U&& )
-      {
-        return *this;
-      }
-    };
   }
 
   // get<T>
@@ -269,9 +276,6 @@ namespace tao
   {
     return get< impl::index_of< T, Ts... >::value >( std::move( t ) );
   }
-
-  // ignore
-  impl::ignore_t ignore;
 
   // 20.4.2.7 Relational operators [tuple.rel]
 
