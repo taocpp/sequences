@@ -11,12 +11,12 @@ UNAME_S := $(shell uname -s)
 endif
 
 CPPFLAGS ?= -pedantic
-CXXSTD ?= c++14
+CXXSTD ?= c++11
 CXXFLAGS ?= -O3 -Wall -Wextra -Werror
 
-SOURCES := $(shell find . -name '*.cpp')
-DEPENDS := $(SOURCES:./%.cpp=build/%.d)
-BINARIES := $(SOURCES:./%.cpp=build/%)
+SOURCES := $(shell find src/ -name '*.cpp')
+DEPENDS := $(SOURCES:%.cpp=build/%.d)
+BINARIES := $(SOURCES:%.cpp=build/%)
 
 UNIT_TESTS := $(filter build/src/test/%,$(BINARIES))
 
