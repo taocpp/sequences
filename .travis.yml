@@ -86,14 +86,6 @@ matrix:
       compiler: clang
       addons:
         apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.5']
-          packages: ['clang-3.5']
-      env: COMPILER=clang++-3.5 CXXSTD=c++1y CPPFLAGS="-pedantic -DTAOCPP_NO_STD_INTEGER_SEQUENCE"
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.6']
           packages: ['clang-3.6']
       env: COMPILER=clang++-3.6 CXXSTD=c++11

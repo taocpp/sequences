@@ -4,8 +4,7 @@
 #ifndef TAOCPP_SEQUENCES_INCLUDE_CONFIG_HPP
 #define TAOCPP_SEQUENCES_INCLUDE_CONFIG_HPP
 
-// TODO: Get rid of manual switch, detect properly
-#if (__cplusplus >= 201402L) && !defined(TAOCPP_NO_STD_INTEGER_SEQUENCE)
+#if __cplusplus >= 201402L
 # define TAOCPP_USE_STD_INTEGER_SEQUENCE
 #endif
 
@@ -15,7 +14,7 @@
 
 #if defined(__cpp_fold_expressions)
 # define TAOCPP_FOLD_EXPRESSIONS
-#elif (__cplusplus > 201402L)
+#elif __cplusplus > 201402L
 # if defined(__apple_build_version__) && (__clang_major__ >= 7)
 #  define TAOCPP_FOLD_EXPRESSIONS
 # elif defined(__clang__) && ((__clang_major__ > 3) || ((__clang_major__ == 3) && (__clang_minor__ >= 6)))
