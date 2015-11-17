@@ -5,7 +5,7 @@
 [![TravisCI](https://travis-ci.org/taocpp/sequences.svg)](https://travis-ci.org/taocpp/sequences)
 [![Issues](https://img.shields.io/github/issues/taocpp/sequences.svg)](https://github.com/taocpp/sequences/issues)
 
-The Art of C++ / Sequences is a zero-dependency C++11 header-only library that provides efficient algorithms to generate and work on [`std::integer_sequence`](http://en.cppreference.com/w/cpp/utility/integer_sequence).
+The Art of C++ / Sequences is a zero-dependency C++11 header-only library that provides efficient algorithms to generate and work on variadic templates and [`std::integer_sequence`](http://en.cppreference.com/w/cpp/utility/integer_sequence).
 
 ## Compatibility
 
