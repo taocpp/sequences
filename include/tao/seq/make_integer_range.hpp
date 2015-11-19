@@ -12,7 +12,7 @@ namespace tao
   {
     namespace impl
     {
-      template< typename T, T N, T M, bool = ( M < N ), typename = make_integer_sequence< T, ( M < N ) ? ( N - M ) : ( M - N ) > >
+      template< typename T, T N, T M, bool B = ( M < N ), typename = make_integer_sequence< T, B ? ( N - M ) : ( M - N ) > >
       struct range_t;
 
       template< typename T, T N, T M, T... Ns >
