@@ -54,6 +54,21 @@ libc++ already has very efficient versions for the above, so they are pulled in 
 
 Our own implementation has O(log N) instantiation depth. This allows for very large sequences without the need to increase the compiler's default instantiation depth limits. For example, GCC and Clang generate `index_sequence<10000>` in ~0.15s (on my machine, of course). The standard library version from libstdc++, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
 
+#### Header `tao/seq/make_integer_range.hpp`
+
+Generate half-open ranges of integers.
+
+* `make_integer_range< typename T, T N, T M >`
+* `make_index_range< std::size_t N, std::size_t M >`
+
+Examples:
+
+* `make_integer_range<int,3,7>` ➙ `integer_sequence<int,3,4,5,6>`
+* `make_integer_range<int,7,3>` ➙ `integer_sequence<int,7,6,5,4>`
+* `make_integer_sequence<int,-2,2>` ➙ `integer_sequence<int,-2,-1,0,1>`
+* `make_index_range<5,5>` ➙ `index_sequence<>`
+* `make_index_range<2,5>` ➙ `index_sequence<2,3,4>`
+
 #### Header `tao/seq/sum.hpp`
 
 Integral constant to provide the sum of `Ns`.
