@@ -44,31 +44,31 @@ namespace tao
       };
 
       template< typename T, T N, typename = void >
-      struct generate;
+      struct generate_sequence;
 
       template< typename T, T N >
-      using generate_t = typename generate< T, N >::type;
+      using generate_sequence_t = typename generate_sequence< T, N >::type;
 
       template< typename T, T N, typename >
-      struct generate
-        : double_up< generate_t< T, N / 2 >, N / 2, N % 2 == 1 >
+      struct generate_sequence
+        : double_up< generate_sequence_t< T, N / 2 >, N / 2, N % 2 == 1 >
       {};
 
       template< typename T, T N >
-      struct generate< T, N, typename std::enable_if< ( N == 0 ) >::type >
+      struct generate_sequence< T, N, typename std::enable_if< ( N == 0 ) >::type >
       {
         using type = integer_sequence< T >;
       };
 
       template< typename T, T N >
-      struct generate< T, N, typename std::enable_if< ( N == 1 ) >::type >
+      struct generate_sequence< T, N, typename std::enable_if< ( N == 1 ) >::type >
       {
         using type = integer_sequence< T, 0 >;
       };
     }
 
     template< typename T, T N >
-    using make_integer_sequence = impl::generate_t< T, N >;
+    using make_integer_sequence = impl::generate_sequence_t< T, N >;
 
     template< std::size_t N >
     using make_index_sequence = make_integer_sequence< std::size_t, N >;
