@@ -1,5 +1,5 @@
 // The Art of C++ / Sequences
-// Copyright (c) 2015 Daniel Frey
+// Copyright (c) 2015-2016 Daniel Frey
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_SUM_HPP
 #define TAOCPP_SEQUENCES_INCLUDE_SUM_HPP
@@ -24,7 +24,7 @@ namespace tao
 
     template< typename T, T... Ns >
     struct sum
-      : std::integral_constant< T, ( Ns + ... ) >
+      : std::integral_constant< T, ( Ns + ... + T( 0 ) ) >
     {};
 
 #else
