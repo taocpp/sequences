@@ -59,6 +59,30 @@ matrix:
       env: COMPILER=g++-5 CXXSTD=c++1z
 
     - os: linux
+      compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-6']
+      env: COMPILER=g++-6 CXXSTD=c++11
+
+    - os: linux
+      compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-6']
+      env: COMPILER=g++-6 CXXSTD=c++14
+
+    - os: linux
+      compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-6']
+      env: COMPILER=g++-6 CXXSTD=c++17
+
+    - os: linux
       compiler: clang
       addons:
         apt:
