@@ -32,7 +32,10 @@ int main()
    static_assert( make_index_sequence< 1 >::size() == 1, "oops" );
    static_assert( make_index_sequence< 10 >::size() == 10, "oops" );
    static_assert( make_index_sequence< 100 >::size() == 100, "oops" );
+
+#ifndef _MSC_VER  // Visual C++ complains about the symbol length
    static_assert( make_index_sequence< 1000 >::size() == 1000, "oops" );
    static_assert( make_index_sequence< 10000 >::size() == 10000, "oops" );
    static_assert( make_index_sequence< 100000 >::size() == 100000, "oops" );
+#endif
 }
