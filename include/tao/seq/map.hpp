@@ -1,5 +1,5 @@
-// The Art of C++ / Sequences
-// Copyright (c) 2015 Daniel Frey
+// Copyright (c) 2015-2017 Daniel Frey
+// Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_MAP_HPP
 #define TAOCPP_SEQUENCES_INCLUDE_MAP_HPP
@@ -12,20 +12,20 @@
 
 namespace tao
 {
-  namespace seq
-  {
-    template< typename, typename >
-    struct map;
+   namespace seq
+   {
+      template< typename, typename >
+      struct map;
 
-    template< std::size_t... Ns, typename M >
-    struct map< index_sequence< Ns... >, M >
-    {
-      using type = integer_sequence< typename M::value_type, select< Ns, M >::value... >;
-    };
+      template< std::size_t... Ns, typename M >
+      struct map< index_sequence< Ns... >, M >
+      {
+         using type = integer_sequence< typename M::value_type, select< Ns, M >::value... >;
+      };
 
-    template< typename S, typename M >
-    using map_t = typename map< S, M >::type;
-  }
+      template< typename S, typename M >
+      using map_t = typename map< S, M >::type;
+   }
 }
 
-#endif // TAOCPP_SEQUENCES_INCLUDE_MAP_HPP
+#endif  // TAOCPP_SEQUENCES_INCLUDE_MAP_HPP

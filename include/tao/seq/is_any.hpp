@@ -1,5 +1,5 @@
-// The Art of C++ / Sequences
-// Copyright (c) 2015 Daniel Frey
+// Copyright (c) 2015-2017 Daniel Frey
+// Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_IS_ANY_HPP
 #define TAOCPP_SEQUENCES_INCLUDE_IS_ANY_HPP
@@ -14,22 +14,21 @@
 
 namespace tao
 {
-  namespace seq
-  {
+   namespace seq
+   {
 
 #ifdef TAOCPP_FOLD_EXPRESSIONS
 
-    template< bool... Bs >
-    using is_any = std::integral_constant< bool, ( Bs || ... ) >;
+      template< bool... Bs >
+      using is_any = std::integral_constant< bool, ( Bs || ... ) >;
 
 #else
 
-    template< bool... Bs >
-    using is_any = std::integral_constant< bool, !is_all< !Bs... >::value >;
+      template< bool... Bs >
+      using is_any = std::integral_constant< bool, !is_all< !Bs... >::value >;
 
 #endif
-
-  }
+   }
 }
 
-#endif // TAOCPP_SEQUENCES_INCLUDE_IS_ANY_HPP
+#endif  // TAOCPP_SEQUENCES_INCLUDE_IS_ANY_HPP

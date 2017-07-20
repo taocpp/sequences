@@ -1,5 +1,5 @@
-// The Art of C++ / Sequences
-// Copyright (c) 2015 Daniel Frey
+// Copyright (c) 2015-2017 Daniel Frey
+// Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_TYPE_BY_INDEX_HPP
 #define TAOCPP_SEQUENCES_INCLUDE_TYPE_BY_INDEX_HPP
@@ -11,47 +11,47 @@
 
 namespace tao
 {
-  namespace seq
-  {
-    // based on http://stackoverflow.com/questions/18942322
+   namespace seq
+   {
+      // based on http://stackoverflow.com/questions/18942322
 
-    namespace impl
-    {
-      template< std::size_t >
-      struct any
+      namespace impl
       {
-        any( ... );
-      };
+         template< std::size_t >
+         struct any
+         {
+            any( ... );
+         };
 
-      template< typename >
-      struct wrapper;
+         template< typename >
+         struct wrapper;
 
-      template< typename >
-      struct unwrap;
+         template< typename >
+         struct unwrap;
 
-      template< typename T >
-      struct unwrap< wrapper< T > >
-      {
-        using type = T;
-      };
+         template< typename T >
+         struct unwrap< wrapper< T > >
+         {
+            using type = T;
+         };
 
-      template< typename >
-      struct get_nth;
+         template< typename >
+         struct get_nth;
 
-      template< std::size_t... Is >
-      struct get_nth< index_sequence< Is... > >
-      {
-        template< typename T >
-        static T deduce( any< Is & 0 >..., T*, ... );
-      };
-    }
+         template< std::size_t... Is >
+         struct get_nth< index_sequence< Is... > >
+         {
+            template< typename T >
+            static T deduce( any< Is & 0 >..., T*, ... );
+         };
+      }
 
-    template< std::size_t I, typename... Ts >
-    using type_by_index = impl::unwrap< decltype( impl::get_nth< make_index_sequence< I > >::deduce( std::declval< impl::wrapper< Ts >* >()... ) ) >;
+      template< std::size_t I, typename... Ts >
+      using type_by_index = impl::unwrap< decltype( impl::get_nth< make_index_sequence< I > >::deduce( std::declval< impl::wrapper< Ts >* >()... ) ) >;
 
-    template< std::size_t I, typename... Ts >
-    using type_by_index_t = typename type_by_index< I, Ts... >::type;
-  }
+      template< std::size_t I, typename... Ts >
+      using type_by_index_t = typename type_by_index< I, Ts... >::type;
+   }
 }
 
-#endif // TAOCPP_SEQUENCES_INCLUDE_TYPE_BY_INDEX_HPP
+#endif  // TAOCPP_SEQUENCES_INCLUDE_TYPE_BY_INDEX_HPP
