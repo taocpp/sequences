@@ -14,12 +14,6 @@
 
 #if defined( __cpp_fold_expressions )
 #define TAOCPP_FOLD_EXPRESSIONS
-#elif __cplusplus > 201402L
-#if defined( __apple_build_version__ ) && ( __clang_major__ >= 7 )
-#define TAOCPP_FOLD_EXPRESSIONS
-#elif defined( __clang__ ) && ( ( __clang_major__ > 3 ) || ( ( __clang_major__ == 3 ) && ( __clang_minor__ >= 6 ) ) )
-#define TAOCPP_FOLD_EXPRESSIONS
-#endif
 #endif
 
 #endif  // TAOCPP_SEQUENCES_INCLUDE_CONFIG_HPP
