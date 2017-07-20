@@ -12,7 +12,17 @@ namespace tao
    {
       namespace impl
       {
-         template< typename T, T... >
+         template< typename T >
+         struct is_integer_sequence : std::false_type
+         {
+         };
+
+         template< typename T, T... Ns >
+         struct is_integer_sequence< integer_sequence< T, Ns... > > : std::true_type
+         {
+         };
+
+         template< typename T >
          struct element_type
          {
             using type = T;
@@ -23,21 +33,32 @@ namespace tao
          {
             using type = T;
          };
+
+         template< bool, typename >
+         struct scale
+         {
+            template< typename T, T S, T... Ns >
+            struct impl
+            {
+               using type = integer_sequence< T, S * Ns... >;
+            };
+         };
+
+         template< typename T, T... Ns >
+         struct scale< true, integer_sequence< T, Ns... > >
+         {
+            template< typename, T S >
+            struct impl
+            {
+               using type = integer_sequence< T, S * Ns... >;
+            };
+         };
       }
 
-      template< typename T, typename impl::element_type< T >::type S, T... Ns >
-      struct scale
-      {
-         using type = integer_sequence< T, S * Ns... >;
-      };
+      template< typename T, typename impl::element_type< T >::type S, typename impl::element_type< T >::type... Ns >
+      using scale = typename impl::scale< impl::is_integer_sequence< T >::value, T >::template impl< T, S, Ns... >;
 
-      template< typename T, T S, T... Ns >
-      struct scale< integer_sequence< T, Ns... >, S >
-      {
-         using type = integer_sequence< T, S * Ns... >;
-      };
-
-      template< typename T, typename impl::element_type< T >::type S, T... Ns >
+      template< typename T, typename impl::element_type< T >::type S, typename impl::element_type< T >::type... Ns >
       using scale_t = typename scale< T, S, Ns... >::type;
    }
 }
