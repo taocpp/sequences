@@ -8,7 +8,7 @@
 
 #include "integer_sequence.hpp"
 #include "make_integer_sequence.hpp"
-#include "values.hpp"
+#include "select.hpp"
 
 namespace tao
 {
@@ -22,15 +22,13 @@ namespace tao
          template< template< typename U, U, U > class OP, std::size_t... Is, typename T, T... Ns >
          struct folder< OP, index_sequence< Is... >, false, T, Ns... >
          {
-            using values = seq::values< T, Ns... >;
-            using type = integer_sequence< T, OP< T, values::data[ 2 * Is ], values::data[ 2 * Is + 1 ] >::value... >;
+            using type = integer_sequence< T, OP< T, seq::select< 2 * Is, T, Ns... >::value, seq::select< 2 * Is + 1, T, Ns... >::value >::value... >;
          };
 
          template< template< typename U, U, U > class OP, std::size_t... Is, typename T, T N, T... Ns >
          struct folder< OP, index_sequence< Is... >, true, T, N, Ns... >
          {
-            using values = seq::values< T, Ns... >;
-            using type = integer_sequence< T, N, OP< T, values::data[ 2 * Is ], values::data[ 2 * Is + 1 ] >::value... >;
+            using type = integer_sequence< T, N, OP< T, seq::select< 2 * Is, T, Ns... >::value, seq::select< 2 * Is + 1, T, Ns... >::value >::value... >;
          };
       }
 

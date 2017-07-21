@@ -5,10 +5,10 @@
 #define TAOCPP_SEQUENCES_INCLUDE_SELECT_HPP
 
 #include <cstddef>
-#include <type_traits>
+#include <utility>
 
+#include "at_index.hpp"
 #include "integer_sequence.hpp"
-#include "values.hpp"
 
 namespace tao
 {
@@ -16,7 +16,7 @@ namespace tao
    {
       template< std::size_t I, typename T, T... Ns >
       struct select
-         : std::integral_constant< T, values< T, Ns... >::data[ I ] >
+         : at_index_t< I, std::integral_constant< T, Ns >... >
       {
       };
 
