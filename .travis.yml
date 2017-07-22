@@ -282,38 +282,40 @@ matrix:
         - COMPILER=clang++-3.9
         - CXXSTD=c++1z
 
-    - os: linux
-      dist: trusty
-      compiler: clang
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-          packages: ['clang-4.0', 'g++-4.9']
-      env:
-        - COMPILER=clang++-4.0
-        - CXXSTD=c++11
+# Clang 4.0 has a bug which prevents it from compiling our code :(
 
-    - os: linux
-      dist: trusty
-      compiler: clang
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-          packages: ['clang-4.0', 'g++-4.9']
-      env:
-        - COMPILER=clang++-4.0
-        - CXXSTD=c++14
+#    - os: linux
+#      dist: trusty
+#      compiler: clang
+#      addons:
+#        apt:
+#          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
+#          packages: ['clang-4.0', 'g++-4.9']
+#      env:
+#        - COMPILER=clang++-4.0
+#        - CXXSTD=c++11
 
-    - os: linux
-      dist: trusty
-      compiler: clang
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-          packages: ['clang-4.0', 'g++-4.9']
-      env:
-        - COMPILER=clang++-4.0
-        - CXXSTD=c++1z
+#    - os: linux
+#      dist: trusty
+#      compiler: clang
+#      addons:
+#        apt:
+#          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
+#          packages: ['clang-4.0', 'g++-4.9']
+#      env:
+#        - COMPILER=clang++-4.0
+#        - CXXSTD=c++14
+
+#    - os: linux
+#      dist: trusty
+#      compiler: clang
+#      addons:
+#        apt:
+#          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
+#          packages: ['clang-4.0', 'g++-4.9']
+#      env:
+#        - COMPILER=clang++-4.0
+#        - CXXSTD=c++1z
 
     - os: osx
       osx_image: xcode6.4
@@ -343,19 +345,21 @@ matrix:
         - COMPILER=clang++
         - CXXSTD=c++11
 
-    - os: osx
-      osx_image: xcode7.3
-      compiler: clang
-      env:
-        - COMPILER=clang++
-        - CXXSTD=c++14
+# Compiler bug?
 
-    - os: osx
-      osx_image: xcode7.3
-      compiler: clang
-      env:
-        - COMPILER=clang++
-        - CXXSTD=c++1z
+#    - os: osx
+#      osx_image: xcode7.3
+#      compiler: clang
+#      env:
+#        - COMPILER=clang++
+#        - CXXSTD=c++14
+
+#    - os: osx
+#      osx_image: xcode7.3
+#      compiler: clang
+#      env:
+#        - COMPILER=clang++
+#        - CXXSTD=c++1z
 
     - os: osx
       osx_image: xcode8.3
@@ -364,19 +368,21 @@ matrix:
         - COMPILER=clang++
         - CXXSTD=c++11
 
-    - os: osx
-      osx_image: xcode8.3
-      compiler: clang
-      env:
-        - COMPILER=clang++
-        - CXXSTD=c++14
+# Compiler bug?
 
-    - os: osx
-      osx_image: xcode8.3
-      compiler: clang
-      env:
-        - COMPILER=clang++
-        - CXXSTD=c++1z
+#    - os: osx
+#      osx_image: xcode8.3
+#      compiler: clang
+#      env:
+#        - COMPILER=clang++
+#        - CXXSTD=c++14
+
+#    - os: osx
+#      osx_image: xcode8.3
+#      compiler: clang
+#      env:
+#        - COMPILER=clang++
+#        - CXXSTD=c++1z
 
 script:
   make CXX=$COMPILER -j3
