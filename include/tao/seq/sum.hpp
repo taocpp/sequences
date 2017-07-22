@@ -47,17 +47,22 @@ namespace tao
          {
          };
 
-         template< std::size_t N, typename T, T... Ns >
+         template< bool, std::size_t N, typename T, T... Ns >
          struct sum
          {
-            using type = std::integral_constant< T,
-                                                 T( sizeof( collector< make_index_sequence< N >, ( ( Ns > 0 ) ? Ns : 0 )... > ) - N ) - T( sizeof( collector< make_index_sequence< N >, ( ( Ns < 0 ) ? -Ns : 0 )... > ) - N ) >;
+            using type = std::integral_constant< T, T( sizeof( collector< make_index_sequence< N >, ( ( Ns > 0 ) ? Ns : 0 )... > ) - N ) - T( sizeof( collector< make_index_sequence< N >, ( ( Ns < 0 ) ? -Ns : 0 )... > ) - N ) >;
+         };
+
+         template< std::size_t N, typename T, T... Ns >
+         struct sum< true, N, T, Ns... >
+         {
+            using type = std::integral_constant< T, T( sizeof( collector< make_index_sequence< N >, ( ( Ns > 0 ) ? Ns : 0 )... > ) - N ) >;
          };
       }
 
       template< typename T, T... Ns >
       struct sum
-         : impl::sum< sizeof...( Ns ) + 1, T, Ns..., 0 >::type
+         : impl::sum< std::is_unsigned< T >::value, sizeof...( Ns ) + 1, T, Ns..., 0 >::type
       {
       };
 
