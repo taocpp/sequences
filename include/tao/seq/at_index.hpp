@@ -38,8 +38,22 @@ namespace tao
       template< std::size_t I, typename... Ts >
       using at_index = decltype( impl::select< I >( impl::indexer< index_sequence_for< Ts... >, Ts... >() ) );
 
+#ifndef _MSC_VER
       template< std::size_t I, typename... Ts >
       using at_index_t = typename at_index< I, Ts... >::type;
+#else
+      namespace impl
+      {
+         template< typename T >
+         struct get_type
+         {
+            using type = typename T::type;
+         };
+      }
+
+      template< std::size_t I, typename... Ts >
+      using at_index_t = typename impl::get_type< at_index< I, Ts... > >::type;
+#endif
    }
 }
 
