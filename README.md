@@ -9,7 +9,15 @@ The Art of C++ / Sequences is a zero-dependency C++11 header-only library that p
 ## Compatibility
 
 * Requires C++11 or newer.
-* Tested with GCC 4.8+ and Clang 3.4+.
+* Tested with GCC 4.8+, Clang 3.4+ and Visual Studio 2017.
+
+The following compilers have bugs which prevent our code from compiling:
+
+* Clang 4.0.
+* Xcode 7 and 8 when used with C++14 or higher.
+* Visual Studio 2015.
+
+(If you know how to fix those, please let us know)
 
 ## Provided algorithms and examples
 
