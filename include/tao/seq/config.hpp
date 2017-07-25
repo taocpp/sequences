@@ -8,7 +8,11 @@
 #define TAOCPP_USE_STD_INTEGER_SEQUENCE
 #endif
 
-#if( __cplusplus >= 201402L ) && defined( _LIBCPP_VERSION )
+#if defined( _LIBCPP_VERSION ) && ( __cplusplus >= 201402L )
+#define TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
+#endif
+
+#if defined( _MSC_VER ) && ( _MSC_VER >= 190023918 )
 #define TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
 #endif
 
