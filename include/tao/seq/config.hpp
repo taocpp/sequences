@@ -5,16 +5,20 @@
 #define TAOCPP_SEQUENCES_INCLUDE_CONFIG_HPP
 
 #if __cplusplus >= 201402L
+
 #define TAOCPP_USE_STD_INTEGER_SEQUENCE
-#endif
 
-#if defined( _LIBCPP_VERSION ) && ( __cplusplus >= 201402L )
+#if defined( _LIBCPP_VERSION )
+#define TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
+#elif defined( _GLIBCXX_RELEASE )
+#define TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
+#elif defined( __GNUC__ ) && ( __GNUC__ >= 6 )
+#define TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
+#elif defined( _MSC_VER ) && ( _MSC_VER >= 190023918 )
 #define TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
 #endif
 
-#if defined( _MSC_VER ) && ( _MSC_VER >= 190023918 )
-#define TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
-#endif
+#endif  // __cplusplus >= 201402L
 
 #if defined( __cpp_fold_expressions )
 #define TAOCPP_FOLD_EXPRESSIONS
