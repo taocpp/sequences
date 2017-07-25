@@ -10,9 +10,7 @@
 
 #if defined( _LIBCPP_VERSION )
 #define TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
-#elif defined( _GLIBCXX_RELEASE )
-#define TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
-#elif defined( __GNUC__ ) && ( __GNUC__ >= 6 )
+#elif defined( _GLIBCXX_RELEASE ) && ( _GLIBCXX_RELEASE >= 8 )
 #define TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
 #elif defined( _MSC_VER ) && ( _MSC_VER >= 190023918 )
 #define TAOCPP_USE_STD_MAKE_INTEGER_SEQUENCE
