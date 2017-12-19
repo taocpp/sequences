@@ -5,6 +5,7 @@
 #define TAOCPP_SEQUENCES_INCLUDE_SCALE_HPP
 
 #include "integer_sequence.hpp"
+#include "sequence_helper.hpp"
 
 namespace tao
 {
@@ -12,28 +13,6 @@ namespace tao
    {
       namespace impl
       {
-         template< typename T >
-         struct is_integer_sequence : std::false_type
-         {
-         };
-
-         template< typename T, T... Ns >
-         struct is_integer_sequence< integer_sequence< T, Ns... > > : std::true_type
-         {
-         };
-
-         template< typename T >
-         struct element_type
-         {
-            using type = T;
-         };
-
-         template< typename T, T... Ns >
-         struct element_type< integer_sequence< T, Ns... > >
-         {
-            using type = T;
-         };
-
          template< bool, typename >
          struct scale
          {
