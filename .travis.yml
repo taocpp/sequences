@@ -384,5 +384,12 @@ matrix:
 #        - COMPILER=clang++
 #        - CXXSTD=c++1z
 
+    - os: osx
+      osx_image: xcode9.2
+      compiler: clang
+      env:
+        - COMPILER=clang++
+        - CXXSTD=c++11
+
 script:
   make CXX=$COMPILER -j3
