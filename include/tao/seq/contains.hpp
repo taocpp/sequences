@@ -14,23 +14,23 @@ namespace tao
    {
       namespace impl
       {
-         template< bool, typename >
+         template< typename T >
          struct contains
          {
-            template< typename T, T N, T... Ns >
+            template< T N, T... Ns >
             using type = is_any< ( N == Ns )... >;
          };
 
          template< typename T, T... Ns >
-         struct contains< true, integer_sequence< T, Ns... > >
+         struct contains< integer_sequence< T, Ns... > >
          {
-            template< typename, T N >
+            template< T N >
             using type = is_any< ( N == Ns )... >;
          };
       }
 
       template< typename T, typename impl::element_type< T >::type N, typename impl::element_type< T >::type... Ns >
-      using contains = typename impl::contains< impl::is_integer_sequence< T >::value, T >::template type< T, N, Ns... >;
+      using contains = typename impl::contains< T >::template type< N, Ns... >;
    }
 }
 

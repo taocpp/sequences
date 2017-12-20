@@ -13,10 +13,10 @@ namespace tao
    {
       namespace impl
       {
-         template< bool, typename >
+         template< typename T >
          struct scale
          {
-            template< typename T, T S, T... Ns >
+            template< T S, T... Ns >
             struct impl
             {
                using type = integer_sequence< T, S * Ns... >;
@@ -24,9 +24,9 @@ namespace tao
          };
 
          template< typename T, T... Ns >
-         struct scale< true, integer_sequence< T, Ns... > >
+         struct scale< integer_sequence< T, Ns... > >
          {
-            template< typename, T S >
+            template< T S >
             struct impl
             {
                using type = integer_sequence< T, S * Ns... >;
@@ -35,7 +35,7 @@ namespace tao
       }
 
       template< typename T, typename impl::element_type< T >::type S, typename impl::element_type< T >::type... Ns >
-      using scale = typename impl::scale< impl::is_integer_sequence< T >::value, T >::template impl< T, S, Ns... >;
+      using scale = typename impl::scale< T >::template impl< S, Ns... >;
 
       template< typename T, typename impl::element_type< T >::type S, typename impl::element_type< T >::type... Ns >
       using scale_t = typename scale< T, S, Ns... >::type;

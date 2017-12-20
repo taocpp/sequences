@@ -15,16 +15,6 @@ namespace tao
       namespace impl
       {
          template< typename T >
-         struct is_integer_sequence : std::false_type
-         {
-         };
-
-         template< typename T, T... Ns >
-         struct is_integer_sequence< integer_sequence< T, Ns... > > : std::true_type
-         {
-         };
-
-         template< typename T >
          struct element_type
          {
             using type = T;
@@ -34,6 +24,18 @@ namespace tao
          struct element_type< integer_sequence< T, Ns... > >
          {
             using type = T;
+         };
+
+         template< typename T, T... Ns >
+         struct sequence_size
+            : std::integral_constant< std::size_t, sizeof...( Ns ) >
+         {
+         };
+
+         template< typename T, T... Ns >
+         struct sequence_size< integer_sequence< T, Ns... > >
+            : std::integral_constant< std::size_t, sizeof...( Ns ) >
+         {
          };
       }
    }
