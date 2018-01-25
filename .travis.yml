@@ -236,32 +236,34 @@ matrix:
         - CXX=clang++-3.9
         - CXXSTD=c++1z
 
-    - compiler: clang
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-          packages: ['clang-4.0']
-      env:
-        - CXX=clang++-4.0
-        - CXXSTD=c++11
+# clang 4.0 has a bug which affects fold/zip
 
-    - compiler: clang
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-          packages: ['clang-4.0']
-      env:
-        - CXX=clang++-4.0
-        - CXXSTD=c++14
+#    - compiler: clang
+#      addons:
+#        apt:
+#          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
+#          packages: ['clang-4.0']
+#      env:
+#        - CXX=clang++-4.0
+#        - CXXSTD=c++11
 
-    - compiler: clang
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-          packages: ['clang-4.0']
-      env:
-        - CXX=clang++-4.0
-        - CXXSTD=c++1z
+#    - compiler: clang
+#      addons:
+#        apt:
+#          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
+#          packages: ['clang-4.0']
+#      env:
+#        - CXX=clang++-4.0
+#        - CXXSTD=c++14
+
+#    - compiler: clang
+#      addons:
+#        apt:
+#          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
+#          packages: ['clang-4.0']
+#      env:
+#        - CXX=clang++-4.0
+#        - CXXSTD=c++1z
 
     - compiler: clang
       addons:
@@ -294,84 +296,84 @@ matrix:
       osx_image: xcode6.4
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++11
 
     - os: osx
       osx_image: xcode6.4
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++14
 
     - os: osx
       osx_image: xcode6.4
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++1z
 
     - os: osx
       osx_image: xcode7.3
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++11
 
     - os: osx
       osx_image: xcode7.3
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++14
 
     - os: osx
       osx_image: xcode7.3
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++1z
 
     - os: osx
       osx_image: xcode8.3
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++11
 
     - os: osx
       osx_image: xcode8.3
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++14
 
     - os: osx
       osx_image: xcode8.3
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++1z
 
     - os: osx
       osx_image: xcode9.2
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++11
 
     - os: osx
       osx_image: xcode9.2
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++14
 
     - os: osx
       osx_image: xcode9.2
       compiler: clang
       env:
-        - COMPILER=clang++
+        - CXX=clang++
         - CXXSTD=c++17
 
 script:
