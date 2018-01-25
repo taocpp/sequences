@@ -371,4 +371,6 @@ matrix:
 
 script:
   - $CXX --version
-  - make -j3
+  - make -j3 build/src/test/seq/tester
+  - build/src/test/seq/tester
+  - make -kj3
