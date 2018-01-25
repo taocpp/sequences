@@ -265,7 +265,7 @@ matrix:
           packages: ['clang-5.0']
       env:
         - CXX=clang++-5.0
-        - CXXSTD=-std=c++11
+        - CXXSTD=c++11
 
     - compiler: clang
       addons:
@@ -274,7 +274,7 @@ matrix:
           packages: ['clang-5.0']
       env:
         - CXX=clang++-5.0
-        - CXXSTD=-std=c++14
+        - CXXSTD=c++14
 
     - compiler: clang
       addons:
@@ -283,7 +283,7 @@ matrix:
           packages: ['clang-5.0', 'g++-7']
       env:
         - CXX=clang++-5.0
-        - CXXSTD=-std=c++17
+        - CXXSTD=c++17
 
     - os: osx
       osx_image: xcode6.4
