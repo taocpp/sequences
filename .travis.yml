@@ -148,7 +148,8 @@ matrix:
     - compiler: clang
       addons:
         apt:
-          packages: ['clang-3.6']
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['clang-3.6', 'g++-4.9']
       env:
         - CXX=clang++-3.6
         - CXXSTD=c++14
@@ -194,7 +195,8 @@ matrix:
     - compiler: clang
       addons:
         apt:
-          packages: ['clang-3.8']
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['clang-3.8', 'g++-4.9']
       env:
         - CXX=clang++-3.8
         - CXXSTD=c++14
@@ -202,7 +204,8 @@ matrix:
     - compiler: clang
       addons:
         apt:
-          packages: ['clang-3.8']
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['clang-3.8', 'g++-4.9']
       env:
         - CXX=clang++-3.8
         - CXXSTD=c++1z
@@ -218,7 +221,8 @@ matrix:
     - compiler: clang
       addons:
         apt:
-          packages: ['clang-3.9']
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['clang-3.9', 'g++-4.9']
       env:
         - CXX=clang++-3.9
         - CXXSTD=c++14
@@ -226,7 +230,8 @@ matrix:
     - compiler: clang
       addons:
         apt:
-          packages: ['clang-3.9']
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['clang-3.9', 'g++-4.9']
       env:
         - CXX=clang++-3.9
         - CXXSTD=c++1z
