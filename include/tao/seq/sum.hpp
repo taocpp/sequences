@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2017 Daniel Frey
+// Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_SUM_HPP
@@ -50,13 +50,18 @@ namespace tao
          template< bool, std::size_t N, typename T, T... Ns >
          struct sum
          {
-            using type = std::integral_constant< T, T( sizeof( collector< make_index_sequence< N >, ( ( Ns > 0 ) ? Ns : 0 )... > ) - N ) - T( sizeof( collector< make_index_sequence< N >, ( ( Ns < 0 ) ? -Ns : 0 )... > ) - N ) >;
+            using Is = make_index_sequence< N >;
+            using P = collector< Is, ( ( Ns > 0 ) ? Ns : 0 )... >;
+            using M = collector< Is, ( ( Ns < 0 ) ? -Ns : 0 )... >;
+            using type = std::integral_constant< T, T( sizeof( P ) ) - T( sizeof( M ) ) >;
          };
 
          template< std::size_t N, typename T, T... Ns >
          struct sum< true, N, T, Ns... >
          {
-            using type = std::integral_constant< T, T( sizeof( collector< make_index_sequence< N >, ( ( Ns > 0 ) ? Ns : 0 )... > ) - N ) >;
+            using Is = make_index_sequence< N >;
+            using C = collector< Is, Ns... >;
+            using type = std::integral_constant< T, T( sizeof( C ) - N ) >;
          };
       }
 

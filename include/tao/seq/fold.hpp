@@ -16,19 +16,26 @@ namespace tao
    {
       namespace impl
       {
+         template< std::size_t I >
+         struct folder_select
+         {
+            template< typename T, T... Ns >
+            using type = seq::select< I, T, Ns... >;
+         };
+
          template< template< typename U, U, U > class, typename, bool, typename T, T... >
          struct folder;
 
          template< template< typename U, U, U > class OP, std::size_t... Is, typename T, T... Ns >
          struct folder< OP, index_sequence< Is... >, false, T, Ns... >
          {
-            using type = integer_sequence< T, OP< T, seq::select< 2 * Is, T, Ns... >::value, seq::select< 2 * Is + 1, T, Ns... >::value >::value... >;
+            using type = integer_sequence< T, OP< T, folder_select< 2 * Is >::template type< T, Ns... >::value, folder_select< 2 * Is + 1 >::template type< T, Ns... >::value >::value... >;
          };
 
          template< template< typename U, U, U > class OP, std::size_t... Is, typename T, T N, T... Ns >
          struct folder< OP, index_sequence< Is... >, true, T, N, Ns... >
          {
-            using type = integer_sequence< T, N, OP< T, seq::select< 2 * Is, T, Ns... >::value, seq::select< 2 * Is + 1, T, Ns... >::value >::value... >;
+            using type = integer_sequence< T, N, OP< T, folder_select< 2 * Is >::template type< T, Ns... >::value, folder_select< 2 * Is + 1 >::template type< T, Ns... >::value >::value... >;
          };
       }
 
