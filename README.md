@@ -13,13 +13,10 @@ The Art of C++ / Sequences is a zero-dependency C++11 header-only library that p
 
 The following compilers have bugs which prevent our code from compiling:
 
-* Clang 4.0.
 * Xcode 7 and 8 when used with C++14 or higher.
 * Visual Studio 2015.
 
 (If you know how to fix those, please let us know)
-
-Part of the library might still work, e.g. Clang 4.0 only has problems with `zip` and `fold` (and everything based on it).
 
 ## Provided algorithms and examples
 
