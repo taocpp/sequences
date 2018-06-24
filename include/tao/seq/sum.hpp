@@ -48,17 +48,23 @@ namespace tao
          };
 
          template< bool, std::size_t N, typename T, T... Ns >
-         struct sum
-         {
-            using type = std::integral_constant< T, T( sizeof( collector< make_index_sequence< N >, ( ( Ns > 0 ) ? Ns : 0 )... > ) ) - T( sizeof( collector< make_index_sequence< N >, ( ( Ns < 0 ) ? -Ns : 0 )... > ) ) >;
-         };
+         struct sum;
 
          template< std::size_t N, typename T, T... Ns >
          struct sum< true, N, T, Ns... >
          {
             using type = std::integral_constant< T, T( sizeof( collector< make_index_sequence< N >, Ns... > ) - N ) >;
          };
-      }
+
+         template< bool, std::size_t N, typename T, T... Ns >
+         struct sum
+         {
+            using positive = typename sum< true, N, T, ( ( Ns > 0 ) ? Ns : 0 )... >::type;
+            using negative = typename sum< true, N, T, ( ( Ns < 0 ) ? -Ns : 0 )... >::type;
+            using type = std::integral_constant< T, positive::value - negative::value >;
+         };
+
+      }  // namespace impl
 
       template< typename T, T... Ns >
       struct sum
@@ -73,7 +79,9 @@ namespace tao
          : sum< T, Ns... >
       {
       };
-   }
-}
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_SUM_HPP
+   }  // namespace seq
+
+}  // namespace tao
+
+#endif
