@@ -4,14 +4,6 @@ dist: trusty
 
 matrix:
   include:
-    - dist: precise
-      compiler: gcc
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-4.7']
-      env: CXX=g++-4.7
-
     - compiler: gcc
       env:
         - CXX=g++-4.8
