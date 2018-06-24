@@ -4,19 +4,12 @@
 [![TravisCI](https://travis-ci.org/taocpp/sequences.svg)](https://travis-ci.org/taocpp/sequences)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/taocpp/sequences?svg=true)](https://ci.appveyor.com/project/taocpp/sequences)
 
-The Art of C++ / Sequences is a zero-dependency C++11 header-only library that provides efficient algorithms to generate and work on variadic templates and [`std::integer_sequence`](http://en.cppreference.com/w/cpp/utility/integer_sequence).
+[The Art of C++](https://taocpp.github.io/) / Sequences is a zero-dependency C++11 header-only library that provides efficient algorithms to generate and work on variadic templates and [`std::integer_sequence`](http://en.cppreference.com/w/cpp/utility/integer_sequence).
 
 ## Compatibility
 
 * Requires C++11 or newer.
 * Tested with GCC 4.8+, Clang 3.4+, Xcode 6+ and Visual Studio 2017.
-
-The following compilers have bugs which prevent our code from compiling:
-
-* Xcode 7 and 8 when used with C++14 or higher.
-* Visual Studio 2015.
-
-(If you know how to fix those, please let us know)
 
 ## Provided algorithms and examples
 
@@ -126,7 +119,7 @@ Examples:
 
 Applies a binary operation to elements from two sequences.
 
-* `zip_t< template< typename U, U, U > class OP, typename L, typename R >`
+* `zip_t< typename OP, typename L, typename R >`
 
 Notes:
 
@@ -200,8 +193,8 @@ Both sequences may have a different element type, the resulting sequence's type 
 
 Integral constant calculated by "folding" a sequence of values with a given binary operation.
 
-* `fold< template< typename U, U, U > class OP, typename T, T... >`
-* `fold< template< typename U, U, U > class OP, typename S >`
+* `fold< typename OP, typename T, T... >`
+* `fold< typename OP, typename S >`
 
 #### Header `tao/seq/min.hpp`
 
@@ -216,8 +209,11 @@ Implemented with `fold` like this:
 
     namespace impl
     {
-      template< typename T, T A, T B >
-      using min = std::integral_constant< T, ( ( A < B ) ? A : B ) >;
+      struct min
+      {
+        template< typename T, T A, T B >
+        using apply = std::integral_constant< T, ( ( A < B ) ? A : B ) >;
+      };
     }
 
     template< typename T, T... Ns >
