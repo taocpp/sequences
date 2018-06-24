@@ -13,42 +13,36 @@ namespace tao
 {
    namespace seq
    {
-      // based on http://stackoverflow.com/questions/18942322
-
       namespace impl
       {
-         template< std::size_t >
-         struct any
-         {
-            any( ... );
-         };
-
-         template< typename >
-         struct wrapper;
-
-         template< typename >
-         struct unwrap;
-
          template< typename T >
-         struct unwrap< wrapper< T > >
+         struct identity
          {
             using type = T;
          };
 
-         template< typename >
-         struct get_nth;
-
-         template< std::size_t... Is >
-         struct get_nth< index_sequence< Is... > >
+         template< std::size_t, typename T >
+         struct indexed_type
          {
-            template< typename T >
-            static T deduce( any< Is & 0 >..., T*, ... );
+            using type = T;
          };
+
+         template< typename, typename... >
+         struct type_union;
+
+         template< std::size_t... Is, typename... Ts >
+         struct type_union< index_sequence< Is... >, Ts... >
+            : indexed_type< Is, Ts >...
+         {
+         };
+
+         template< std::size_t I, typename T >
+         identity< T > select_type( const indexed_type< I, T >& );
 
       }  // namespace impl
 
       template< std::size_t I, typename... Ts >
-      using type_by_index = impl::unwrap< decltype( impl::get_nth< make_index_sequence< I > >::deduce( std::declval< impl::wrapper< Ts >* >()... ) ) >;
+      using type_by_index = decltype( impl::select_type< I >( impl::type_union< index_sequence_for< Ts... >, Ts... >{} ) );
 
       template< std::size_t I, typename... Ts >
       using type_by_index_t = typename type_by_index< I, Ts... >::type;
