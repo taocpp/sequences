@@ -16,19 +16,23 @@ namespace tao
    {
       namespace impl
       {
-         template< template< typename U, U, U > class, typename, bool, typename T, T... >
-         struct folder;
-
-         template< template< typename U, U, U > class OP, std::size_t... Is, typename T, T... Ns >
-         struct folder< OP, index_sequence< Is... >, false, T, Ns... >
+         template< template< typename U, U, U > class OP >
+         struct folder
          {
-            using type = integer_sequence< T, OP< T, seq::select< 2 * Is, T, Ns... >::value, seq::select< 2 * Is + 1, T, Ns... >::value >::value... >;
-         };
+            template< bool, typename, typename T, T... >
+            struct sub;
 
-         template< template< typename U, U, U > class OP, std::size_t... Is, typename T, T N, T... Ns >
-         struct folder< OP, index_sequence< Is... >, true, T, N, Ns... >
-         {
-            using type = integer_sequence< T, N, OP< T, seq::select< 2 * Is, T, Ns... >::value, seq::select< 2 * Is + 1, T, Ns... >::value >::value... >;
+            template< std::size_t... Is, typename T, T... Ns >
+            struct sub< false, index_sequence< Is... >, T, Ns... >
+            {
+               using type = integer_sequence< T, OP< T, seq::select< 2 * Is, T, Ns... >::value, seq::select< 2 * Is + 1, T, Ns... >::value >::value... >;
+            };
+
+            template< std::size_t... Is, typename T, T N, T... Ns >
+            struct sub< true, index_sequence< Is... >, T, N, Ns... >
+            {
+               using type = integer_sequence< T, N, OP< T, seq::select< 2 * Is, T, Ns... >::value, seq::select< 2 * Is + 1, T, Ns... >::value >::value... >;
+            };
          };
 
       }  // namespace impl
@@ -44,7 +48,7 @@ namespace tao
 
       template< template< typename U, U, U > class OP, typename T, T... Ns >
       struct fold
-         : fold< OP, typename impl::folder< OP, make_index_sequence< sizeof...( Ns ) / 2 >, sizeof...( Ns ) % 2 == 1, T, Ns... >::type >
+         : fold< OP, typename impl::folder< OP >::template sub< sizeof...( Ns ) % 2 == 1, make_index_sequence< sizeof...( Ns ) / 2 >, T, Ns... >::type >
       {
       };
 
