@@ -7,12 +7,20 @@
 #include <cstddef>
 #include <type_traits>
 
+#if defined( __apple_build_version__ ) && ( __apple_build_version__ >= 7000000 ) && ( __apple_build_version__ < 9000000 ) && ( __cplusplus >= 201402L )
+#define TAOCPP_SEQUENCES_RECURSIVE_TYPE_BY_INDEX
+#endif
+
+#ifndef TAOCPP_SEQUENCES_RECURSIVE_TYPE_BY_INDEX
 #include "make_integer_sequence.hpp"
+#endif
 
 namespace tao
 {
    namespace seq
    {
+#ifndef TAOCPP_SEQUENCES_RECURSIVE_TYPE_BY_INDEX
+
       namespace impl
       {
          template< typename T >
@@ -43,6 +51,25 @@ namespace tao
 
       template< std::size_t I, typename... Ts >
       using type_by_index = decltype( impl::select_type< I >( impl::type_union< index_sequence_for< Ts... >, Ts... >{} ) );
+
+#else
+
+      template< std::size_t I, typename... Ts >
+      struct type_by_index;
+
+      template< typename T, typename... Ts >
+      struct type_by_index< 0, T, Ts... >
+      {
+         using type = T;
+      };
+
+      template< std::size_t I, typename T, typename... Ts >
+      struct type_by_index< I, T, Ts... >
+         : type_by_index< I - 1, Ts... >
+      {
+      };
+
+#endif
 
       template< std::size_t I, typename... Ts >
       using type_by_index_t = typename type_by_index< I, Ts... >::type;
