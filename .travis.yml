@@ -2,12 +2,16 @@ language: generic
 os: linux
 dist: trusty
 
-branches:
-  only:
-    - master
-
 matrix:
   include:
+    - dist: precise
+      compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-4.7']
+      env: CXX=g++-4.7
+
     - compiler: gcc
       env:
         - CXX=g++-4.8
@@ -115,6 +119,33 @@ matrix:
           packages: ['g++-7']
       env:
         - CXX=g++-7
+        - CXXSTD=c++17
+
+    - compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-8']
+      env:
+        - CXX=g++-8
+        - CXXSTD=c++11
+
+    - compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-8']
+      env:
+        - CXX=g++-8
+        - CXXSTD=c++14
+
+    - compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-8']
+      env:
+        - CXX=g++-8
         - CXXSTD=c++17
 
     - dist: precise
@@ -236,34 +267,32 @@ matrix:
         - CXX=clang++-3.9
         - CXXSTD=c++1z
 
-# clang 4.0 has a bug which affects fold/zip
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
+          packages: ['clang-4.0']
+      env:
+        - CXX=clang++-4.0
+        - CXXSTD=c++11
 
-#    - compiler: clang
-#      addons:
-#        apt:
-#          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-#          packages: ['clang-4.0']
-#      env:
-#        - CXX=clang++-4.0
-#        - CXXSTD=c++11
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
+          packages: ['clang-4.0']
+      env:
+        - CXX=clang++-4.0
+        - CXXSTD=c++14
 
-#    - compiler: clang
-#      addons:
-#        apt:
-#          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-#          packages: ['clang-4.0']
-#      env:
-#        - CXX=clang++-4.0
-#        - CXXSTD=c++14
-
-#    - compiler: clang
-#      addons:
-#        apt:
-#          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-#          packages: ['clang-4.0']
-#      env:
-#        - CXX=clang++-4.0
-#        - CXXSTD=c++1z
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
+          packages: ['clang-4.0']
+      env:
+        - CXX=clang++-4.0
+        - CXXSTD=c++1z
 
     - compiler: clang
       addons:
@@ -290,6 +319,33 @@ matrix:
           packages: ['clang-5.0', 'g++-7']
       env:
         - CXX=clang++-5.0
+        - CXXSTD=c++17
+
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-6.0']
+          packages: ['clang-6.0']
+      env:
+        - CXX=clang++-6.0
+        - CXXSTD=c++11
+
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-6.0']
+          packages: ['clang-6.0']
+      env:
+        - CXX=clang++-6.0
+        - CXXSTD=c++14
+
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-6.0']
+          packages: ['clang-6.0', 'g++-7']
+      env:
+        - CXX=clang++-6.0
         - CXXSTD=c++17
 
     - os: osx
@@ -356,21 +412,21 @@ matrix:
         - CXXSTD=c++1z
 
     - os: osx
-      osx_image: xcode9.2
+      osx_image: xcode9.3
       compiler: clang
       env:
         - CXX=clang++
         - CXXSTD=c++11
 
     - os: osx
-      osx_image: xcode9.2
+      osx_image: xcode9.3
       compiler: clang
       env:
         - CXX=clang++
         - CXXSTD=c++14
 
     - os: osx
-      osx_image: xcode9.2
+      osx_image: xcode9.3
       compiler: clang
       env:
         - CXX=clang++
