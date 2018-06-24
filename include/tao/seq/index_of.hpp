@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Daniel Frey
+// Copyright (c) 2017-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_INDEX_OF_HPP
@@ -32,7 +32,8 @@ namespace tao
             template< typename, T N >
             using type = seq::min< std::size_t, ( ( N == Ns ) ? Is : sizeof...( Is ) )... >;
          };
-      }
+
+      }  // namespace impl
 
       template< typename T, typename impl::element_type< T >::type N, typename impl::element_type< T >::type... Ns >
       struct index_of
@@ -40,7 +41,9 @@ namespace tao
       {
          static_assert( contains< T, N, Ns... >::value, "index not found" );
       };
-   }
-}
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_INDEX_OF_HPP
+   }  // namespace seq
+
+}  // namespace tao
+
+#endif

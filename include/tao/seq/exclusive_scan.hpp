@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2017 Daniel Frey
+// Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_EXCLUSIVE_SCAN_HPP
@@ -23,7 +23,8 @@ namespace tao
          {
             using type = integer_sequence< typename S::value_type, partial_sum< Is, S >::value... >;
          };
-      }
+
+      }  // namespace impl
 
       template< typename T, T... Ns >
       struct exclusive_scan
@@ -39,7 +40,9 @@ namespace tao
 
       template< typename T, T... Ns >
       using exclusive_scan_t = typename exclusive_scan< T, Ns... >::type;
-   }
-}
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_EXCLUSIVE_SCAN_HPP
+   }  // namespace seq
+
+}  // namespace tao
+
+#endif

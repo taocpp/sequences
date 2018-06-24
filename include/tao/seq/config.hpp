@@ -30,4 +30,4 @@
 #define TAOCPP_FOLD_EXPRESSIONS
 #endif
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_CONFIG_HPP
+#endif

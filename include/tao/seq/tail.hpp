@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2017 Daniel Frey
+// Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_TAIL_HPP
@@ -29,7 +29,9 @@ namespace tao
 
       template< typename T, T... Ns >
       using tail_t = typename tail< T, Ns... >::type;
-   }
-}
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_TAIL_HPP
+   }  // namespace seq
+
+}  // namespace tao
+
+#endif

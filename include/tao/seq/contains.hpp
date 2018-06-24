@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Daniel Frey
+// Copyright (c) 2017-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_CONTAINS_HPP
@@ -27,11 +27,14 @@ namespace tao
             template< T N >
             using type = is_any< ( N == Ns )... >;
          };
-      }
+
+      }  // namespace impl
 
       template< typename T, typename impl::element_type< T >::type N, typename impl::element_type< T >::type... Ns >
       using contains = typename impl::contains< T >::template type< N, Ns... >;
-   }
-}
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_CONTAINS_HPP
+   }  // namespace seq
+
+}  // namespace tao
+
+#endif

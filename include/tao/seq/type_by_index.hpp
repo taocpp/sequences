@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2017 Daniel Frey
+// Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_TYPE_BY_INDEX_HPP
@@ -44,14 +44,17 @@ namespace tao
             template< typename T >
             static T deduce( any< Is & 0 >..., T*, ... );
          };
-      }
+
+      }  // namespace impl
 
       template< std::size_t I, typename... Ts >
       using type_by_index = impl::unwrap< decltype( impl::get_nth< make_index_sequence< I > >::deduce( std::declval< impl::wrapper< Ts >* >()... ) ) >;
 
       template< std::size_t I, typename... Ts >
       using type_by_index_t = typename type_by_index< I, Ts... >::type;
-   }
-}
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_TYPE_BY_INDEX_HPP
+   }  // namespace seq
+
+}  // namespace tao
+
+#endif

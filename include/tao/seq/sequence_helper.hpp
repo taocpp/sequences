@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Daniel Frey
+// Copyright (c) 2017-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_SEQUENCE_HELPER_HPP
@@ -37,8 +37,11 @@ namespace tao
             : std::integral_constant< std::size_t, sizeof...( Ns ) >
          {
          };
-      }
-   }
-}
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_SEQUENCE_HELPER_HPP
+      }  // namespace impl
+
+   }  // namespace seq
+
+}  // namespace tao
+
+#endif

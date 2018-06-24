@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2017 Daniel Frey
+// Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_SELECT_HPP
@@ -25,7 +25,9 @@ namespace tao
          : select< I, T, Ns... >
       {
       };
-   }
-}
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_SELECT_HPP
+   }  // namespace seq
+
+}  // namespace tao
+
+#endif

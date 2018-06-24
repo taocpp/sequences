@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2017 Daniel Frey
+// Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_FOLD_HPP
@@ -30,7 +30,8 @@ namespace tao
          {
             using type = integer_sequence< T, N, OP< T, seq::select< 2 * Is, T, Ns... >::value, seq::select< 2 * Is + 1, T, Ns... >::value >::value... >;
          };
-      }
+
+      }  // namespace impl
 
       template< template< typename U, U, U > class, typename T, T... >
       struct fold;
@@ -52,7 +53,9 @@ namespace tao
          : fold< OP, T, Ns... >
       {
       };
-   }
-}
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_FOLD_HPP
+   }  // namespace seq
+
+}  // namespace tao
+
+#endif

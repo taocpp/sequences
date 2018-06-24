@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2017 Daniel Frey
+// Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_CONCATENATE_HPP
@@ -23,7 +23,9 @@ namespace tao
 
       template< typename A, typename B >
       using concatenate_t = typename concatenate< A, B >::type;
-   }
-}
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_CONCATENATE_HPP
+   }  // namespace seq
+
+}  // namespace tao
+
+#endif

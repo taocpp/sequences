@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2017 Daniel Frey
+// Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAOCPP_SEQUENCES_INCLUDE_MAKE_INTEGER_RANGE_HPP
@@ -26,14 +26,17 @@ namespace tao
          {
             using type = integer_sequence< T, B - D * Ns... >;
          };
-      }
+
+      }  // namespace impl
 
       template< typename T, T N, T M >
       using make_integer_range = typename impl::generate_range< T, N, ( N <= M ) ? ( M - N ) : ( N - M ), ( N <= M ) >::type;
 
       template< std::size_t N, std::size_t M >
       using make_index_range = make_integer_range< std::size_t, N, M >;
-   }
-}
 
-#endif  // TAOCPP_SEQUENCES_INCLUDE_MAKE_INTEGER_RANGE_HPP
+   }  // namespace seq
+
+}  // namespace tao
+
+#endif
