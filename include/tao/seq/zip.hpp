@@ -12,17 +12,17 @@ namespace tao
 {
    namespace seq
    {
-      template< template< typename U, U, U > class, typename, typename >
+      template< typename, typename, typename >
       struct zip;
 
-      template< template< typename U, U, U > class OP, typename TA, TA... As, typename TB, TB... Bs >
+      template< typename OP, typename TA, TA... As, typename TB, TB... Bs >
       struct zip< OP, integer_sequence< TA, As... >, integer_sequence< TB, Bs... > >
       {
          using CT = typename std::common_type< TA, TB >::type;
-         using type = integer_sequence< CT, OP< CT, As, Bs >::value... >;
+         using type = integer_sequence< CT, OP::template apply< CT, As, Bs >::value... >;
       };
 
-      template< template< typename U, U, U > class OP, typename A, typename B >
+      template< typename OP, typename A, typename B >
       using zip_t = typename zip< OP, A, B >::type;
 
    }  // namespace seq

@@ -14,8 +14,11 @@ namespace tao
    {
       namespace impl
       {
-         template< typename T, T A, T B >
-         using minus = std::integral_constant< T, A - B >;
+         struct minus
+         {
+            template< typename T, T A, T B >
+            using apply = std::integral_constant< T, A - B >;
+         };
 
       }  // namespace impl
 

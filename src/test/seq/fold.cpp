@@ -1,12 +1,15 @@
-// Copyright (c) 2015-2017 Daniel Frey
+// Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #include <tao/seq/fold.hpp>
 
 #include <type_traits>
 
-template< typename T, T A, T B >
-using add = std::integral_constant< T, A + B >;
+struct add
+{
+   template< typename T, T A, T B >
+   using apply = std::integral_constant< T, A + B >;
+};
 
 int main()
 {

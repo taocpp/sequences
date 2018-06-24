@@ -14,9 +14,13 @@ namespace tao
    {
       namespace impl
       {
-         template< typename T, T A, T B >
-         using plus = std::integral_constant< T, A + B >;
-      }
+         struct plus
+         {
+            template< typename T, T A, T B >
+            using apply = std::integral_constant< T, A + B >;
+         };
+
+      }  // namespace impl
 
       template< typename A, typename B >
       using plus = zip< impl::plus, A, B >;

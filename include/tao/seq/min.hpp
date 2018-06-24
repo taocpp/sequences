@@ -14,9 +14,13 @@ namespace tao
    {
       namespace impl
       {
-         template< typename T, T A, T B >
-         using min = std::integral_constant< T, ( ( A < B ) ? A : B ) >;
-      }
+         struct min
+         {
+            template< typename T, T A, T B >
+            using apply = std::integral_constant< T, ( ( A < B ) ? A : B ) >;
+         };
+
+      }  // namespace impl
 
       template< typename T, T... Ns >
       struct min

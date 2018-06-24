@@ -14,9 +14,13 @@ namespace tao
    {
       namespace impl
       {
-         template< typename T, T A, T B >
-         using max = std::integral_constant< T, ( ( A > B ) ? A : B ) >;
-      }
+         struct max
+         {
+            template< typename T, T A, T B >
+            using apply = std::integral_constant< T, ( ( A > B ) ? A : B ) >;
+         };
+
+      }  // namespace impl
 
       template< typename T, T... Ns >
       struct max
