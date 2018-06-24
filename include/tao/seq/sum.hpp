@@ -1,8 +1,8 @@
 // Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
-#ifndef TAOCPP_SEQUENCES_INCLUDE_SUM_HPP
-#define TAOCPP_SEQUENCES_INCLUDE_SUM_HPP
+#ifndef TAO_SEQUENCES_INCLUDE_SUM_HPP
+#define TAO_SEQUENCES_INCLUDE_SUM_HPP
 
 #include <type_traits>
 #include <utility>
@@ -10,7 +10,7 @@
 #include "config.hpp"
 #include "integer_sequence.hpp"
 
-#ifndef TAOCPP_FOLD_EXPRESSIONS
+#ifndef TAO_SEQUENCES_FOLD_EXPRESSIONS
 #include "make_integer_sequence.hpp"
 #include <cstddef>
 #endif
@@ -20,7 +20,7 @@ namespace tao
    namespace seq
    {
 
-#ifdef TAOCPP_FOLD_EXPRESSIONS
+#ifdef TAO_SEQUENCES_FOLD_EXPRESSIONS
 
       template< typename T, T... Ns >
       struct sum
