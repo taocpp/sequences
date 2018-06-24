@@ -424,6 +424,34 @@ matrix:
         - CXX=clang++
         - CXXSTD=-std=c++17
 
+    - compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-7']
+      env:
+        - CXX=g++-7
+        - CXXFLAGS="-O0 --coverage"
+      before_script:
+        - pip install --user cpp-coveralls
+      after_success:
+        - coveralls --gcov gcov-7 --gcov-options '\-lp' --exclude src
+
+    - compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-6']
+      env:
+        - CXX=g++-6
+      script:
+        - $CXX --version
+        - mkdir build
+        - cd build
+        - cmake ..
+        - cmake --build .
+        - cmake --build . --target test
+
 script:
   - $CXX --version
   - make -j3 build/src/test/seq/tester
