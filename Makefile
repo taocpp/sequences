@@ -32,7 +32,7 @@ CXXFLAGS ?= -Wall -Wextra -Wshadow -Werror -O3
 CLANG_TIDY ?= clang-tidy
 
 HEADERS := $(shell find include -name '*.hpp')
-SOURCES := $(shell find src/ -name '*.cpp')
+SOURCES := $(shell find src -name '*.cpp')
 DEPENDS := $(SOURCES:%.cpp=build/%.d)
 BINARIES := $(SOURCES:%.cpp=build/%)
 
