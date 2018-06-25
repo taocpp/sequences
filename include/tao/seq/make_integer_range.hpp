@@ -1,8 +1,8 @@
 // Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
-#ifndef TAO_SEQUENCES_INCLUDE_MAKE_INTEGER_RANGE_HPP
-#define TAO_SEQUENCES_INCLUDE_MAKE_INTEGER_RANGE_HPP
+#ifndef TAO_SEQ_MAKE_INTEGER_RANGE_HPP
+#define TAO_SEQ_MAKE_INTEGER_RANGE_HPP
 
 #include "make_integer_sequence.hpp"
 

@@ -1,12 +1,12 @@
 // Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
-#ifndef TAO_SEQUENCES_INCLUDE_IS_ANY_HPP
-#define TAO_SEQUENCES_INCLUDE_IS_ANY_HPP
+#ifndef TAO_SEQ_IS_ANY_HPP
+#define TAO_SEQ_IS_ANY_HPP
 
 #include "config.hpp"
 
-#ifndef TAO_SEQUENCES_FOLD_EXPRESSIONS
+#ifndef TAO_SEQ_FOLD_EXPRESSIONS
 #include "is_all.hpp"
 #endif
 
@@ -17,7 +17,7 @@ namespace tao
    namespace seq
    {
 
-#ifdef TAO_SEQUENCES_FOLD_EXPRESSIONS
+#ifdef TAO_SEQ_FOLD_EXPRESSIONS
 
       template< bool... Bs >
       using is_any = std::integral_constant< bool, ( Bs || ... ) >;

@@ -1,8 +1,8 @@
 // Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
-#ifndef TAO_SEQUENCES_INCLUDE_INTEGER_SEQUENCE_HPP
-#define TAO_SEQUENCES_INCLUDE_INTEGER_SEQUENCE_HPP
+#ifndef TAO_SEQ_INTEGER_SEQUENCE_HPP
+#define TAO_SEQ_INTEGER_SEQUENCE_HPP
 
 #include <cstddef>
 #include <utility>
@@ -14,7 +14,7 @@ namespace tao
    namespace seq
    {
 
-#ifdef TAO_SEQUENCES_USE_STD_INTEGER_SEQUENCE
+#ifdef TAO_SEQ_USE_STD_INTEGER_SEQUENCE
 
       using std::index_sequence;
       using std::integer_sequence;

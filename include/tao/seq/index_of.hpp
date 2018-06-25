@@ -1,8 +1,8 @@
 // Copyright (c) 2017-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
-#ifndef TAO_SEQUENCES_INCLUDE_INDEX_OF_HPP
-#define TAO_SEQUENCES_INCLUDE_INDEX_OF_HPP
+#ifndef TAO_SEQ_INDEX_OF_HPP
+#define TAO_SEQ_INDEX_OF_HPP
 
 #include "contains.hpp"
 #include "integer_sequence.hpp"

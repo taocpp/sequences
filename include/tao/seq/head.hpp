@@ -1,8 +1,8 @@
 // Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
-#ifndef TAO_SEQUENCES_INCLUDE_HEAD_HPP
-#define TAO_SEQUENCES_INCLUDE_HEAD_HPP
+#ifndef TAO_SEQ_HEAD_HPP
+#define TAO_SEQ_HEAD_HPP
 
 #include <type_traits>
 
