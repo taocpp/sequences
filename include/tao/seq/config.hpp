@@ -26,7 +26,7 @@
 #endif
 #endif
 
-#if defined( __cpp_fold_expressions )
+#if defined( __cpp_fold_expressions ) && ( !defined( __GNUC__ ) || ( __GNUC__ >= 8 ) )
 #define TAO_SEQ_FOLD_EXPRESSIONS
 #endif
 
