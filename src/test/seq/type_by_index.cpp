@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2017 Daniel Frey
+// Copyright (c) 2015-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #include <tao/seq/type_by_index.hpp>
@@ -15,12 +15,10 @@ int main()
    static_assert( std::is_same< type_by_index_t< 0, int >, int >::value, "oops" );
    static_assert( std::is_same< type_by_index_t< 0, int* >, int* >::value, "oops" );
    static_assert( std::is_same< type_by_index_t< 0, int& >, int& >::value, "oops" );
-   static_assert( std::is_same< type_by_index_t< 0, int&& >, int&& >::value, "oops" );
 
    static_assert( std::is_same< type_by_index_t< 0, const int >, const int >::value, "oops" );
    static_assert( std::is_same< type_by_index_t< 0, const int* >, const int* >::value, "oops" );
    static_assert( std::is_same< type_by_index_t< 0, const int& >, const int& >::value, "oops" );
-   static_assert( std::is_same< type_by_index_t< 0, const int&& >, const int&& >::value, "oops" );
 
    static_assert( std::is_same< type_by_index_t< 0, int( long, double ) >, int( long, double ) >::value, "oops" );
 
