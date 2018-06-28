@@ -262,6 +262,14 @@ Examples:
 * `is_any<false,false,false,false>::value` ➙ `false`
 * `is_any<>::value` ➙ `false`
 
+## Changelog
+
+### 1.0.0
+
+Released 2018-06-28
+
+* Initial release.
+
 ## License
 
 The Art of C++ is certified [Open Source](http://www.opensource.org/docs/definition.html) software. It may be used for any purpose, including commercial purposes, at absolutely no cost. It is distributed under the terms of the [MIT license](http://www.opensource.org/licenses/mit-license.html) reproduced here.
