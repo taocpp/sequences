@@ -21,9 +21,7 @@ target_compile_features (sequences INTERFACE
   cxx_constexpr
   cxx_decltype
   cxx_noexcept
-  cxx_rvalue_references
   cxx_static_assert
-  cxx_template_template_parameters
   cxx_variadic_templates
 )
 
