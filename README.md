@@ -266,7 +266,7 @@ Examples:
 
 ### 1.0.0
 
-Released 2018-06-28
+Released 2018-06-29
 
 * Initial release.
 
