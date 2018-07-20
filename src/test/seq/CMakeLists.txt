@@ -25,7 +25,6 @@ set (test_sources
   sum.cpp
   tail.cpp
   tester.cpp
-  type_by_index.cpp
 )
 
 # file (GLOB ...) is used to validate the above list of test_sources
