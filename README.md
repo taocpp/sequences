@@ -263,7 +263,72 @@ Examples:
 * `is_any<false,false,false,false>::value` ➙ `false`
 * `is_any<>::value` ➙ `false`
 
+#### Header `tao/seq/contains.hpp`
+
+Integral constant which is true if an element `N` is part of a list of elements `Ns...`.
+
+* `contains< typename T, T N, T... Ns>`
+* `contains< typename S, T N>`
+
+Examples:
+
+* `contains<int,0>` ➙ `false`
+* `contains<int,0,0>` ➙ `true`
+* `contains<int,0,1>` ➙ `false`
+* `contains<int,0,1,2,3,4,5>` ➙ `false`
+* `contains<int,3,1,2,3,4,5>` ➙ `true`
+* `using A = integer_sequence<int,1,2,3,4,5>`
+* `contains<A,0>` ➙ `false`
+* `contains<A,3>` ➙ `true`
+
+#### Header `tao/seq/index_of.hpp`
+
+Integral constant which is the smallest index of an element `N` in a list of elements `Ns...`.
+
+* `index_of< typename T, T N, T... Ns>`
+* `index_of< typename S, T N>`
+
+Note: `Ns...` must contain `N`, otherwise a `static_assert` is triggered.
+
+Examples:
+
+* `contains<int,0,0>` ➙ `std::integral_constant<std::size_t,0>`
+* `contains<int,3,1,2,3,4,5>` ➙ `std::integral_constant<std::size_t,2>`
+* `using A = integer_sequence<int,1,2,3,4,5>`
+* `contains<A,3>` ➙ `std::integral_constant<std::size_t,2>`
+
+#### Header `tao/seq/scale.hpp`
+
+Scales a sequence by a factor `F`.
+
+* `scale< typename T, T F, T... Ns>`
+* `scale< typename S, T F>`
+
+Examples:
+
+* `scale<int,0,0>` ➙ `std::integer_sequence<int,0>`
+* `scale<int,2,-1,2,0,1,5>` ➙ `std::integer_sequence<int,-2,4,0,2,10>`
+* `using A = integer_sequence<int,-1,2,4>`
+* `scale<A,3>` ➙ `std::integer_sequence<int,-3,6,12>`
+
+#### Header `tao/seq/at_index.hpp`
+
+Returns the `I`th type from a list of types `Ts...`.
+
+* `at_index_t< std::size_t I, typename... Ts >
+
+Examples:
+
+* `at_index<0,bool,int,void,char*>` ➙ `bool`
+* `at_index<2,bool,int,void,char*>` ➙ `void`
+
 ## Changelog
+
+### 1.0.1
+
+Released 2018-07-21
+
+* Removed `type_by_index`, use `at_index` instead.
 
 ### 1.0.0
 
