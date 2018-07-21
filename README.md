@@ -292,10 +292,10 @@ Note: `Ns...` must contain `N`, otherwise a `static_assert` is triggered.
 
 Examples:
 
-* `contains<int,0,0>` ➙ `0`
-* `contains<int,3,1,2,3,4,5>` ➙ `2`
+* `index_of<int,0,0>` ➙ `0`
+* `index_of<int,3,1,2,3,4,5>` ➙ `2`
 * `using A = integer_sequence<int,1,2,3,4,5>`
-* `contains<A,3>` ➙ `2`
+* `index_of<A,3>` ➙ `2`
 
 #### Header `tao/seq/scale.hpp`
 
