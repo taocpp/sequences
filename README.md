@@ -315,7 +315,7 @@ Examples:
 
 Returns the `I`th type from a list of types `Ts...`.
 
-* `at_index_t< std::size_t I, typename... Ts >
+* `at_index_t< std::size_t I, typename... Ts >`
 
 Examples:
 
