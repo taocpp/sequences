@@ -306,10 +306,10 @@ Scales a sequence by a factor `F`.
 
 Examples:
 
-* `scale<int,0,0>` ➙ `std::integer_sequence<int,0>`
-* `scale<int,2,-1,2,0,1,5>` ➙ `std::integer_sequence<int,-2,4,0,2,10>`
+* `scale<int,0,0>` ➙ `integer_sequence<int,0>`
+* `scale<int,2,-1,2,0,1,5>` ➙ `integer_sequence<int,-2,4,0,2,10>`
 * `using A = integer_sequence<int,-1,2,4>`
-* `scale<A,3>` ➙ `std::integer_sequence<int,-3,6,12>`
+* `scale<A,3>` ➙ `integer_sequence<int,-3,6,12>`
 
 #### Header `tao/seq/at_index.hpp`
 
