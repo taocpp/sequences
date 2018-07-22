@@ -324,6 +324,12 @@ Examples:
 
 ## Changelog
 
+### 1.0.2
+
+Released 2018-07-22
+
+* Added documentation for the remaining headers.
+
 ### 1.0.1
 
 Released 2018-07-21
