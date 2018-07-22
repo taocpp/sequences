@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Daniel Frey
+// Copyright (c) 2017-2018 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #include <tao/seq/index_of.hpp>
