@@ -25,7 +25,7 @@ namespace tao
 #else
 
       template< bool... Bs >
-      using is_all = std::integral_constant< bool, std::is_same< integer_sequence< bool, true, Bs... >, integer_sequence< bool, Bs..., true > >::value >;
+      using is_all = std::is_same< integer_sequence< bool, true, Bs... >, integer_sequence< bool, Bs..., true > >;
 
 #endif
 
