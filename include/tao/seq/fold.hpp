@@ -22,13 +22,19 @@ namespace tao
          template< typename OP, std::size_t... Is, typename T, T... Ns >
          struct folder< OP, false, index_sequence< Is... >, T, Ns... >
          {
-            using type = integer_sequence< T, OP::template apply< T, seq::select< 2 * Is, T, Ns... >::value, seq::select< 2 * Is + 1, T, Ns... >::value >::value... >;
+            template< std::size_t I >
+            using subsel = seq::select< I, T, Ns... >;
+
+            using type = integer_sequence< T, OP::template apply< T, subsel< 2 * Is >::value, subsel< 2 * Is + 1 >::value >::value... >;
          };
 
          template< typename OP, std::size_t... Is, typename T, T N, T... Ns >
          struct folder< OP, true, index_sequence< Is... >, T, N, Ns... >
          {
-            using type = integer_sequence< T, N, OP::template apply< T, seq::select< 2 * Is, T, Ns... >::value, seq::select< 2 * Is + 1, T, Ns... >::value >::value... >;
+            template< std::size_t I >
+            using subsel = seq::select< I, T, Ns... >;
+
+            using type = integer_sequence< T, N, OP::template apply< T, subsel< 2 * Is >::value, subsel< 2 * Is + 1 >::value >::value... >;
          };
 
       }  // namespace impl
