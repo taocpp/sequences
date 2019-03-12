@@ -1,6 +1,6 @@
 // The Art of C++ / Sequences
-// Copyright (c) 2013-2018 Daniel Frey
-// Please see LICENSE for license or visit https://github.com/taocpp/operators/
+// Copyright (c) 2013-2019 Daniel Frey
+// Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #include <tao/seq/exclusive_scan.hpp>
 #include <tao/seq/integer_sequence.hpp>
