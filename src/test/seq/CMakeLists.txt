@@ -4,11 +4,14 @@ set (test_sources
   at_index.cpp
   concatenate.cpp
   contains.cpp
+  cum_prod.cpp
   exclusive_scan.cpp
+  filter_out_seq.cpp
   fold.cpp
   head.cpp
   inclusive_scan.cpp
   index_of.cpp
+  index_of_seq.cpp
   integer_sequence.cpp
   is_all.cpp
   is_any.cpp
@@ -19,9 +22,14 @@ set (test_sources
   min.cpp
   minus.cpp
   partial_sum.cpp
+  permute.cpp
   plus.cpp
+  prod.cpp
+  prod_red.cpp
   scale.cpp
   select.cpp
+  sort.cpp
+  sort_index.cpp
   sum.cpp
   tail.cpp
   tester.cpp

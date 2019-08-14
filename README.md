@@ -322,6 +322,86 @@ Examples:
 * `at_index<0,bool,int,void,char*>` ➙ `bool`
 * `at_index<2,bool,int,void,char*>` ➙ `void`
 
+#### Header `tao/seq/prod.hpp`
+
+Returns the element-wise product of two sequences.
+
+Examples :
+
+* `using A = index_sequence< 0, 5, 7, 1 >`
+* `using B = index_sequence< 4, 5, 6, 7 >`
+* `prod_t<A,B>` ➙ `index_sequence< 0, 25, 42, 7 >`
+
+#### Header `tao/seq/prod_red.hpp`
+
+Integral constant to provide the product of a sequence (the empty sequence counting as 1).
+
+Examples : 
+
+* `prod_red_t< integer_sequence<int> >` ➙ `integral_constant<int,1>`
+* `prod_red_t< integer_sequence< int, -1, 4, 5 > >` ➙ `integral_constant<int,-20>`
+
+#### Header `tao/seq/cum_prod.hpp`
+
+Reverse cumulative product of a sequence
+
+Example :
+
+* `cum_prod_t< index_sequence< 4, 5, 6, 7 > >` ➙ `index_sequence< 210, 42, 7, 1 >`
+
+#### Header `tao/seq/filter_out_seq.hpp`
+
+Filters out elements of the first sequence in the second sequence.
+
+Example :
+
+* `filter_out_seq_t< index_sequence< 4, 6 >, index_sequence< 4, 5, 6, 7 > >` ➙ `index_sequence< 5, 7 >`
+
+#### Header `tao/seq/index_of_seq.hpp`
+
+Given a sequence S and U a permutation of S, returns the indices of elements of U in S.
+
+Example :
+
+* `using S = integer_sequence< int, 7, -2, 3, 0, 4 >`
+* `using U = integer_sequence< int, 4, 7, -2, 0, 3 >`
+* `index_of_seq_t< S, U >` ➙ `index_sequence< 4, 0, 1, 3, 2 >`
+
+#### Header `tao/seq/permute.hpp`
+
+Apply a index permutation on a sequence.
+
+Example :
+
+* `using S = integer_sequence< int, 7, -2, 3, 0, 4 >`
+* `permute_t< index_sequence< 3, 0, 4, 1, 2 >, S >` ➙ `integer_sequence< int, -2, 0, 4, 7, 3 >`
+
+#### Header `tao/seq/sort.hpp`
+
+Sort a sequence with a comparison (meta)function.
+
+Example :
+
+```c++
+template<int a, int b>
+struct ord
+{
+  static const bool value = a < b;
+};
+```
+
+* `using S = integer_sequence< int, 7, -2, 3, 0, 4 >`
+* `sort_t< S, ord >` ➙ `integer_sequence< int, -2, 0, 3, 4, 7 >`
+
+#### Header `tao/seq/sort_index.hpp`
+
+Same as `sort`, but returns the indices of the sorted sequence instead.
+
+* `using U = index_sequence< 39, 2, 4, 10 >`
+* `sort_index_t< U, ord >` ➙ `index_sequence< 3, 0, 1, 2 >`
+
+
+
 ## Changelog
 
 ### 1.0.2
