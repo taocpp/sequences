@@ -1,16 +1,8 @@
 // Copyright (c) 2019 François-David Collin
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
-#include <iostream>
 #include <tao/seq/filter_out_seq.hpp>
 #include <tao/seq/integer_sequence.hpp>
-
-template< typename T, T... Ts >
-void print_seq( tao::seq::integer_sequence< T, Ts... > )
-{
-   (void)std::initializer_list< int >{ ( std::cout << Ts << " ", 0 )... };
-   std::cout << std::endl;
-}
 
 int main()
 {
