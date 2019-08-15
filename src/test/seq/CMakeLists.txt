@@ -18,6 +18,7 @@ set (test_sources
   max.cpp
   min.cpp
   minus.cpp
+  multiply.cpp
   partial_sum.cpp
   plus.cpp
   scale.cpp
