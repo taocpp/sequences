@@ -159,6 +159,22 @@ Examples:
 * `minus_t<A,B>` ➙ `integer_sequence<int,1,3,-2,0,-3>`
 * `minus_t<B,A>` ➙ `integer_sequence<int,-1,-3,2,0,3>`
 
+#### Header `tao/seq/multiply.hpp`
+
+Provides a sequence which is the element-wise product of its input sequences.
+
+* `multiply_t< typename L, typename R >`
+
+Notes:
+
+Both sequences may have a different element type, the resulting sequence's type is calculated with `std::common_type_t`.
+
+Examples:
+
+* `using A = index_sequence<1,5,2,3,1>`
+* `using B = index_sequence<3,0,2,4,1>`
+* `multiply_t<A,B>` ➙ `index_sequence<3,0,4,12,1>`
+
 #### Header `tao/seq/head.hpp`
 
 Integral constant to provide the first element of a non-empty sequence.
