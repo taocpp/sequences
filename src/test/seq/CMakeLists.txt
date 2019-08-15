@@ -9,6 +9,7 @@ set (test_sources
   head.cpp
   inclusive_scan.cpp
   index_of.cpp
+  index_of_seq.cpp
   integer_sequence.cpp
   is_all.cpp
   is_any.cpp

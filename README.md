@@ -326,6 +326,20 @@ Examples:
 * `using A = integer_sequence<int,1,2,3,4,5>`
 * `index_of<A,3>` ➙ `2`
 
+#### Header `tao/seq/index_of_seq.hpp`
+
+Given two sequences `S` and `T` where `T` is a permutation or a subset of `S`, returns the indices of elements of `T` in `S`.
+
+Example :
+
+* `using S = integer_sequence< int, 7, -2, 3, 0, 4 >`
+* `using T = integer_sequence< int, 4, 7, -2, 0, 3 >`
+* `index_of_seq_t< S, T >` ➙ `index_sequence< 4, 0, 1, 3, 2 >`
+
+* `using S2 = integer_sequence< int, 7, -2, 3, 0, 4 >`
+* `using T2 = integer_sequence< int, 3, -2, 0 >`
+* `index_of_seq_t< S2, T2 >` ➙ `index_sequence< 2, 1, 3 >`
+
 #### Header `tao/seq/scale.hpp`
 
 Scales a sequence by a factor `F`.
