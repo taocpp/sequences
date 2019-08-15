@@ -10,7 +10,7 @@
 ## Compatibility
 
 * Requires C++11 or newer.
-* Tested with GCC 4.8+, Clang 3.4+, Xcode 6+ and Visual Studio 2017.
+* Tested with GCC 4.8+, Clang 3.4+, Xcode 6+ and Visual Studio 2017+.
 
 ## Provided algorithms and examples
 
