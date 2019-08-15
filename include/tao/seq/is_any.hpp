@@ -20,12 +20,16 @@ namespace tao
 #ifdef TAO_SEQ_FOLD_EXPRESSIONS
 
       template< bool... Bs >
-      using is_any = std::integral_constant< bool, ( Bs || ... ) >;
+      struct is_any : std::integral_constant< bool, ( Bs || ... ) >
+      {
+      };
 
 #else
 
       template< bool... Bs >
-      using is_any = std::integral_constant< bool, !is_all< !Bs... >::value >;
+      struct is_any : std::integral_constant< bool, !is_all< !Bs... >::value >
+      {
+      };
 
 #endif
 
