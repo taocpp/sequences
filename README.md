@@ -81,6 +81,19 @@ Examples:
 * `sum<int,1,4,3,1>::value` ➙ `9`
 * `sum<make_index_sequence<5>>::value` ➙ `10`
 
+#### Header `tao/seq/prod.hpp`
+
+Integral constant to provide the product of `Ns`.
+If no `Ns` are given, the result is `T(1)`.
+
+* `prod< typename T, T... Ns >`
+* `prod< typename S >`
+
+Examples:
+
+* `prod<int>::value` ➙ `1`
+* `prod<int,1,4,3,-1>::value` ➙ `-12`
+
 #### Header `tao/seq/partial_sum.hpp`
 
 Integral constant to provide the sum of the first `I` elements of `Ns`.

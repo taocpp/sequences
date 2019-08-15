@@ -21,6 +21,7 @@ set (test_sources
   multiply.cpp
   partial_sum.cpp
   plus.cpp
+  prod.cpp
   scale.cpp
   select.cpp
   sum.cpp
