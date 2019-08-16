@@ -1,4 +1,4 @@
-#The Art of C++ / Sequences
+# The Art of C++ / Sequences
 
 [![Release](https://img.shields.io/github/release/taocpp/sequences.svg)](https://github.com/taocpp/sequences/releases/latest)
 [![Download](https://api.bintray.com/packages/taocpp/public-conan/sequences%3Ataocpp/images/download.svg)](https://bintray.com/taocpp/public-conan/sequences%3Ataocpp/_latestVersion)
@@ -50,9 +50,13 @@ Examples:
 
 Notes:
 
-libc++ already has very efficient versions for the above, so they are pulled in with a using-declaration. Only if we don't know if the STL's versions are at least O(log N) we provide our own implementations.
+libc++ already has very efficient versions for the above, so they are pulled in with a using-declaration.
+Only if we don't know if the STL's versions are at least O(log N) we provide our own implementations.
 
-Our own implementation has O(log N) instantiation depth. This allows for very large sequences without the need to increase the compiler's default instantiation depth limits. For example, GCC and Clang generate `index_sequence<10000>` in ~0.15s (on my machine, of course). The standard library version from libstdc++, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
+Our own implementation has O(log N) instantiation depth.
+This allows for very large sequences without the need to increase the compiler's default instantiation depth limits.
+For example, GCC and Clang generate `index_sequence<10000>` in ~0.15s (on my machine, of course).
+The standard library version from libstdc++, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
 
 #### Header `tao/seq/make_integer_range.hpp`
 
@@ -255,11 +259,11 @@ Implemented with `fold` like this:
 
     namespace impl
     {
-   struct min
-   {
-      template< typename T, T A, T B >
-      using apply = std::integral_constant< T, ( ( A < B ) ? A : B ) >;
-   };
+       struct min
+       {
+          template< typename T, T A, T B >
+          using apply = std::integral_constant< T, ( ( A < B ) ? A : B ) >;
+       };
     }
 
     template< typename T, T... Ns >
@@ -283,6 +287,16 @@ Examples:
 * `using I = index_sequence<1,0,3,2,1,1,3>`
 * `using M = integer_sequence<int,5,6,-7,8,9>`
 * `map_t<I,M>` ➙ `integer_sequence<int,6,5,8,-7,6,6,8>`
+
+#### Header `tao/seq/permutate.hpp`
+
+Apply an index permutation on a sequence.
+
+Example :
+
+* `using S = integer_sequence<int,7,-2,3,0,4>`
+* `using P = index_sequence<3,0,4,1,2>`
+* `permutate_t<P,S>` ➙ `integer_sequence<int,-2,0,4,7,3>`
 
 #### Header `tao/seq/is_all.hpp`
 
@@ -387,7 +401,7 @@ Examples:
 
 **Not yet released**
 
-* Added `prod`, `multiply`, `difference`, and `index_of_seq`.
+* Added `prod`, `multiply`, `difference`, `index_of_seq`, and `permutate`.
 
 ### 1.0.2
 
