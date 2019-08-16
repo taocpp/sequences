@@ -1,15 +1,11 @@
 version: '{branch}-{build}'
 
 os:
-  - Visual Studio 2017
+  - Visual Studio 2015
 
 branches:
   only:
     - master
-
-configuration:
-- Release
-- Debug
 
 environment:
   matrix:
