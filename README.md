@@ -367,6 +367,12 @@ Examples:
 
 ## Changelog
 
+### 1.1.0
+
+**Not yet released**
+
+* Added `prod`, `multiply`, and `index_of_seq`.
+
 ### 1.0.2
 
 Released 2018-07-22
