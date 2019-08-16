@@ -19,8 +19,7 @@ namespace tao
       template< typename TA, TA... As, typename TB, TB... Bs >
       struct index_of_seq< integer_sequence< TA, As... >, integer_sequence< TB, Bs... > >
       {
-         using CT = typename std::common_type< TA, TB >::type;
-         using type = index_sequence< index_of< CT, Bs, As... >::value... >;
+         using type = index_sequence< index_of< typename std::common_type< TA, TB >::type, Bs, As... >::value... >;
       };
 
       template< typename As, typename Bs >
