@@ -219,6 +219,22 @@ Notes:
 
 Both sequences may have a different element type, the resulting sequence's type is calculated with `std::common_type_t`.
 
+#### Header `tao/seq/difference.hpp`
+
+Builds the difference of two sequences, i.e. a sequence that contains all elements of `T` that are not in `U`.
+
+* `difference_t< typename T, typename U >`
+
+Examples:
+
+* `using A = index_sequence<1,5,2,3,1,7>`
+* `using B = index_sequence<2,1>`
+* `difference_t<A,B>` ➙ `index_sequence<5,3,7>`
+
+Notes:
+
+Both sequences may have a different element type, the resulting sequence's type is calculated with `std::common_type_t`.
+
 #### Header `tao/seq/fold.hpp`
 
 Integral constant calculated by "folding" a sequence of values with a given binary operation.
@@ -330,7 +346,7 @@ Examples:
 
 Given two sequences `S` and `T` where `T` is a permutation or a subset of `S`, returns the indices of elements of `T` in `S`.
 
-Example :
+Examples:
 
 * `using S = integer_sequence< int, 7, -2, 3, 0, 4 >`
 * `using T = integer_sequence< int, 4, 7, -2, 0, 3 >`
@@ -371,7 +387,7 @@ Examples:
 
 **Not yet released**
 
-* Added `prod`, `multiply`, and `index_of_seq`.
+* Added `prod`, `multiply`, `difference`, and `index_of_seq`.
 
 ### 1.0.2
 

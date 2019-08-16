@@ -4,6 +4,7 @@ set (test_sources
   at_index.cpp
   concatenate.cpp
   contains.cpp
+  difference.cpp
   exclusive_scan.cpp
   fold.cpp
   head.cpp
