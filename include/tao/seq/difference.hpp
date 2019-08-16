@@ -21,7 +21,11 @@ namespace tao
       struct difference< integer_sequence< TA, As... >, integer_sequence< TB, Bs... > >
       {
          using CT = typename std::common_type< TA, TB >::type;
-         using type = concatenate_t< typename std::conditional< contains< CT, As, Bs... >::value, integer_sequence< CT >, integer_sequence< CT, As > >::type... >;
+
+         template< CT N >
+         using check = contains< CT, N, Bs... >;
+
+         using type = concatenate_t< typename std::conditional< check< As >::value, integer_sequence< CT >, integer_sequence< CT, As > >::type... >;
       };
 
       template< typename A, typename B >
