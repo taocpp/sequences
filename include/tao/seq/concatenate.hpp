@@ -21,21 +21,14 @@ namespace tao
          using type = integer_sequence< T, Ns... >;
       };
 
-      template< typename TA, TA... As, typename TB, TB... Bs >
-      struct concatenate< integer_sequence< TA, As... >, integer_sequence< TB, Bs... > >
+      template< typename TA, TA... As, typename TB, TB... Bs, typename... Ts >
+      struct concatenate< integer_sequence< TA, As... >, integer_sequence< TB, Bs... >, Ts... >
+         : concatenate< integer_sequence< typename std::common_type< TA, TB >::type, As..., Bs... >, Ts... >
       {
-         using type = integer_sequence< typename std::common_type< TA, TB >::type, As..., Bs... >;
       };
 
       template< typename... Ts >
       using concatenate_t = typename concatenate< Ts... >::type;
-
-      // TODO: Can this recursion be improved?
-      template< typename TA, typename TB, typename TC, typename... Ts >
-      struct concatenate< TA, TB, TC, Ts... >
-         : concatenate< concatenate_t< TA, TB >, concatenate_t< TC, Ts... > >
-      {
-      };
 
    }  // namespace seq
 

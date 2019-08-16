@@ -1,4 +1,4 @@
-# The Art of C++ / Sequences
+#The Art of C++ / Sequences
 
 [![Release](https://img.shields.io/github/release/taocpp/sequences.svg)](https://github.com/taocpp/sequences/releases/latest)
 [![Download](https://api.bintray.com/packages/taocpp/public-conan/sequences%3Ataocpp/images/download.svg)](https://bintray.com/taocpp/public-conan/sequences%3Ataocpp/_latestVersion)
@@ -211,13 +211,13 @@ Integral constant to provide the `I`th element of a non-empty sequence.
 
 #### Header `tao/seq/concatenate.hpp`
 
-Concatenate the values.
+Concatenate the values of all sequences.
 
-* `concatenate_t< typename T, typename U >`
+* `concatenate_t< typename... Ts >`
 
 Notes:
 
-Both sequences may have a different element type, the resulting sequence's type is calculated with `std::common_type_t`.
+The sequences may have different element types, the resulting sequence's type is calculated with `std::common_type_t`.
 
 #### Header `tao/seq/difference.hpp`
 
@@ -255,11 +255,11 @@ Implemented with `fold` like this:
 
     namespace impl
     {
-      struct min
-      {
-        template< typename T, T A, T B >
-        using apply = std::integral_constant< T, ( ( A < B ) ? A : B ) >;
-      };
+   struct min
+   {
+      template< typename T, T A, T B >
+      using apply = std::integral_constant< T, ( ( A < B ) ? A : B ) >;
+   };
     }
 
     template< typename T, T... Ns >
