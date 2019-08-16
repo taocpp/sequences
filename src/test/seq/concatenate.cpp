@@ -28,4 +28,9 @@ int main()
 
    static_assert( std::is_same< concatenate_t< A, B >, integer_sequence< int, 1, 2, 3, 4, 5, 6 > >::value, "oops" );
    static_assert( std::is_same< concatenate_t< B, A >, integer_sequence< int, 4, 5, 6, 1, 2, 3 > >::value, "oops" );
+
+   static_assert( std::is_same< concatenate_t< E, E, E >, E >::value, "oops" );
+   static_assert( std::is_same< concatenate_t< E, E, E, E, E, E >, E >::value, "oops" );
+
+   static_assert( std::is_same< concatenate_t< E, A, B, E, A, O >, integer_sequence< int, 1, 2, 3, 4, 5, 6, 1, 2, 3, 0 > >::value, "oops" );
 }
