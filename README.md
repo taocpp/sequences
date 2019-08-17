@@ -404,7 +404,7 @@ Sort a sequence according to a given predicate.
 
 Examples:
 
-* Given a predicate `less`:
+Given a predicate `less`...
 
     struct less
     {
