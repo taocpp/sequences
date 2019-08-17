@@ -61,8 +61,8 @@ namespace tao
       {
       };
 
-      template< typename OP, typename S >
-      using sort_t = typename sort< OP, S >::type;
+      template< typename OP, typename T, typename impl::element_type< T >::type... Ns >
+      using sort_t = typename sort< OP, T, Ns... >::type;
 
    }  // namespace seq
 
