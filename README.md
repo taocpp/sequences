@@ -76,6 +76,7 @@ Examples:
 #### Header `tao/seq/sum.hpp`
 
 Integral constant to provide the sum of `Ns`.
+If no `Ns` are given, the result is `T(0)`.
 
 * `sum< typename T, T... Ns >`
 * `sum< typename S >`
@@ -362,13 +363,13 @@ Given two sequences `S` and `T` where `T` is a permutation or a subset of `S`, r
 
 Examples:
 
-* `using S = integer_sequence< int, 7, -2, 3, 0, 4 >`
-* `using T = integer_sequence< int, 4, 7, -2, 0, 3 >`
-* `index_of_seq_t< S, T >` ➙ `index_sequence< 4, 0, 1, 3, 2 >`
+* `using S = integer_sequence<int,7,-2,3,0,4>`
+* `using T = integer_sequence<int,4,7,-2,0,3>`
+* `index_of_seq_t<S,T>` ➙ `index_sequence<4,0,1,3,2>`
 
-* `using S2 = integer_sequence< int, 7, -2, 3, 0, 4 >`
-* `using T2 = integer_sequence< int, 3, -2, 0 >`
-* `index_of_seq_t< S2, T2 >` ➙ `index_sequence< 2, 1, 3 >`
+* `using S2 = integer_sequence<int,7,-2,3,0,4>`
+* `using T2 = integer_sequence<int,3,-2,0>`
+* `index_of_seq_t<S2,T2>` ➙ `index_sequence<2,1,3>`
 
 #### Header `tao/seq/scale.hpp`
 
