@@ -413,8 +413,8 @@ Given a predicate `less`...
     };
 
 * `sort_t<less,int,7,-2,3,0,4>` ➙ `integer_sequence<int,-2,0,3,4,7>`
-* `using S = index_sequence<39,4,2,10>`
-* `sort_t<less,S>` ➙ `index_sequence<2,4,10,39>`
+* `using S = index_sequence<39,10,2,4,10,2>`
+* `sort_t<less,S>` ➙ `index_sequence<2,2,4,10,10,39>`
 
 ## Changelog
 
