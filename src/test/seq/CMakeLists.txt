@@ -28,6 +28,7 @@ set (test_sources
   scale.cpp
   select.cpp
   sort.cpp
+  sort_index.cpp
   sum.cpp
   tail.cpp
   tester.cpp

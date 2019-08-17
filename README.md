@@ -416,13 +416,24 @@ Given a predicate `less`...
 * `using S = index_sequence<39,10,2,4,10,2>`
 * `sort_t<less,S>` ➙ `index_sequence<2,2,4,10,10,39>`
 
+#### Header `tao/seq/sort_index.hpp`
+
+Generate the indices of the elements if ordered by a given predicate.
+
+* `sort_index_t< typename OP, typename T, T... Ns >`
+* `sort_index_t< typename OP, typename S >`
+
+Examples:
+
+* `sort_index_t<less,int,7,-2,3,0,4>` ➙ `index_sequence<4,0,2,1,3>`
+
 ## Changelog
 
 ### 1.1.0
 
 **Not yet released**
 
-* Added `prod`, `multiply`, `difference`, `index_of_seq`, `permutate`, and `sort`.
+* Added `prod`, `multiply`, `difference`, `index_of_seq`, `permutate`, `sort`, and `sort_index`.
 
 ### 1.0.2
 
