@@ -395,13 +395,34 @@ Examples:
 * `at_index<0,bool,int,void,char*>` ➙ `bool`
 * `at_index<2,bool,int,void,char*>` ➙ `void`
 
+#### Header `tao/seq/sort.hpp`
+
+Sort a sequence according to a given predicate.
+
+* `sort_t< typename OP, typename T, T... Ns >`
+* `sort_t< typename OP, typename S >`
+
+Examples:
+
+* Given a predicate `less`:
+
+    struct less
+    {
+       template< typename T, T A, T B >
+       using apply = std::integral_constant< bool, ( A < B ) >;
+    };
+
+* `sort_t<less,int,7,-2,3,0,4>` ➙ `integer_sequence<int,-2,0,3,4,7>`
+* `using S = index_sequence<39,4,2,10>`
+* `sort_t<less,S>` ➙ `index_sequence<2,4,10,39>`
+
 ## Changelog
 
 ### 1.1.0
 
 **Not yet released**
 
-* Added `prod`, `multiply`, `difference`, `index_of_seq`, and `permutate`.
+* Added `prod`, `multiply`, `difference`, `index_of_seq`, `permutate`, and `sort`.
 
 ### 1.0.2
 

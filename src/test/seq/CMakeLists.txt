@@ -27,6 +27,7 @@ set (test_sources
   prod.cpp
   scale.cpp
   select.cpp
+  sort.cpp
   sum.cpp
   tail.cpp
   tester.cpp
