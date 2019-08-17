@@ -9,6 +9,7 @@
 #include "concatenate.hpp"
 #include "contains.hpp"
 #include "integer_sequence.hpp"
+#include "sequence_helper.hpp"
 
 namespace tao
 {
@@ -25,7 +26,7 @@ namespace tao
          template< CT N >
          using check = contains< CT, N, Bs... >;
 
-         using type = concatenate_t< typename std::conditional< check< As >::value, integer_sequence< CT >, integer_sequence< CT, As > >::type... >;
+         using type = concatenate_t< typename impl::conditional< check< As >::value >::template type< integer_sequence< CT >, integer_sequence< CT, As > >... >;
       };
 
       template< typename A, typename B >

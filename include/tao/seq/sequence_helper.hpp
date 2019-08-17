@@ -38,6 +38,20 @@ namespace tao
          {
          };
 
+         template< bool >
+         struct conditional
+         {
+            template< typename T, typename >
+            using type = T;
+         };
+
+         template<>
+         struct conditional< false >
+         {
+            template< typename, typename F >
+            using type = F;
+         };
+
       }  // namespace impl
 
    }  // namespace seq
