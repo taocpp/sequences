@@ -16,7 +16,7 @@ namespace tao
    {
       namespace impl
       {
-         template< typename OP, typename A, typename B, typename R >
+         template< typename... >
          struct merge;
 
          template< typename OP, typename T, T A, T... As, T... Rs >
@@ -33,31 +33,31 @@ namespace tao
          {
          };
 
-         template< typename OP, typename T, bool, typename I, typename... Ss >
+         template< bool, typename... >
          struct multi_merge;
 
          template< typename OP, typename T, typename S >
-         struct multi_merge< OP, T, false, index_sequence<>, S >
+         struct multi_merge< false, index_sequence<>, OP, T, S >
          {
             using type = S;
          };
 
-         template< typename OP, typename T, std::size_t... Is, typename... Ss >
-         struct multi_merge< OP, T, true, index_sequence< Is... >, Ss... >
-            : multi_merge< OP,
-                           T,
-                           ( ( sizeof...( Is ) % 2 ) == 0 ),
+         template< std::size_t... Is, typename OP, typename T, typename... Ss >
+         struct multi_merge< true, index_sequence< Is... >, OP, T, Ss... >
+            : multi_merge< ( ( sizeof...( Is ) % 2 ) == 0 ),
                            make_index_sequence< sizeof...( Is ) / 2 >,
+                           OP,
+                           T,
                            typename merge< OP, at_index_t< Is * 2, Ss... >, at_index_t< Is * 2 + 1, Ss... >, integer_sequence< T > >::type... >
          {
          };
 
-         template< typename OP, typename T, std::size_t... Is, typename S, typename... Ss >
-         struct multi_merge< OP, T, false, index_sequence< Is... >, S, Ss... >
-            : multi_merge< OP,
-                           T,
-                           ( ( ( sizeof...( Is ) + 1 ) % 2 ) == 0 ),
+         template< std::size_t... Is, typename OP, typename T, typename S, typename... Ss >
+         struct multi_merge< false, index_sequence< Is... >, OP, T, S, Ss... >
+            : multi_merge< ( ( ( sizeof...( Is ) + 1 ) % 2 ) == 0 ),
                            make_index_sequence< ( sizeof...( Is ) + 1 ) / 2 >,
+                           OP,
+                           T,
                            S,
                            typename merge< OP, at_index_t< Is * 2, Ss... >, at_index_t< Is * 2 + 1, Ss... >, integer_sequence< T > >::type... >
          {
@@ -67,10 +67,10 @@ namespace tao
 
       template< typename OP, typename T, T... Ns >
       struct sort
-         : impl::multi_merge< OP,
-                              T,
-                              ( ( sizeof...( Ns ) % 2 ) == 0 ),
+         : impl::multi_merge< ( ( sizeof...( Ns ) % 2 ) == 0 ),
                               make_index_sequence< sizeof...( Ns ) / 2 >,
+                              OP,
+                              T,
                               integer_sequence< T, Ns >... >
       {
       };

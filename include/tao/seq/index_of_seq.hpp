@@ -22,8 +22,8 @@ namespace tao
          using type = index_sequence< index_of< typename std::common_type< TA, TB >::type, Bs, As... >::value... >;
       };
 
-      template< typename As, typename Bs >
-      using index_of_seq_t = typename index_of_seq< As, Bs >::type;
+      template< typename A, typename B >
+      using index_of_seq_t = typename index_of_seq< A, B >::type;
 
    }  // namespace seq
 

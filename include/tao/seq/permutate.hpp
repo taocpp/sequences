@@ -16,8 +16,8 @@ namespace tao
       template< typename I, typename S >
       using permutate = map< index_of_seq_t< I, make_index_sequence< impl::sequence_size< S >::value > >, S >;
 
-      template< typename S, typename M >
-      using permutate_t = typename permutate< S, M >::type;
+      template< typename I, typename S >
+      using permutate_t = typename permutate< I, S >::type;
 
    }  // namespace seq
 
