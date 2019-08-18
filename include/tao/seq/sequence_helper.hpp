@@ -52,6 +52,9 @@ namespace tao
             using type = F;
          };
 
+         template< bool C, typename T, typename F >
+         using conditional_t = typename conditional< C >::template type< T, F >;
+
       }  // namespace impl
 
    }  // namespace seq
