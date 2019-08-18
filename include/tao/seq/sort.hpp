@@ -25,16 +25,10 @@ namespace tao
             using type = integer_sequence< T, Rs..., A, As... >;
          };
 
-         template< typename OP, typename T, T B, T... Bs, T... Rs >
-         struct merge< OP, integer_sequence< T >, integer_sequence< T, B, Bs... >, integer_sequence< T, Rs... > >
-         {
-            using type = integer_sequence< T, Rs..., B, Bs... >;
-         };
-
          template< typename OP, typename T, T A, T... As, T B, T... Bs, T... Rs >
          struct merge< OP, integer_sequence< T, A, As... >, integer_sequence< T, B, Bs... >, integer_sequence< T, Rs... > >
             : conditional< OP::template apply< T, A, B >::value >::template type<
-                 merge< OP, integer_sequence< T, As... >, integer_sequence< T, B, Bs... >, integer_sequence< T, Rs..., A > >,
+                 merge< OP, integer_sequence< T, B, Bs... >, integer_sequence< T, As... >, integer_sequence< T, Rs..., A > >,
                  merge< OP, integer_sequence< T, A, As... >, integer_sequence< T, Bs... >, integer_sequence< T, Rs..., B > > >
          {
          };
