@@ -6,6 +6,7 @@
 
 #include <type_traits>
 
+#include "config.hpp"
 #include "integer_sequence.hpp"
 #include "make_integer_sequence.hpp"
 #include "select.hpp"
@@ -14,6 +15,38 @@ namespace tao
 {
    namespace seq
    {
+
+#ifdef TAO_SEQ_FOLD_EXPRESSIONS
+
+      namespace impl
+      {
+         template< typename OP, typename T, T N >
+         struct wrap
+         {
+         };
+
+         template< typename OP, typename T, T R, T L >
+         constexpr auto operator+( std::integral_constant< T, R >, wrap< OP, T, L > ) noexcept
+         {
+            return typename OP::template apply< T, R, L >();
+         }
+
+         template< typename OP, typename T, T N, T... Ns >
+         constexpr auto fold() noexcept
+         {
+            return ( std::integral_constant< T, N >() + ... + wrap< OP, T, Ns >() );
+         }
+
+      }  // namespace impl
+
+      template< typename OP, typename T, T... Ns >
+      struct fold
+         : decltype( impl::fold< OP, T, Ns... >() )
+      {
+      };
+
+#else
+
       namespace impl
       {
          template< typename OP, bool, typename, typename T, T... >
@@ -53,6 +86,8 @@ namespace tao
          : fold< OP, typename impl::folder< OP, sizeof...( Ns ) % 2 == 1, make_index_sequence< sizeof...( Ns ) / 2 >, T, Ns... >::type >
       {
       };
+
+#endif
 
       template< typename OP, typename T, T... Ns >
       struct fold< OP, integer_sequence< T, Ns... > >
