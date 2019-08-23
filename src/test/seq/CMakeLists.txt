@@ -20,7 +20,8 @@ set (test_sources
   max.cpp
   min.cpp
   minus.cpp
-  multiply.cpp
+  multiplies.cpp
+  partial_fold.cpp
   partial_sum.cpp
   permutate.cpp
   plus.cpp
