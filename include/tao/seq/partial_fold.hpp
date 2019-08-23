@@ -25,7 +25,7 @@ namespace tao
             template< std::size_t I >
             using element = seq::select< I, T, Ns... >;
 
-            using type = fold< OP, T, element< Is >::value... >;
+            using type = seq::fold< OP, T, element< Is >::value... >;
          };
 
       }  // namespace impl
