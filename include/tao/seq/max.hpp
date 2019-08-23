@@ -5,34 +5,14 @@
 #define TAO_SEQ_MAX_HPP
 
 #include "fold.hpp"
-
-#include <type_traits>
+#include "functional.hpp"
 
 namespace tao
 {
    namespace seq
    {
-      namespace impl
-      {
-         struct max
-         {
-            template< typename T, T A, T B >
-            using apply = std::integral_constant< T, ( ( A > B ) ? A : B ) >;
-         };
-
-      }  // namespace impl
-
       template< typename T, T... Ns >
-      struct max
-         : fold< impl::max, T, Ns... >
-      {
-      };
-
-      template< typename T, T... Ns >
-      struct max< integer_sequence< T, Ns... > >
-         : max< T, Ns... >
-      {
-      };
+      using max = fold< op::max, T, Ns... >;
 
    }  // namespace seq
 

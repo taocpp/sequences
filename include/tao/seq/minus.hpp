@@ -4,26 +4,15 @@
 #ifndef TAO_SEQ_MINUS_HPP
 #define TAO_SEQ_MINUS_HPP
 
-#include <type_traits>
-
+#include "functional.hpp"
 #include "zip.hpp"
 
 namespace tao
 {
    namespace seq
    {
-      namespace impl
-      {
-         struct minus
-         {
-            template< typename T, T A, T B >
-            using apply = std::integral_constant< T, A - B >;
-         };
-
-      }  // namespace impl
-
       template< typename A, typename B >
-      using minus = zip< impl::minus, A, B >;
+      using minus = zip< op::minus, A, B >;
 
       template< typename A, typename B >
       using minus_t = typename minus< A, B >::type;

@@ -5,34 +5,14 @@
 #define TAO_SEQ_MIN_HPP
 
 #include "fold.hpp"
-
-#include <type_traits>
+#include "functional.hpp"
 
 namespace tao
 {
    namespace seq
    {
-      namespace impl
-      {
-         struct min
-         {
-            template< typename T, T A, T B >
-            using apply = std::integral_constant< T, ( ( A < B ) ? A : B ) >;
-         };
-
-      }  // namespace impl
-
       template< typename T, T... Ns >
-      struct min
-         : fold< impl::min, T, Ns... >
-      {
-      };
-
-      template< typename T, T... Ns >
-      struct min< integer_sequence< T, Ns... > >
-         : min< T, Ns... >
-      {
-      };
+      using min = fold< op::min, T, Ns... >;
 
    }  // namespace seq
 

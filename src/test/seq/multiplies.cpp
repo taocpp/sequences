@@ -1,7 +1,7 @@
 // Copyright (c) 2019 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
-#include <tao/seq/multiply.hpp>
+#include <tao/seq/multiplies.hpp>
 
 #include <type_traits>
 
@@ -14,5 +14,5 @@ int main()
 
    using R = index_sequence< 0, 25, 42, 7 >;
 
-   static_assert( std::is_same< multiply_t< A, B >, R >::value, "oops" );
+   static_assert( std::is_same< multiplies_t< A, B >, R >::value, "oops" );
 }

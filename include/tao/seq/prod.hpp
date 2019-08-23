@@ -4,14 +4,18 @@
 #ifndef TAO_SEQ_PROD_HPP
 #define TAO_SEQ_PROD_HPP
 
-#include <type_traits>
-
 #include "config.hpp"
 #include "integer_sequence.hpp"
 
-#ifndef TAO_SEQ_FOLD_EXPRESSIONS
+#ifdef TAO_SEQ_FOLD_EXPRESSIONS
+
+#include <type_traits>
+
+#else
+
 #include "fold.hpp"
-#include "multiply.hpp"
+#include "functional.hpp"
+
 #endif
 
 namespace tao
@@ -23,7 +27,7 @@ namespace tao
 
       template< typename T, T... Ns >
       struct prod
-         : std::integral_constant< T, ( Ns * ... * T( 1 ) ) >
+         : std::integral_constant< T, ( T( 1 ) * ... * Ns ) >
       {
       };
 
@@ -31,7 +35,7 @@ namespace tao
 
       template< typename T, T... Ns >
       struct prod
-         : fold< impl::multiply, T, T( 1 ), Ns... >
+         : fold< op::multiplies, T, T( 1 ), Ns... >
       {
       };
 

@@ -24,7 +24,7 @@ namespace tao
 
       template< typename T, T... Ns >
       struct sum
-         : std::integral_constant< T, ( Ns + ... + T( 0 ) ) >
+         : std::integral_constant< T, ( T( 0 ) + ... + Ns ) >
       {
       };
 
@@ -68,7 +68,7 @@ namespace tao
 
       template< typename T, T... Ns >
       struct sum
-         : impl::sum< std::is_unsigned< T >::value, sizeof...( Ns ) + 1, T, Ns..., 0 >::type
+         : impl::sum< std::is_unsigned< T >::value, sizeof...( Ns ) + 1, T, T( 0 ), Ns... >::type
       {
       };
 

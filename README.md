@@ -434,7 +434,7 @@ Examples:
 
 **Not yet released**
 
-* Added `prod`, `multiply`, `difference`, `index_of_seq`, `permutate`, `sort`, and `sort_index`.
+* Added `prod`, `partial_prod`, `multiplies`, `difference`, `index_of_seq`, `permutate`, `sort`, and `sort_index`.
 
 ### 1.0.2
 
