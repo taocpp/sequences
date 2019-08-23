@@ -21,15 +21,18 @@ namespace tao
 
          template< typename OP, std::size_t... Is, typename T, T... Ns >
          struct partial_fold< OP, index_sequence< Is... >, T, Ns... >
-            : fold< OP, T, seq::select< Is, T, Ns... >::value... >
          {
+            template< std::size_t I >
+            using element = seq::select< I, T, Ns... >;
+
+            using type = fold< OP, T, element< Is >::value... >;
          };
 
       }  // namespace impl
 
       template< typename OP, std::size_t I, typename T, T... Ns >
       struct partial_fold
-         : impl::partial_fold< OP, make_index_sequence< I >, T, Ns... >
+         : impl::partial_fold< OP, make_index_sequence< I >, T, Ns... >::type
       {
       };
 
