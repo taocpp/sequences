@@ -1,9 +1,8 @@
 // Copyright (c) 2015-2019 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
+#include <tao/seq/make_integer_sequence.hpp>
 #include <tao/seq/max.hpp>
-
-#include <type_traits>
 
 int main()
 {

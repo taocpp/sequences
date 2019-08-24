@@ -5,7 +5,6 @@
 #define TAO_SEQ_PARTIAL_SUM_HPP
 
 #include <cstddef>
-#include <utility>
 
 #include "make_integer_sequence.hpp"
 #include "sum.hpp"

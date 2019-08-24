@@ -5,7 +5,6 @@
 #define TAO_SEQ_PARTIAL_PROD_HPP
 
 #include <cstddef>
-#include <utility>
 
 #include "make_integer_sequence.hpp"
 #include "prod.hpp"
@@ -21,7 +20,7 @@ namespace tao
 
          template< std::size_t I, typename T, T... Ns, std::size_t... Is >
          struct partial_prod< I, integer_sequence< T, Ns... >, index_sequence< Is... > >
-            : seq::prod< T, ( ( Is < I ) ? Ns : 0 )... >
+            : seq::prod< T, ( ( Is < I ) ? Ns : 1 )... >
          {
             static_assert( I <= sizeof...( Is ), "tao::seq::partial_prod<I, S>: I is out of range" );
          };

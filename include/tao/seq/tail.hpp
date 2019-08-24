@@ -4,8 +4,6 @@
 #ifndef TAO_SEQ_TAIL_HPP
 #define TAO_SEQ_TAIL_HPP
 
-#include <type_traits>
-
 #include "integer_sequence.hpp"
 
 namespace tao

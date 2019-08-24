@@ -5,7 +5,6 @@
 #define TAO_SEQ_MAKE_INTEGER_SEQUENCE_HPP
 
 #include <cstddef>
-#include <type_traits>
 #include <utility>
 
 #include "config.hpp"

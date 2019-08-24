@@ -12,7 +12,7 @@ namespace tao
 {
    namespace seq
    {
-      template< typename OP, typename T, typename impl::element_type< T >::type... Ns >
+      template< typename OP, typename T, T... Ns >
       struct sort_index
          : sort_index< OP, integer_sequence< T, Ns... > >
       {
@@ -24,7 +24,7 @@ namespace tao
       {
       };
 
-      template< typename OP, typename T, typename impl::element_type< T >::type... Ns >
+      template< typename OP, typename T, T... Ns >
       using sort_index_t = typename sort_index< OP, T, Ns... >::type;
 
    }  // namespace seq

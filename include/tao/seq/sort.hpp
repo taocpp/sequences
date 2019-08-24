@@ -4,10 +4,11 @@
 #ifndef TAO_SEQ_SORT_HPP
 #define TAO_SEQ_SORT_HPP
 
+#include <cstddef>
 #include <type_traits>
 
 #include "at_index.hpp"
-#include "integer_sequence.hpp"
+#include "make_integer_sequence.hpp"
 #include "sequence_helper.hpp"
 
 namespace tao

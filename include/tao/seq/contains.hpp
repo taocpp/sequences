@@ -30,7 +30,7 @@ namespace tao
 
       }  // namespace impl
 
-      template< typename T, typename impl::element_type< T >::type N, typename impl::element_type< T >::type... Ns >
+      template< typename T, typename impl::element_type< T >::type N, T... Ns >
       using contains = typename impl::contains< T >::template type< N, Ns... >;
 
    }  // namespace seq

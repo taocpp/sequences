@@ -4,7 +4,8 @@
 #ifndef TAO_SEQ_SEQUENCE_HELPER_HPP
 #define TAO_SEQ_SEQUENCE_HELPER_HPP
 
-#include <type_traits>
+#include <cstddef>
+#include <utility>
 
 #include "integer_sequence.hpp"
 

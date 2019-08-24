@@ -7,9 +7,19 @@
 #include <type_traits>
 
 #include "config.hpp"
+
+#ifdef TAO_SEQ_FOLD_EXPRESSIONS
+
 #include "integer_sequence.hpp"
+
+#else
+
+#include <cstddef>
+
 #include "make_integer_sequence.hpp"
 #include "select.hpp"
+
+#endif
 
 namespace tao
 {
@@ -21,12 +31,12 @@ namespace tao
       namespace impl
       {
          template< typename OP, typename T, T N >
-         struct wrap
+         struct wrap_fold
          {
          };
 
          template< typename OP, typename T, T R, T L >
-         constexpr auto operator+( std::integral_constant< T, R >, wrap< OP, T, L > ) noexcept
+         constexpr auto operator+( std::integral_constant< T, R >, wrap_fold< OP, T, L > ) noexcept
          {
             return typename OP::template apply< T, R, L >();
          }
@@ -34,7 +44,7 @@ namespace tao
          template< typename OP, typename T, T N, T... Ns >
          constexpr auto fold() noexcept
          {
-            return ( std::integral_constant< T, N >() + ... + wrap< OP, T, Ns >() );
+            return ( std::integral_constant< T, N >() + ... + wrap_fold< OP, T, Ns >() );
          }
 
       }  // namespace impl

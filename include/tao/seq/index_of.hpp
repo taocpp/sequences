@@ -5,7 +5,6 @@
 #define TAO_SEQ_INDEX_OF_HPP
 
 #include "contains.hpp"
-#include "integer_sequence.hpp"
 #include "make_integer_sequence.hpp"
 #include "min.hpp"
 #include "sequence_helper.hpp"
@@ -35,7 +34,7 @@ namespace tao
 
       }  // namespace impl
 
-      template< typename T, typename impl::element_type< T >::type N, typename impl::element_type< T >::type... Ns >
+      template< typename T, typename impl::element_type< T >::type N, T... Ns >
       struct index_of
          : impl::index_of< T, make_index_sequence< impl::sequence_size< T, Ns... >::value > >::template type< T, N, Ns... >
       {

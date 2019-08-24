@@ -4,7 +4,7 @@
 #ifndef TAO_SEQ_EXCLUSIVE_SCAN_HPP
 #define TAO_SEQ_EXCLUSIVE_SCAN_HPP
 
-#include <utility>
+#include <cstddef>
 
 #include "make_integer_sequence.hpp"
 #include "partial_sum.hpp"

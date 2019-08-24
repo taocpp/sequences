@@ -4,6 +4,8 @@
 #include <tao/seq/index_of_seq.hpp>
 #include <tao/seq/integer_sequence.hpp>
 
+#include <type_traits>
+
 int main()
 {
    using namespace tao::seq;

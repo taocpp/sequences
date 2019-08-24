@@ -4,6 +4,8 @@
 #ifndef TAO_SEQ_MAKE_INTEGER_RANGE_HPP
 #define TAO_SEQ_MAKE_INTEGER_RANGE_HPP
 
+#include <cstddef>
+
 #include "make_integer_sequence.hpp"
 
 namespace tao

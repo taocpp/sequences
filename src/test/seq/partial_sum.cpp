@@ -4,8 +4,6 @@
 #include <tao/seq/integer_sequence.hpp>
 #include <tao/seq/partial_sum.hpp>
 
-#include <type_traits>
-
 int main()
 {
    using namespace tao::seq;

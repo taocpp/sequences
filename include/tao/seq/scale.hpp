@@ -35,10 +35,10 @@ namespace tao
 
       }  // namespace impl
 
-      template< typename T, typename impl::element_type< T >::type S, typename impl::element_type< T >::type... Ns >
+      template< typename T, typename impl::element_type< T >::type S, T... Ns >
       using scale = typename impl::scale< T >::template impl< S, Ns... >;
 
-      template< typename T, typename impl::element_type< T >::type S, typename impl::element_type< T >::type... Ns >
+      template< typename T, typename impl::element_type< T >::type S, T... Ns >
       using scale_t = typename scale< T, S, Ns... >::type;
 
    }  // namespace seq

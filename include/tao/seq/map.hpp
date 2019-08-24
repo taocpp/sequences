@@ -5,7 +5,6 @@
 #define TAO_SEQ_MAP_HPP
 
 #include <cstddef>
-#include <utility>
 
 #include "integer_sequence.hpp"
 #include "select.hpp"

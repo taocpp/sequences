@@ -4,15 +4,21 @@
 #ifndef TAO_SEQ_SUM_HPP
 #define TAO_SEQ_SUM_HPP
 
-#include <type_traits>
 #include <utility>
 
 #include "config.hpp"
+
+#ifdef TAO_SEQ_FOLD_EXPRESSIONS
+
 #include "integer_sequence.hpp"
 
-#ifndef TAO_SEQ_FOLD_EXPRESSIONS
-#include "make_integer_sequence.hpp"
+#else
+
 #include <cstddef>
+#include <type_traits>
+
+#include "make_integer_sequence.hpp"
+
 #endif
 
 namespace tao
