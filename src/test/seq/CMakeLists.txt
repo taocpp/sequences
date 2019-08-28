@@ -1,12 +1,12 @@
 cmake_minimum_required (VERSION 3.3.0 FATAL_ERROR)
 
 set (test_sources
+  accumulate.cpp
   at_index.cpp
   concatenate.cpp
   contains.cpp
   difference.cpp
   exclusive_scan.cpp
-  fold.cpp
   head.cpp
   inclusive_scan.cpp
   index_of.cpp
@@ -21,7 +21,7 @@ set (test_sources
   min.cpp
   minus.cpp
   multiplies.cpp
-  partial_fold.cpp
+  partial_accumulate.cpp
   partial_sum.cpp
   permutate.cpp
   plus.cpp

@@ -13,8 +13,8 @@
 
 #else
 
-#include "fold.hpp"
 #include "functional.hpp"
+#include "reduce.hpp"
 
 #endif
 
@@ -35,7 +35,7 @@ namespace tao
 
       template< typename T, T... Ns >
       struct prod
-         : fold< op::multiplies, T, T( 1 ), Ns... >
+         : reduce< op::multiplies, T, T( 1 ), Ns... >
       {
       };
 

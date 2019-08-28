@@ -4,15 +4,15 @@
 #ifndef TAO_SEQ_MIN_HPP
 #define TAO_SEQ_MIN_HPP
 
-#include "fold.hpp"
 #include "functional.hpp"
+#include "reduce.hpp"
 
 namespace tao
 {
    namespace seq
    {
       template< typename T, T... Ns >
-      using min = fold< op::min, T, Ns... >;
+      using min = reduce< op::min, T, Ns... >;
 
    }  // namespace seq
 

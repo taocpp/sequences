@@ -101,7 +101,7 @@ Examples:
 
 #### Header `tao/seq/partial_sum.hpp`
 
-Integral constant to provide the sum of the first `I` elements of `Ns`.
+Integral constant to provide the sum of the first `I` elements.
 
 * `partial_sum< std::size_t I, typename T, T... Ns >`
 * `partial_sum< std::size_t I, typename S >`
@@ -111,6 +111,20 @@ Examples:
 * `partial_sum<0,int,1,4,3,1>::value` ➙ `0`
 * `partial_sum<2,int,1,4,3,1>::value` ➙ `5`
 * `partial_sum<4,make_index_sequence<5>>::value` ➙ `6`
+
+#### Header `tao/seq/partial_prod.hpp`
+
+Integral constant to provide the product of the first `I` elements of `Ns`.
+
+* `partial_prod< std::size_t I, typename T, T... Ns >`
+* `partial_prod< std::size_t I, typename S >`
+
+Examples:
+
+* `partial_prod<0,int,2,5,3,2>::value` ➙ `1`
+* `partial_prod<1,int,2,5,3,2>::value` ➙ `2`
+* `partial_prod<2,int,2,5,3,2>::value` ➙ `10`
+* `partial_prod<4,int,2,5,3,2>::value` ➙ `60`
 
 #### Header `tao/seq/exclusive_scan.hpp`
 
@@ -209,10 +223,17 @@ Removed the first element of a non-empty sequence.
 
 #### Header `tao/seq/select.hpp`
 
-Integral constant to provide the `I`th element of a non-empty sequence.
+Integral constant to provide the `I`-th element of a non-empty sequence.
 
 * `select< std::size_t I, typename T, T... >`
 * `select< std::size_t I, typename S >`
+
+#### Header `tao/seq/first.hpp`
+
+Sequence that contains only the first `I` elements of a given sequence.
+
+* `first_t< std::size_t I, typename T, T... >`
+* `first_t< std::size_t I, typename S >`
 
 #### Header `tao/seq/concatenate.hpp`
 
@@ -240,12 +261,19 @@ Notes:
 
 Both sequences may have a different element type, the resulting sequence's type is calculated with `std::common_type_t`.
 
-#### Header `tao/seq/fold.hpp`
+#### Header `tao/seq/accumulate.hpp`
 
-Integral constant calculated by "folding" a sequence of values with a given binary operation.
+Result of a left fold of the given values over `OP`.
 
-* `fold< typename OP, typename T, T... >`
-* `fold< typename OP, typename S >`
+* `accumulate< typename OP, typename T, T... >`
+* `accumulate< typename OP, typename S >`
+
+#### Header `tao/seq/reduce.hpp`
+
+Reduces the given values in an unspecified order over `OP`.
+
+* `reduce< typename OP, typename T, T... >`
+* `reduce< typename OP, typename S >`
 
 #### Header `tao/seq/min.hpp`
 
@@ -253,22 +281,6 @@ Integral constant to provide the minimum value.
 
 * `min< typename T, T... >`
 * `min< typename S >`
-
-Notes:
-
-Implemented with `fold` like this:
-
-    namespace impl
-    {
-       struct min
-       {
-          template< typename T, T A, T B >
-          using apply = std::integral_constant< T, ( ( A < B ) ? A : B ) >;
-       };
-    }
-
-    template< typename T, T... Ns >
-    using min = fold< impl::min, T, Ns... >;
 
 #### Header `tao/seq/max.hpp`
 
@@ -387,7 +399,7 @@ Examples:
 
 #### Header `tao/seq/at_index.hpp`
 
-Returns the `I`th type from a list of types `Ts...`.
+Returns the `I`-th type from a list of types `Ts...`.
 
 * `at_index_t< std::size_t I, typename... Ts >`
 
@@ -430,11 +442,12 @@ Examples:
 
 ## Changelog
 
-### 1.1.0
+### 2.0.0
 
 **Not yet released**
 
-* Added `partial_fold`, `prod`, `partial_prod`, `multiplies`, `difference`, `index_of_seq`, `permutate`, `sort`, and `sort_index`.
+* Split `fold` into `accumulate` and `reduce`.
+* Added `first`, `prod`, `partial_prod`, `multiplies`, `difference`, `index_of_seq`, `permutate`, `sort`, and `sort_index`.
 
 ### 1.0.2
 
