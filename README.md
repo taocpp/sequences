@@ -1,4 +1,4 @@
-#The Art of C++ / Sequences
+# The Art of C++ / Sequences
 
 [![Release](https://img.shields.io/github/release/taocpp/sequences.svg)](https://github.com/taocpp/sequences/releases/latest)
 [![Download](https://api.bintray.com/packages/taocpp/public-conan/sequences%3Ataocpp/images/download.svg)](https://bintray.com/taocpp/public-conan/sequences%3Ataocpp/_latestVersion)
@@ -423,8 +423,8 @@ Given a predicate `less`...
 
     struct less
     {
-   template< typename T, T A, T B >
-   using apply = std::integral_constant< bool, ( A < B ) >;
+       template< typename T, T A, T B >
+       using apply = std::integral_constant< bool, ( A < B ) >;
     };
 
 * `sort_t<less,int,7,-2,3,0,4>` ➙ `integer_sequence<int,-2,0,3,4,7>`
@@ -449,6 +449,7 @@ Examples:
 **Not yet released**
 
 * Split `fold` into `accumulate` and `reduce`.
+* Generalized `exclusive_scan` and `inclusive_scan`.
 * Added `first`, `prod`, `partial_prod`, `multiplies`, `difference`, `index_of_seq`, `permutate`, `sort`, and `sort_index`.
 
 ### 1.0.2
