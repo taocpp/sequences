@@ -1,4 +1,4 @@
-# The Art of C++ / Sequences
+#The Art of C++ / Sequences
 
 [![Release](https://img.shields.io/github/release/taocpp/sequences.svg)](https://github.com/taocpp/sequences/releases/latest)
 [![Download](https://api.bintray.com/packages/taocpp/public-conan/sequences%3Ataocpp/images/download.svg)](https://bintray.com/taocpp/public-conan/sequences%3Ataocpp/_latestVersion)
@@ -130,23 +130,25 @@ Examples:
 
 Provides a sequence with the exclusive scan of the input sequence.
 
-* `exclusive_scan_t< typename T, T... Ns >`
-* `exclusive_scan_t< typename S >`
+* `exclusive_scan_t< typename OP, typename T, T Init, T... Ns >`
+* `exclusive_scan_t< typename OP, typename S, T Init >`
 
 Examples:
 
-* `exclusive_scan_t<int,1,4,0,3,1>` ➙ `integer_sequence<int,0,1,5,5,8>`
+* `exclusive_scan_t<op::plus,int,0,1,4,0,3,1>` ➙ `integer_sequence<int,0,1,5,5,8>`
+* `using S = index_sequence<3,1,4,1,5,9,2,6>;
+* `exclusive_scan_t<op::multiplies,S,1>` ➙ `index_sequence<3,3,12,12,60,540,1080,6480>`
 
 #### Header `tao/seq/inclusive_scan.hpp`
 
 Provides a sequence with the inclusive scan of the input sequence.
 
-* `inclusive_scan_t< typename T, T... Ns >`
-* `inclusive_scan_t< typename S >`
+* `inclusive_scan_t< typename OP, typename T, T... Ns >`
+* `inclusive_scan_t< typename OP, typename S >`
 
 Examples:
 
-* `inclusive_scan_t<int,1,4,0,3,1>` ➙ `integer_sequence<int,1,5,5,8,9>`
+* `inclusive_scan_t<op::plus,int,1,4,0,3,1>` ➙ `integer_sequence<int,1,5,5,8,9>`
 
 #### Header `tao/seq/zip.hpp`
 
@@ -421,8 +423,8 @@ Given a predicate `less`...
 
     struct less
     {
-       template< typename T, T A, T B >
-       using apply = std::integral_constant< bool, ( A < B ) >;
+   template< typename T, T A, T B >
+   using apply = std::integral_constant< bool, ( A < B ) >;
     };
 
 * `sort_t<less,int,7,-2,3,0,4>` ➙ `integer_sequence<int,-2,0,3,4,7>`
