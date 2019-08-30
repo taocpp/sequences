@@ -4,8 +4,6 @@
 #ifndef TAO_SEQ_EXCLUSIVE_SCAN_HPP
 #define TAO_SEQ_EXCLUSIVE_SCAN_HPP
 
-#include <type_traits>
-
 #include "integer_sequence.hpp"
 #include "sequence_helper.hpp"
 
@@ -18,16 +16,16 @@ namespace tao
 
 #if( __cplusplus >= 201402L )
 
-         template< typename OP, typename T, T... Ns, T V >
-         constexpr auto exclusive_impl( integer_sequence< T, Ns... >, std::integral_constant< T, V >, integer_sequence< T > ) noexcept
+         template< typename OP, typename T, T V, T... Ns >
+         constexpr auto exclusive_impl( integer_sequence< T, Ns... >, integer_sequence< T > ) noexcept
          {
             return integer_sequence< T, Ns... >();
          }
 
-         template< typename OP, typename T, T... Ns, T V, T R, T... Rs >
-         constexpr auto exclusive_impl( integer_sequence< T, Ns... >, std::integral_constant< T, V >, integer_sequence< T, R, Rs... > ) noexcept
+         template< typename OP, typename T, T V, T... Ns, T R, T... Rs >
+         constexpr auto exclusive_impl( integer_sequence< T, Ns... >, integer_sequence< T, R, Rs... > ) noexcept
          {
-            return exclusive_impl< OP, T >( integer_sequence< T, Ns..., V >(), typename OP::template apply< T, V, R >(), integer_sequence< T, Rs... >() );
+            return exclusive_impl< OP, T, OP::template apply< T, V, R >::value >( integer_sequence< T, Ns..., V >(), integer_sequence< T, Rs... >() );
          }
 
          template< typename T >
@@ -36,7 +34,7 @@ namespace tao
             template< typename OP, T Init, T... Ns >
             struct apply
             {
-               using type = decltype( exclusive_impl< OP, T >( integer_sequence< T >(), std::integral_constant< T, Init >(), integer_sequence< T, Ns... >() ) );
+               using type = decltype( exclusive_impl< OP, T, Init >( integer_sequence< T >(), integer_sequence< T, Ns... >() ) );
             };
          };
 
@@ -46,7 +44,7 @@ namespace tao
             template< typename OP, T Init >
             struct apply
             {
-               using type = decltype( exclusive_impl< OP, T >( integer_sequence< T >(), std::integral_constant< T, Init >(), integer_sequence< T, Ns... >() ) );
+               using type = decltype( exclusive_impl< OP, T, Init >( integer_sequence< T >(), integer_sequence< T, Ns... >() ) );
             };
          };
 
