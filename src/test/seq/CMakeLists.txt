@@ -26,6 +26,7 @@ set (test_sources
   permutate.cpp
   plus.cpp
   prod.cpp
+  reverse.cpp
   scale.cpp
   select.cpp
   sort.cpp

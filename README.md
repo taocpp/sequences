@@ -410,6 +410,15 @@ Examples:
 * `at_index<0,bool,int,void,char*>` ➙ `bool`
 * `at_index<2,bool,int,void,char*>` ➙ `void`
 
+#### Header `tao/seq/reverse.hpp`
+
+Reverses a sequence.
+
+Examples:
+
+* `reverse_t<int,1,4,0,3,2>` ➙ `integer_sequence<int,2,3,0,4,1>`
+* `reverse_t<index_sequence<1,4,0,3,2>>` ➙ `index_sequence<int,2,3,0,4,1>`
+
 #### Header `tao/seq/sort.hpp`
 
 Sort a sequence according to a given predicate.
@@ -450,7 +459,7 @@ Examples:
 
 * Split `fold` into `accumulate` and `reduce`.
 * Generalized `exclusive_scan` and `inclusive_scan`.
-* Added `first`, `prod`, `partial_prod`, `multiplies`, `difference`, `index_of_seq`, `permutate`, `sort`, and `sort_index`.
+* Added `first`, `reverse`, `prod`, `partial_prod`, `multiplies`, `difference`, `index_of_seq`, `permutate`, `sort`, and `sort_index`.
 
 ### 1.0.2
 
