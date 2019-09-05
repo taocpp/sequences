@@ -1,8 +1,8 @@
 // Copyright (c) 2019 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
-#ifndef TAO_SEQ_OP_MIN_HPP
-#define TAO_SEQ_OP_MIN_HPP
+#ifndef TAO_SEQ_FUNCTIONAL_HPP
+#define TAO_SEQ_FUNCTIONAL_HPP
 
 #include <type_traits>
 

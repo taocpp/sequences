@@ -41,7 +41,7 @@ namespace tao
          template< std::size_t, std::size_t N >
          struct chars
          {
-            char dummy[ N + 1 ];
+            char dummy[ N + 1 ];  // NOLINT(modernize-avoid-c-arrays)
          };
 
          template< typename, std::size_t... >

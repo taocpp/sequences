@@ -61,8 +61,8 @@ build/%.d: %.cpp Makefile
 build/%: %.cpp build/%.d
 	$(CXX) $(CXXSTD) -Iinclude $(CPPFLAGS) $(CXXFLAGS) $< -o $@
 
-build/%.clang-tidy: %
-	$(CLANG_TIDY) -extra-arg "-Iinclude" -extra-arg "-std=c++11" -checks=*,-fuchsia-*,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-misc-macro-parentheses,-hicpp-no-array-decay -warnings-as-errors=* $< 2>/dev/null
+build/%.clang-tidy: % .clang-tidy
+	$(CLANG_TIDY) -quiet $< -- -Iinclude 2>/dev/null
 	@mkdir -p $(@D)
 	@touch $@
 

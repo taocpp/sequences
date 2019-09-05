@@ -17,13 +17,13 @@ namespace tao
 #if( __cplusplus >= 201402L )
 
          template< typename OP, typename T, T V, T... Ns >
-         constexpr auto exclusive_impl( integer_sequence< T, Ns... >, integer_sequence< T > ) noexcept
+         constexpr auto exclusive_impl( integer_sequence< T, Ns... > /*unused*/, integer_sequence< T > /*unused*/ ) noexcept
          {
             return integer_sequence< T, Ns... >();
          }
 
          template< typename OP, typename T, T V, T... Ns, T R, T... Rs >
-         constexpr auto exclusive_impl( integer_sequence< T, Ns... >, integer_sequence< T, R, Rs... > ) noexcept
+         constexpr auto exclusive_impl( integer_sequence< T, Ns... > /*unused*/, integer_sequence< T, R, Rs... > /*unused*/ ) noexcept
          {
             return exclusive_impl< OP, T, OP::template apply< T, V, R >::value >( integer_sequence< T, Ns..., V >(), integer_sequence< T, Rs... >() );
          }

@@ -529,6 +529,39 @@ matrix:
         - build/src/test/seq/tester
         - scan-build-8 make -kj3
 
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-8']
+          packages: ['clang-8', 'clang-tidy-8']
+      env:
+        - CXX=clang++-8
+        - CLANG_TIDY=clang-tidy-8
+      script:
+        - make -kj3 clang-tidy
+
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-8']
+          packages: ['clang-8', 'clang-tidy-8']
+      env:
+        - CXX=clang++-8
+        - CLANG_TIDY="clang-tidy-8 -extra-arg='-std=c++14'"
+      script:
+        - make -kj3 clang-tidy
+
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-8']
+          packages: ['clang-8', 'clang-tidy-8']
+      env:
+        - CXX=clang++-8
+        - CLANG_TIDY="clang-tidy-8 -extra-arg='-std=c++17'"
+      script:
+        - make -kj3 clang-tidy
+
     - language: python
       python:
         - "3.6"

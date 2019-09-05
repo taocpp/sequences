@@ -1,0 +1,11 @@
+Checks: >-
+  bugprone-*,
+  cppcoreguidelines-slicing,
+  llvm-*,
+  modernize-*,
+  -modernize-concat-nested-namespaces,
+  performance-*,
+  readability-*,
+  -readability-magic-numbers,
+
+WarningsAsErrors: '*'
