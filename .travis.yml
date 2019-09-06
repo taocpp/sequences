@@ -535,8 +535,8 @@ matrix:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-8']
           packages: ['clang-8', 'clang-tidy-8']
       env:
-        - CXX=clang++-8
         - CLANG_TIDY=clang-tidy-8
+        - CXXSTD=-std=c++11
       script:
         - make -kj3 clang-tidy
 
@@ -546,8 +546,8 @@ matrix:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-8']
           packages: ['clang-8', 'clang-tidy-8']
       env:
-        - CXX=clang++-8
-        - CLANG_TIDY="clang-tidy-8 -extra-arg='-std=c++14'"
+        - CLANG_TIDY=clang-tidy-8
+        - CXXSTD=-std=c++14
       script:
         - make -kj3 clang-tidy
 
@@ -557,8 +557,8 @@ matrix:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-8']
           packages: ['clang-8', 'clang-tidy-8']
       env:
-        - CXX=clang++-8
-        - CLANG_TIDY="clang-tidy-8 -extra-arg='-std=c++17'"
+        - CLANG_TIDY=clang-tidy-8
+        - CXXSTD=-std=c++17
       script:
         - make -kj3 clang-tidy
 

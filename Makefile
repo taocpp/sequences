@@ -62,7 +62,7 @@ build/%: %.cpp build/%.d
 	$(CXX) $(CXXSTD) -Iinclude $(CPPFLAGS) $(CXXFLAGS) $< -o $@
 
 build/%.clang-tidy: % .clang-tidy
-	$(CLANG_TIDY) -quiet $< -- -Iinclude 2>/dev/null
+	$(CLANG_TIDY) -quiet $< -- $(CXXSTD) -Iinclude $(CPPFLAGS) $(CXXFLAGS) 2>/dev/null
 	@mkdir -p $(@D)
 	@touch $@
 
