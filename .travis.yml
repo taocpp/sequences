@@ -593,6 +593,8 @@ matrix:
       env:
         - CXX=nvcc
         - CUDA=9.2.148_396.37
+        - CXXSTD=-std=c++14
+        - LDFLAGS=-Wl,--no-export-dynamic
       install:
         - source ./travisci/install-cuda-xenial.sh
       script:
