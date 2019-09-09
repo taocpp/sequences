@@ -1,69 +1,50 @@
-# Copyright (c) 2018, NVIDIA CORPORATION.
+#!/bin/bash
+#
+# Adopted from https://github.com/tmcdonell/travis-scripts/blob/dfaac280ac2082cd6bcaba3217428347899f2975/install-cuda-trusty.sh
+#
+# Install the core CUDA toolkit for a ubuntu-trusty (14.04) system. Requires the
+# CUDA environment variable to be set to the required version.
+#
+# Since this script updates environment variables, to execute correctly you must
+# 'source' this script, rather than executing it in a sub-process.
+#
+set -e
 
-dist: trusty
-sudo: required
-language: cpp
+# CUDA 8 we can use the repo
+if [ ${CUDA:0:1} == '8' ]
+then
+    travis_retry wget --progress=dot:mega http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_${CUDA}_amd64.deb
+    travis_retry sudo dpkg -i cuda-repo-ubuntu1404_${CUDA}_amd64.deb
+    travis_retry sudo apt-get update -qq
+    export CUDA_APT=${CUDA:0:3}
+    export CUDA_APT=${CUDA_APT/./-}
+    # travis_retry sudo apt-get install -y cuda-drivers cuda-core-${CUDA_APT} cuda-cudart-dev-${CUDA_APT} cuda-cufft-dev-${CUDA_APT}
+    travis_retry sudo apt-get install -y cuda-drivers cuda-core-${CUDA_APT} cuda-cudart-dev-${CUDA_APT}
+    travis_retry sudo apt-get clean
+elif [ ${CUDA:0:3} == '9.0' ]
+then
+    # CUDA 9 we use the sh installer
+    travis_retry wget --progress=dot:mega https://developer.nvidia.com/compute/cuda/${CUDA:0:3}/Prod/local_installers/cuda_${CUDA}_linux-run
+    chmod +x cuda_*_linux-run
+    sudo ./cuda_*_linux-run --silent --toolkit
+elif [ ${CUDA:0:3} == '9.1' ]
+then
+    # CUDA 9.1 has a different filename pattern
+    travis_retry wget --progress=dot:mega https://developer.nvidia.com/compute/cuda/${CUDA:0:3}/Prod/local_installers/cuda_${CUDA}_linux
+    chmod +x cuda_*_linux
+    sudo ./cuda_*_linux --silent --toolkit
+elif [ ${CUDA:0:3} == '9.2' ]
+then
+    # Cuda 9.2 has a different url pattern
+    travis_retry wget --progress=dot:mega https://developer.nvidia.com/compute/cuda/${CUDA:0:3}/Prod2/local_installers/cuda_${CUDA}_linux
+    chmod +x cuda_*_linux
+    sudo ./cuda_*_linux --silent --toolkit
+else
+    # Didn't match one of the expected CUDA builds, exit
+    echo "CUDA version not specified or invalid version specified!"
+    exit 1
+fi
 
-git:
-  depth: false
-
-branches:
-    only:
-        - master
-env:
-  global:
-     secure: "EHU4ahNqfqSaT+VQ3cc3MRpHgfIg/K+NUXszlsVzbFgDR43LJD61QavtPMzNM73eVZRzvgRD39yYgHjDF6ZhQ4OpSEGzBiNEzAjKLqnl1JWd7V7/L31OiDsJMwweksrWINoKLPzikr2mOecsWGmRJYcLfYeJZcGlf67PuCN6DI2Un/pYXzblKfU2dVg8bP+HdWrnXTT6u4abnjCU+4kwc+kl9NJzLI1Zk5pSDuLkgRbiF90lImofYh8GfjyUhiz1Hnq+TjKOToLNOLxXMuM6NFxAIsdFfNkklXaz/mhQom3ZYfMlkjwWz/vJ0BKk554bq4mfL71yBzgydvprSppI0qfHtEvVIR2OJy9HnPvOiHdh7aL1qOojC00zjj39PyIx8M61ovpOvJOVD0c2/vBr6Et5JGastULJq2ItzHyP6UNn4oZtinmXV061sNSOepVjEstHMLVytP87cmiMMiBeDncFV/Sl3y5w1l7rGFVn4lNr2XDMl0u+WnDbZ9n57qneAweeoYkS0tBDdcVzfhv6+RJd129NNtgJtk4fWkh387kOeAOPz+uqu6GNFgXRT/zmRI8sttMkyjSBQeKLTGkCDrboqlU1DZ2lyORiQ3P2yOdNeBTkDJFvdntYduHM7tzhTFUOoVaOn0aFK+zE+AwLkw1JJEvi4g1tVI+iKuDZd/Y="
-
-matrix:
-  include:
-    - env: CUDA=9.2.148_396.37
-    - env: CUDA=9.2.148_396.37 BUILD_CFFI=1 PYTHON=3.6
-    - env: CUDA=9.2.148_396.37 BUILD_CFFI=1 PYTHON=3.5
-
-before_install:
-  # install libboost
-  - sudo apt-get update -q
-  - sudo apt-get install -y libboost-all-dev
-  # install libcuda
-  - echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/ /" | sudo tee -a /etc/apt/sources.list.d/cuda.list
-  - sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/7fa2af80.pub
-  - sudo apt-get update -q
-  - sudo apt-get install -y --no-install-recommends cuda-drivers=396.44-1 libcuda1-396
-  # install gcc-5
-  - echo "deb http://archive.ubuntu.com/ubuntu/ xenial main restricted" | sudo tee -a /etc/apt/sources.list
-  - echo "deb http://archive.ubuntu.com/ubuntu/ xenial-updates main restricted" | sudo tee -a /etc/apt/sources.list
-  - echo "deb http://security.ubuntu.com/ubuntu/ xenial-security main restricted" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-get update -q
-  - sudo apt-get install -y gcc-5 g++-5 cpp-5 libisl15 libmpfr4 libstdc++-5-dev libgcc-5-dev libc6-dev
-  # set gcc/g++ paths
-  - export CC=/usr/bin/gcc-5
-  - export CXX=/usr/bin/g++-5
-  # install cuda
-  - source ./travisci/install-cuda-trusty.sh
-  # install miniconda
-  - travis_retry wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-  - chmod +x miniconda.sh
-  - ./miniconda.sh -b
-  - export PATH=$HOME/miniconda3/bin:$PATH
-
-install:
-  # check
-  - $CC --version
-  - $CXX --version
-  - nvcc --version
-  - conda --version
-  # install conda build and cmake
-  - conda install conda-build anaconda-client conda-verify cmake=3.12 --yes
-
-script:
-  # Activate root environment for cmake
-  - source activate root
-  # check conda versions
-  - conda list
-  # build ligdf
-  - source ./travisci/build_libgdf.sh
-  # build libgdf_cffi
-  - source ./travisci/build_libgdf_cffi.sh
-
-after_success:
-  - source ./travisci/upload.sh
+export CUDA_HOME=/usr/local/cuda-${CUDA:0:3}
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+export PATH=${CUDA_HOME}/bin:${PATH}
