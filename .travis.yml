@@ -574,13 +574,27 @@ matrix:
 #       script:
 #         - python .conan/build.py
 
+#     - compiler: gcc
+#       addons:
+#         apt:
+#           sources: ['ubuntu-toolchain-r-test']
+#           packages: ['g++-6']
+#       env:
+#         - CXX=g++-6
+#       script:
+#         - $CXX --version
+#         - mkdir build
+#         - cd build
+#         - cmake ..
+#         - cmake --build .
+#         - cmake --build . --target test
+
     - compiler: gcc
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-6']
       env:
-        - CXX=g++-6
+        - CXX=nvcc
+        - CUDA=9.2.148_396.37
+      install:
+        - source ./travisci/install-cuda-xenial.sh
       script:
         - $CXX --version
         - mkdir build
@@ -589,7 +603,7 @@ matrix:
         - cmake --build .
         - cmake --build . --target test
 
-
+        
 script:
   - $CXX --version
   - make -j3 build/src/test/seq/tester
