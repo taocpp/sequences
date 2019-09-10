@@ -25,6 +25,11 @@ target_compile_features (sequences INTERFACE
   cxx_variadic_templates
 )
 
+# CUDA
+if(DEFINED ENV{CUDA})
+  find_package(CUDA)
+endif()
+
 # testing
 enable_testing ()
 option (TAOCPP_SEQUENCES_BUILD_TESTS "Build test programs" ON)

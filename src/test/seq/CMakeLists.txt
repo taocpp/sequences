@@ -48,19 +48,32 @@ foreach (testsourcefile ${test_sources})
 
   get_filename_component (exename ${testsourcefile} NAME_WE)
   set (exename "tao-sequences-test-${exename}")
-  add_executable (${exename} ${testsourcefile})
-  target_link_libraries (${exename} PRIVATE taocpp::sequences)
-  set_target_properties (${exename} PROPERTIES
-    CXX_STANDARD 11
-    CXX_STANDARD_REQUIRED ON
-    CXX_EXTENSIONS OFF
-  )
-  if (MSVC)
-    target_compile_options (${exename} PRIVATE /W4 /WX /utf-8)
-  else ()
-    target_compile_options (${exename} PRIVATE -pedantic -Wall -Wextra -Wshadow -Werror)
-  endif ()
+
+  if(CUDA_FOUND)
+  add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${testsourcefile}.cu
+    COMMAND ${CMAKE_COMMAND} -E copy 
+      ${CMAKE_CURRENT_SOURCE_DIR}/${testsourcefile} 
+      ${CMAKE_CURRENT_BINARY_DIR}/${testsourcefile}.cu
+    )
+    cuda_add_executable(${exename} ${CMAKE_CURRENT_BINARY_DIR}/${testsourcefile}.cu)
+    target_link_libraries (${exename} taocpp::sequences)
+  else()
+    add_executable (${exename} ${testsourcefile})
+    target_link_libraries (${exename} PRIVATE taocpp::sequences)
+    set_target_properties (${exename} PROPERTIES
+      CXX_STANDARD 11
+      CXX_STANDARD_REQUIRED ON
+      CXX_EXTENSIONS OFF
+    )
+    if (MSVC)
+      target_compile_options (${exename} PRIVATE /W4 /WX /utf-8)
+    else ()
+      target_compile_options (${exename} PRIVATE -pedantic -Wall -Wextra -Wshadow -Werror)
+    endif ()
+  endif()
   add_test (NAME ${exename} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../../.. COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${exename})
+  
 endforeach (testsourcefile)
 
 if (glob_test_sources)
