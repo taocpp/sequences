@@ -592,6 +592,7 @@ matrix:
     - compiler: gcc
       env:
         - CUDA=9.2.148_396.37
+        - CXXSTD=-std=c++14
       install:
         - source ./travisci/install-cuda-xenial.sh
       script:
