@@ -595,7 +595,6 @@ matrix:
       install:
         - source ./travisci/install-cuda-xenial.sh
       script:
-        - $CXX --version
         - mkdir build
         - cd build
         - cmake ..
