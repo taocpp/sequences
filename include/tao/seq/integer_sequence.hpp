@@ -17,7 +17,7 @@ namespace tao
 #ifdef TAO_SEQ_USE_STD_INTEGER_SEQUENCE
 
       using std::index_sequence;
-      using std::integer_sequence;
+      using std::integer_sequence;  // NOLINT(misc-unused-using-decls)
 
 #else
 
