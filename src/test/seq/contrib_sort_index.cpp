@@ -1,9 +1,9 @@
 // Copyright (c) 2019 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
+#include <tao/seq/contrib/sort_index.hpp>
 #include <tao/seq/functional.hpp>
 #include <tao/seq/integer_sequence.hpp>
-#include <tao/seq/sort_index.hpp>
 
 #include <type_traits>
 

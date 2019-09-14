@@ -1,13 +1,13 @@
 // Copyright (c) 2019 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
-#ifndef TAO_SEQ_INDEX_OF_SEQ_HPP
-#define TAO_SEQ_INDEX_OF_SEQ_HPP
+#ifndef TAO_SEQ_CONTRIB_INDEX_OF_SEQ_HPP
+#define TAO_SEQ_CONTRIB_INDEX_OF_SEQ_HPP
 
 #include <type_traits>
 
-#include "index_of.hpp"
-#include "integer_sequence.hpp"
+#include "../index_of.hpp"
+#include "../integer_sequence.hpp"
 
 namespace tao
 {

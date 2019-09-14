@@ -1,8 +1,8 @@
 // Copyright (c) 2019 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
+#include <tao/seq/contrib/permutate.hpp>
 #include <tao/seq/integer_sequence.hpp>
-#include <tao/seq/permutate.hpp>
 
 #include <type_traits>
 

@@ -303,16 +303,6 @@ Examples:
 * `using M = integer_sequence<int,5,6,-7,8,9>`
 * `map_t<I,M>` ➙ `integer_sequence<int,6,5,8,-7,6,6,8>`
 
-#### Header `tao/seq/permutate.hpp`
-
-Apply an index permutation on a sequence.
-
-Example :
-
-* `using S = integer_sequence<int,7,-2,3,0,4>`
-* `using P = index_sequence<3,0,4,1,2>`
-* `permutate_t<P,S>` ➙ `integer_sequence<int,-2,0,4,7,3>`
-
 #### Header `tao/seq/is_all.hpp`
 
 Integral constant which is true if all boolean parameters are true (logical and).
@@ -371,20 +361,6 @@ Examples:
 * `using A = integer_sequence<int,1,2,3,4,5>`
 * `index_of<A,3>` ➙ `2`
 
-#### Header `tao/seq/index_of_seq.hpp`
-
-Given two sequences `S` and `T` where `T` is a permutation or a subset of `S`, returns the indices of elements of `T` in `S`.
-
-Examples:
-
-* `using S = integer_sequence<int,7,-2,3,0,4>`
-* `using T = integer_sequence<int,4,7,-2,0,3>`
-* `index_of_seq_t<S,T>` ➙ `index_sequence<4,0,1,3,2>`
-
-* `using S2 = integer_sequence<int,7,-2,3,0,4>`
-* `using T2 = integer_sequence<int,3,-2,0>`
-* `index_of_seq_t<S2,T2>` ➙ `index_sequence<2,1,3>`
-
 #### Header `tao/seq/scale.hpp`
 
 Scales a sequence by a factor `F`.
@@ -440,26 +416,16 @@ Given a predicate `less`...
 * `using S = index_sequence<39,10,2,4,10,2>`
 * `sort_t<less,S>` ➙ `index_sequence<2,2,4,10,10,39>`
 
-#### Header `tao/seq/sort_index.hpp`
-
-Generate the indices of the elements if ordered by a given predicate.
-
-* `sort_index_t< typename OP, typename T, T... Ns >`
-* `sort_index_t< typename OP, typename S >`
-
-Examples:
-
-* `sort_index_t<less,int,7,-2,3,0,4>` ➙ `index_sequence<4,0,2,1,3>`
-
 ## Changelog
 
 ### 2.0.0
 
 **Not yet released**
 
-* Split `fold` into `accumulate` and `reduce`.
 * Generalized `exclusive_scan` and `inclusive_scan`.
-* Added `first`, `reverse`, `prod`, `partial_prod`, `multiplies`, `difference`, `index_of_seq`, `permutate`, `sort`, and `sort_index`.
+* Split `fold` into `accumulate` and `reduce`.
+* Added `first`, `reverse`, `prod`, `partial_prod`, `multiplies`, `difference`, and`sort`.
+* Added `index_of_seq`, `permutate`, and `sort_index` to contrib (unofficial).
 
 ### 1.0.2
 

@@ -5,12 +5,14 @@ set (test_sources
   at_index.cpp
   concatenate.cpp
   contains.cpp
+  contrib_index_of_seq.cpp
+  contrib_permutate.cpp
+  contrib_sort_index.cpp
   difference.cpp
   exclusive_scan.cpp
   head.cpp
   inclusive_scan.cpp
   index_of.cpp
-  index_of_seq.cpp
   integer_sequence.cpp
   is_all.cpp
   is_any.cpp
@@ -23,14 +25,12 @@ set (test_sources
   multiplies.cpp
   partial_accumulate.cpp
   partial_sum.cpp
-  permutate.cpp
   plus.cpp
   prod.cpp
   reverse.cpp
   scale.cpp
   select.cpp
   sort.cpp
-  sort_index.cpp
   sum.cpp
   tail.cpp
   tester.cpp
