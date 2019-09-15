@@ -440,39 +440,11 @@ matrix:
         - CXXSTD=-std=c++11
 
     - os: osx
-      osx_image: xcode7.3
-      compiler: clang
-      env:
-        - CXX=clang++
-        - CXXSTD=-std=c++14
-
-    - os: osx
-      osx_image: xcode7.3
-      compiler: clang
-      env:
-        - CXX=clang++
-        - CXXSTD=-std=c++1z
-
-    - os: osx
       osx_image: xcode8.3
       compiler: clang
       env:
         - CXX=clang++
         - CXXSTD=-std=c++11
-
-    - os: osx
-      osx_image: xcode8.3
-      compiler: clang
-      env:
-        - CXX=clang++
-        - CXXSTD=-std=c++14
-
-    - os: osx
-      osx_image: xcode8.3
-      compiler: clang
-      env:
-        - CXX=clang++
-        - CXXSTD=-std=c++1z
 
     - os: osx
       osx_image: xcode9.4

@@ -19,9 +19,9 @@ namespace tao
          using type = integer_sequence< T, Ns... >;
       };
 
-      template< typename T, T N, T... Ns >
-      struct tail< integer_sequence< T, N, Ns... > >
-         : tail< T, N, Ns... >
+      template< typename T, T... Ns >
+      struct tail< integer_sequence< T, Ns... > >
+         : tail< T, Ns... >
       {
       };
 
