@@ -30,4 +30,10 @@
 #define TAO_SEQ_FOLD_EXPRESSIONS
 #endif
 
+#if defined( __clang__ ) && defined( __has_builtin )
+#if __has_builtin( __type_pack_element )
+#define TAO_SEQ_TYPE_PACK_ELEMENT
+#endif
+#endif
+
 #endif
