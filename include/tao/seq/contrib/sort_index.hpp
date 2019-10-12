@@ -6,7 +6,7 @@
 
 #include "../sequence_helper.hpp"
 #include "../sort.hpp"
-#include "index_of_seq.hpp"
+#include "make_index_of_sequence.hpp"
 
 namespace tao
 {
@@ -20,7 +20,7 @@ namespace tao
 
       template< typename OP, typename T, T... Ns >
       struct sort_index< OP, integer_sequence< T, Ns... > >
-         : index_of_seq< sort_t< OP, T, Ns... >, integer_sequence< T, Ns... > >
+         : make_index_of_sequence< sort_t< OP, T, Ns... >, integer_sequence< T, Ns... > >
       {
       };
 

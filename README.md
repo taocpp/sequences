@@ -425,7 +425,7 @@ Given a predicate `less`...
 * Generalized `exclusive_scan` and `inclusive_scan`.
 * Split `fold` into `accumulate` and `reduce`.
 * Added `first`, `reverse`, `prod`, `partial_prod`, `multiplies`, `difference`, and `sort`.
-* Added `index_of_seq`, `permutate`, and `sort_index` to contrib (unofficial).
+* Added `make_index_of_sequence`, `permutate`, and `sort_index` to contrib (unofficial).
 * Improved compile-times for `at_index`.
 
 ### 1.0.2

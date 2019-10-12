@@ -1,8 +1,8 @@
 // Copyright (c) 2019 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
-#ifndef TAO_SEQ_CONTRIB_INDEX_OF_SEQ_HPP
-#define TAO_SEQ_CONTRIB_INDEX_OF_SEQ_HPP
+#ifndef TAO_SEQ_CONTRIB_MAKE_INDEX_OF_SEQUENCE_HPP
+#define TAO_SEQ_CONTRIB_MAKE_INDEX_OF_SEQUENCE_HPP
 
 #include <type_traits>
 
@@ -14,16 +14,16 @@ namespace tao
    namespace seq
    {
       template< typename, typename >
-      struct index_of_seq;
+      struct make_index_of_sequence;
 
       template< typename TA, TA... As, typename TB, TB... Bs >
-      struct index_of_seq< integer_sequence< TA, As... >, integer_sequence< TB, Bs... > >
+      struct make_index_of_sequence< integer_sequence< TA, As... >, integer_sequence< TB, Bs... > >
       {
          using type = index_sequence< index_of< typename std::common_type< TA, TB >::type, Bs, As... >::value... >;
       };
 
       template< typename A, typename B >
-      using index_of_seq_t = typename index_of_seq< A, B >::type;
+      using make_index_of_sequence_t = typename make_index_of_sequence< A, B >::type;
 
    }  // namespace seq
 
