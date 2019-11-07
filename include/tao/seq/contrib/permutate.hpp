@@ -6,15 +6,17 @@
 
 #include "../make_integer_sequence.hpp"
 #include "../map.hpp"
-#include "../sequence_helper.hpp"
 #include "make_index_of_sequence.hpp"
 
 namespace tao
 {
    namespace seq
    {
+      template< typename I >
+      using inverse_t = make_index_of_sequence_t< I, make_index_sequence< I::size() > >;
+
       template< typename I, typename S >
-      using permutate = map< make_index_of_sequence_t< I, make_index_sequence< impl::sequence_size< S >::value > >, S >;
+      using permutate = map< inverse_t< I >, S >;
 
       template< typename I, typename S >
       using permutate_t = typename permutate< I, S >::type;
