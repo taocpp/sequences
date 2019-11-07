@@ -420,13 +420,13 @@ Given a predicate `less`...
 
 ### 2.0.0
 
-**Not yet released**
+Released 2019-11-07
 
 * Generalized `exclusive_scan` and `inclusive_scan`.
 * Split `fold` into `accumulate` and `reduce`.
 * Added `first`, `reverse`, `prod`, `partial_prod`, `multiplies`, `difference`, and `sort`.
-* Added `make_index_of_sequence`, `permutate`, and `sort_index` to contrib (unofficial).
 * Improved compile-times for `at_index`.
+* Added `make_index_of_sequence`, `permutate`, and `sort_index` to contrib (unofficial).
 
 ### 1.0.2
 
