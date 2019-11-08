@@ -21,16 +21,16 @@ class BuilderSettings(object):
         return os.getenv("CONAN_UPLOAD", bintray_url)
 
     @property
-    def upload_only_when_stable(self):
-        """ Force to upload when running over tag branch
+    def channel(self):
+        """ Default conan channel
         """
-        return os.getenv("CONAN_UPLOAD_ONLY_WHEN_STABLE", True)
+        return os.getenv("CONAN_CHANNEL", "stable")
 
     @property
-    def stable_branch_pattern(self):
-        """ Only upload the package the branch name is like a tag
+    def upload_only_when_tag(self):
+        """ Only upload the package the branch is a tag
         """
-        return os.getenv("CONAN_STABLE_BRANCH_PATTERN", r"\d+\.\d+\.\d+")
+        return os.getenv("CONAN_UPLOAD_ONLY_WHEN_TAG", True)
 
     @property
     def reference(self):
@@ -45,7 +45,7 @@ class BuilderSettings(object):
                     version = result.group(1)
         if not version:
             raise Exception("Could not find version in CMakeLists.txt")
-        return os.getenv("CONAN_REFERENCE", "sequences/{}@taocpp/stable".format(version))
+        return os.getenv("CONAN_REFERENCE", "sequences/{}@{}/{}".format(version, self.username, self.channel))
 
 if __name__ == "__main__":
     settings = BuilderSettings()
@@ -53,8 +53,8 @@ if __name__ == "__main__":
         reference=settings.reference,
         username=settings.username,
         upload=settings.upload,
-        upload_only_when_stable=settings.upload_only_when_stable,
-        stable_branch_pattern=settings.stable_branch_pattern,
+        channel=settings.channel,
+        upload_only_when_tag=settings.upload_only_when_tag,
         test_folder=os.path.join(".conan", "test_package"))
     builder.add()
     builder.run()
