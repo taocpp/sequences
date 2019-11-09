@@ -418,6 +418,12 @@ Given a predicate `less`...
 
 ## Changelog
 
+### 2.0.1
+
+Released 2019-11-09
+
+* Fixed Conan upload.
+
 ### 2.0.0
 
 Released 2019-11-07
