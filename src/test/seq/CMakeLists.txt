@@ -16,6 +16,7 @@ set (test_sources
   integer_sequence.cpp
   is_all.cpp
   is_any.cpp
+  last.cpp
   make_integer_range.cpp
   make_integer_sequence.cpp
   map.cpp

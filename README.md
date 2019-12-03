@@ -216,6 +216,13 @@ Integral constant to provide the first element of a non-empty sequence.
 * `head< typename T, T... >`
 * `head< typename S >`
 
+#### Header `tao/seq/last.hpp`
+
+Integral constant to provide the last element of a non-empty sequence.
+
+* `last< typename T, T... >`
+* `last< typename S >`
+
 #### Header `tao/seq/tail.hpp`
 
 Removed the first element of a non-empty sequence.
@@ -417,6 +424,12 @@ Given a predicate `less`...
 * `sort_t<less,S>` ➙ `index_sequence<2,2,4,10,10,39>`
 
 ## Changelog
+
+### 2.1.0
+
+**Not yet released**
+
+* Added `last`.
 
 ### 2.0.1
 
