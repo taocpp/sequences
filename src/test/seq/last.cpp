@@ -18,8 +18,6 @@ int main()
    static_assert( last< int, 42, 0 >::value == 0, "oops" );
    static_assert( last< int, 42, 1, 2, 3, 4, 5 >::value == 5, "oops" );
 
-   static_assert( last< index_sequence<> >::value == 0, "oops" );
-
    static_assert( last< index_sequence< 0 > >::value == 0, "oops" );
    static_assert( last< index_sequence< 0, 42 > >::value == 42, "oops" );
    static_assert( last< index_sequence< 0, 1, 2, 3, 4, 5 > >::value == 5, "oops" );
