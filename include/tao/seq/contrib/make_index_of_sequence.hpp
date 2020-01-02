@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Daniel Frey
+// Copyright (c) 2019-2020 Daniel Frey
 // Please see LICENSE for license or visit https://github.com/taocpp/sequences/
 
 #ifndef TAO_SEQ_CONTRIB_MAKE_INDEX_OF_SEQUENCE_HPP
