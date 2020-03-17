@@ -1,7 +1,7 @@
 # The Art of C++ / Sequences
 
 [![Release](https://img.shields.io/github/release/taocpp/sequences.svg)](https://github.com/taocpp/sequences/releases/latest)
-[![Download](https://api.bintray.com/packages/taocpp/public-conan/sequences%3Ataocpp/images/download.svg)](https://bintray.com/taocpp/public-conan/sequences%3Ataocpp/_latestVersion)
+[![Download](https://api.bintray.com/packages/conan/conan-center/taocpp-sequences%3A_/images/download.svg)](https://bintray.com/conan/conan-center/taocpp-sequences%3A_/_latestVersion)
 [![TravisCI](https://travis-ci.org/taocpp/sequences.svg)](https://travis-ci.org/taocpp/sequences)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/taocpp/sequences?svg=true)](https://ci.appveyor.com/project/taocpp/sequences)
 
@@ -422,6 +422,14 @@ Given a predicate `less`...
 * `sort_t<less,int,7,-2,3,0,4>` ➙ `integer_sequence<int,-2,0,3,4,7>`
 * `using S = index_sequence<39,10,2,4,10,2>`
 * `sort_t<less,S>` ➙ `index_sequence<2,2,4,10,10,39>`
+
+## Package Managers
+
+You can download and install taopq using the [Conan](https://github.com/conan-io/conan) package manager:
+
+    conan install taocpp-sequences/2.0.1@
+
+The taopq package in conan is kept up to date by Conan team members and community contributors. If the version is out-of-date, please [create an issue or pull request](https://github.com/conan-io/conan-center-index) on the Conan Center Index repository.
 
 ## Changelog
 
