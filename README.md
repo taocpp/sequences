@@ -425,11 +425,12 @@ Given a predicate `less`...
 
 ## Package Managers
 
-You can download and install taopq using the [Conan](https://github.com/conan-io/conan) package manager:
+You can download and install [The Art of C++](https://taocpp.github.io/) / Sequences using the [Conan](https://github.com/conan-io/conan) package manager:
 
     conan install taocpp-sequences/2.0.1@
 
-The taopq package in conan is kept up to date by Conan team members and community contributors. If the version is out-of-date, please [create an issue or pull request](https://github.com/conan-io/conan-center-index) on the Conan Center Index repository.
+The taocpp-sequences package in conan is kept up to date by Conan team members and community contributors.
+If the version is out-of-date, please [create an issue or pull request](https://github.com/conan-io/conan-center-index) on the Conan Center Index repository.
 
 ## Changelog
 
