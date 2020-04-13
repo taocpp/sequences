@@ -24,7 +24,6 @@ namespace tao
 {
    namespace seq
    {
-
 #ifdef TAO_SEQ_FOLD_EXPRESSIONS
 
       template< typename OP, typename T, T... Ns >

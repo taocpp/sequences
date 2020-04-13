@@ -16,7 +16,6 @@ namespace tao
 {
    namespace seq
    {
-
 #ifdef TAO_SEQ_FOLD_EXPRESSIONS
 
       template< bool... Bs >

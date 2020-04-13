@@ -14,7 +14,6 @@ namespace tao
 {
    namespace seq
    {
-
 #ifdef TAO_SEQ_USE_STD_MAKE_INTEGER_SEQUENCE
 
       using std::index_sequence_for;

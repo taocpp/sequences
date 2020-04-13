@@ -13,7 +13,6 @@ namespace tao
 {
    namespace seq
    {
-
 #ifdef TAO_SEQ_TYPE_PACK_ELEMENT
 
       template< std::size_t I, typename... Ts >

@@ -13,7 +13,6 @@ namespace tao
    {
       namespace impl
       {
-
 #if( __cplusplus >= 201402L )
 
          template< typename OP, typename T, T V, T... Ns >
