@@ -168,6 +168,16 @@ matrix:
         - CXX=g++-9
         - CXXSTD=-std=c++17
 
+    - dist: bionic
+      compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-10']
+      env:
+        - CXX=g++-10
+        - CXXSTD=-std=c++17
+
     - dist: precise
       compiler: clang
       env:
@@ -463,6 +473,32 @@ matrix:
         - CXX=clang++-10
         - CXXSTD=-std=c++11
 
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - sourceline: 'deb https://apt.llvm.org/xenial/ llvm-toolchain-xenial-10 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-10
+      env:
+        - CXX=clang++-10
+        - CXXSTD=-std=c++14
+
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - sourceline: 'deb https://apt.llvm.org/xenial/ llvm-toolchain-xenial-10 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-10
+      env:
+        - CXX=clang++-10
+        - CXXSTD=-std=c++17
+
     - os: osx
       osx_image: xcode6.4
       compiler: clang
@@ -541,21 +577,21 @@ matrix:
         - CXXSTD=-std=c++17
 
     - os: osx
-      osx_image: xcode11.2
+      osx_image: xcode11.4
       compiler: clang
       env:
         - CXX=clang++
         - CXXSTD=-std=c++11
 
     - os: osx
-      osx_image: xcode11.2
+      osx_image: xcode11.4
       compiler: clang
       env:
         - CXX=clang++
         - CXXSTD=-std=c++14
 
     - os: osx
-      osx_image: xcode11.2
+      osx_image: xcode11.4
       compiler: clang
       env:
         - CXX=clang++
