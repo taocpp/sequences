@@ -6,7 +6,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    static_assert( prod< int >::value == 1, "oops" );
    static_assert( prod< int, -1, 4, 5 >::value == -20, "oops" );

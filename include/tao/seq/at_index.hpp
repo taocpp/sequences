@@ -11,7 +11,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
 #ifdef TAO_SEQ_TYPE_PACK_ELEMENT
 
@@ -91,7 +91,7 @@ namespace tao
 
 #endif
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

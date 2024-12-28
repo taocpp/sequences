@@ -8,7 +8,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    using A = integer_sequence< int, 1, 2, 3, 4, 5, 6 >;
    using B = integer_sequence< int, 2, 5 >;

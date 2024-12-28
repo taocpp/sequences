@@ -11,12 +11,12 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename OP, std::size_t I, typename T, T... Ns >
       using partial_reduce = reduce< OP, first_t< I, T, Ns... > >;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

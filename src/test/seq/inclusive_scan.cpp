@@ -9,7 +9,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    static_assert( std::is_same< inclusive_scan_t< op::plus, unsigned >, integer_sequence< unsigned > >::value, "oops" );
    static_assert( std::is_same< inclusive_scan_t< op::plus, int, 2, 3, -1, 0, 4, -1, 1, 1 >, integer_sequence< int, 2, 5, 4, 4, 8, 7, 8, 9 > >::value, "oops" );

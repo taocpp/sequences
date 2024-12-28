@@ -6,7 +6,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    static_assert( index_of< int, 42, 42 >::value == 0, "oops" );
 

@@ -9,7 +9,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    static_assert( std::is_same< sort_t< op::less, index_sequence<> >, index_sequence<> >::value, "oops" );
    static_assert( std::is_same< sort_t< op::less, index_sequence< 42 > >, index_sequence< 42 > >::value, "oops" );

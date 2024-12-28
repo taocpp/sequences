@@ -14,10 +14,10 @@
 
 ## Provided algorithms and examples
 
-* All provided templates are in the nested namespace `tao::seq`.
+* All provided templates are in the nested namespace `tao::sequence`.
 * All templates don't use C++14 features, therefore being compatible with C++11. Sometimes, C++14/C++17 features are used conditionally, taking advantage of newer language features when available but providing C++11-compatible implementations otherwise.
-* All templates use `tao::seq::integer_sequence`, etc. internally, therefore being compatible with C++11.
-* All templates use `tao::seq::make_integer_sequence`, etc. internally, therefore using the most scalable solution available.
+* All templates use `tao::sequence::integer_sequence`, etc. internally, therefore being compatible with C++11.
+* All templates use `tao::sequence::make_integer_sequence`, etc. internally, therefore using the most scalable solution available.
 
 #### Header `tao/seq/integer_sequence.hpp`
 
@@ -434,10 +434,11 @@ If the version is out-of-date, please [create an issue or pull request](https://
 
 ## Changelog
 
-### 2.1.0
+### 3.0.0
 
-**Not yet released**
+Released 2024-12-28
 
+* Renamed namespace from `tao::seq` to `tao::sequence`.
 * Added `last`.
 
 ### 2.0.1
@@ -478,7 +479,7 @@ Released 2018-06-29
 
 The Art of C++ is certified [Open Source](http://www.opensource.org/docs/definition.html) software. It may be used for any purpose, including commercial purposes, at absolutely no cost. It is distributed under the terms of the [MIT license](http://www.opensource.org/licenses/mit-license.html) reproduced here.
 
-> Copyright (c) 2015-2020 Daniel Frey
+> Copyright (c) 2015-2024 Daniel Frey
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 >

@@ -11,7 +11,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       namespace impl
       {
@@ -22,14 +22,14 @@ namespace tao
          struct index_of< U, index_sequence< Is... > >
          {
             template< typename T, T N, T... Ns >
-            using type = seq::min< std::size_t, ( ( N == Ns ) ? Is : sizeof...( Is ) )... >;
+            using type = sequence::min< std::size_t, ( ( N == Ns ) ? Is : sizeof...( Is ) )... >;
          };
 
          template< typename T, T... Ns, std::size_t... Is >
          struct index_of< integer_sequence< T, Ns... >, index_sequence< Is... > >
          {
             template< typename, T N >
-            using type = seq::min< std::size_t, ( ( N == Ns ) ? Is : sizeof...( Is ) )... >;
+            using type = sequence::min< std::size_t, ( ( N == Ns ) ? Is : sizeof...( Is ) )... >;
          };
 
       }  // namespace impl
@@ -41,7 +41,7 @@ namespace tao
          static_assert( contains< T, N, Ns... >::value, "index not found" );
       };
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

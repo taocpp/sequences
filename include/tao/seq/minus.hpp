@@ -9,7 +9,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename A, typename B >
       using minus = zip< op::minus, A, B >;
@@ -17,7 +17,7 @@ namespace tao
       template< typename A, typename B >
       using minus_t = typename minus< A, B >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

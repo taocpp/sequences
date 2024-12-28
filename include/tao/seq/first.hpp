@@ -11,7 +11,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       namespace impl
       {
@@ -22,7 +22,7 @@ namespace tao
          struct first< index_sequence< Is... >, T, Ns... >
          {
             template< std::size_t I >
-            using element = seq::select< I, T, Ns... >;
+            using element = sequence::select< I, T, Ns... >;
 
             using type = integer_sequence< T, element< Is >::value... >;
          };
@@ -44,7 +44,7 @@ namespace tao
       template< std::size_t I, typename T, T... Ns >
       using first_t = typename first< I, T, Ns... >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

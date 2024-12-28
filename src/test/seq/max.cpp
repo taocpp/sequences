@@ -6,7 +6,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    static_assert( max< int, 1 >::value == 1, "oops" );
    static_assert( max< int, 1, 0 >::value == 1, "oops" );

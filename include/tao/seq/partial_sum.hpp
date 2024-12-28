@@ -11,7 +11,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       namespace impl
       {
@@ -20,9 +20,9 @@ namespace tao
 
          template< std::size_t I, typename T, T... Ns, std::size_t... Is >
          struct partial_sum< I, integer_sequence< T, Ns... >, index_sequence< Is... > >
-            : seq::sum< T, ( ( Is < I ) ? Ns : 0 )... >
+            : sequence::sum< T, ( ( Is < I ) ? Ns : 0 )... >
          {
-            static_assert( I <= sizeof...( Is ), "tao::seq::partial_sum<I, S>: I is out of range" );
+            static_assert( I <= sizeof...( Is ), "tao::sequence::partial_sum<I, S>: I is out of range" );
          };
 
       }  // namespace impl
@@ -39,7 +39,7 @@ namespace tao
       {
       };
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

@@ -10,7 +10,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename I >
       using inverse_t = make_index_of_sequence_t< I, make_index_sequence< I::size() > >;
@@ -21,7 +21,7 @@ namespace tao
       template< typename I, typename S >
       using permutate_t = typename permutate< I, S >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

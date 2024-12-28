@@ -13,7 +13,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename, typename >
       struct difference;
@@ -32,7 +32,7 @@ namespace tao
       template< typename A, typename B >
       using difference_t = typename difference< A, B >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

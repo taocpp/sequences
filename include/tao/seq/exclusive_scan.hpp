@@ -9,7 +9,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       namespace impl
       {
@@ -88,7 +88,7 @@ namespace tao
       template< typename OP, typename T, typename impl::element_type< T >::type Init, T... Ns >
       using exclusive_scan_t = typename exclusive_scan< OP, T, Init, Ns... >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

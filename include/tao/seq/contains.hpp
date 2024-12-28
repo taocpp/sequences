@@ -10,7 +10,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       namespace impl
       {
@@ -33,7 +33,7 @@ namespace tao
       template< typename T, typename impl::element_type< T >::type N, T... Ns >
       using contains = typename impl::contains< T >::template type< N, Ns... >;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

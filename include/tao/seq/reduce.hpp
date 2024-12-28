@@ -22,7 +22,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
 #ifdef TAO_SEQ_FOLD_EXPRESSIONS
 
@@ -40,7 +40,7 @@ namespace tao
          struct reducer< OP, false, index_sequence< Is... >, T, Ns... >
          {
             template< std::size_t I >
-            using subsel = seq::select< I, T, Ns... >;
+            using subsel = sequence::select< I, T, Ns... >;
 
             using type = integer_sequence< T, OP::template apply< T, subsel< 2 * Is >::value, subsel< 2 * Is + 1 >::value >::value... >;
          };
@@ -49,7 +49,7 @@ namespace tao
          struct reducer< OP, true, index_sequence< Is... >, T, N, Ns... >
          {
             template< std::size_t I >
-            using subsel = seq::select< I, T, Ns... >;
+            using subsel = sequence::select< I, T, Ns... >;
 
             using type = integer_sequence< T, N, OP::template apply< T, subsel< 2 * Is >::value, subsel< 2 * Is + 1 >::value >::value... >;
          };
@@ -79,7 +79,7 @@ namespace tao
 
 #endif
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

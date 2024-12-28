@@ -8,7 +8,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       namespace op
       {
@@ -122,7 +122,7 @@ namespace tao
 
       }  // namespace op
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

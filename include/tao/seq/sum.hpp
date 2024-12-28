@@ -23,7 +23,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
 #ifdef TAO_SEQ_FOLD_EXPRESSIONS
 
@@ -85,7 +85,7 @@ namespace tao
       {
       };
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

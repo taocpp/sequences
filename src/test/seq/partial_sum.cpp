@@ -6,7 +6,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    static_assert( partial_sum< 0, int >::value == 0, "empty partial sum failed" );
 

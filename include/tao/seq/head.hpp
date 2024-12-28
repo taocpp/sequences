@@ -10,7 +10,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename T, T... Ns >
       struct head;
@@ -27,7 +27,7 @@ namespace tao
       {
       };
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

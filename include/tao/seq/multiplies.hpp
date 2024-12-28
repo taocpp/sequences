@@ -9,7 +9,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename A, typename B >
       using multiplies = zip< op::multiplies, A, B >;
@@ -17,7 +17,7 @@ namespace tao
       template< typename A, typename B >
       using multiplies_t = typename multiplies< A, B >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

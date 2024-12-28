@@ -10,7 +10,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename OP, typename T, T... Ns >
       struct sort_index
@@ -27,7 +27,7 @@ namespace tao
       template< typename OP, typename T, T... Ns >
       using sort_index_t = typename sort_index< OP, T, Ns... >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

@@ -9,7 +9,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    using S = integer_sequence< int, 39, 2, -4, 10 >;
    using R = index_sequence< 3, 1, 0, 2 >;

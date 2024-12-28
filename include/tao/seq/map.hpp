@@ -11,7 +11,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename, typename >
       struct map;
@@ -25,7 +25,7 @@ namespace tao
       template< typename S, typename M >
       using map_t = typename map< S, M >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

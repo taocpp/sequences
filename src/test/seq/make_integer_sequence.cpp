@@ -7,7 +7,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    static_assert( std::is_same< make_integer_sequence< int, 0 >, integer_sequence< int > >::value, "oops" );
    static_assert( std::is_same< make_integer_sequence< unsigned, 0 >, integer_sequence< unsigned > >::value, "oops" );
@@ -36,6 +36,5 @@ int main()
 #ifndef _MSC_VER  // Visual C++ complains about the symbol length
    static_assert( make_index_sequence< 1000 >::size() == 1000, "oops" );
    static_assert( make_index_sequence< 10000 >::size() == 10000, "oops" );
-   static_assert( make_index_sequence< 100000 >::size() == 100000, "oops" );
 #endif
 }

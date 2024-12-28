@@ -9,7 +9,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename OP, typename T, T... Ns >
       struct inclusive_scan;
@@ -35,7 +35,7 @@ namespace tao
       template< typename OP, typename T, T... Ns >
       using inclusive_scan_t = typename inclusive_scan< OP, T, Ns... >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

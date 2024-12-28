@@ -10,7 +10,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename, typename, typename >
       struct zip;
@@ -25,7 +25,7 @@ namespace tao
       template< typename OP, typename A, typename B >
       using zip_t = typename zip< OP, A, B >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

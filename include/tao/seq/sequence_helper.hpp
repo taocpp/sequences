@@ -11,7 +11,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       namespace impl
       {
@@ -58,7 +58,7 @@ namespace tao
 
       }  // namespace impl
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

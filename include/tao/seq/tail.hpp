@@ -8,7 +8,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename T, T... Ns >
       struct tail;
@@ -28,7 +28,7 @@ namespace tao
       template< typename T, T... Ns >
       using tail_t = typename tail< T, Ns... >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

@@ -6,7 +6,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    static_assert( partial_accumulate< op::plus, 1, int, 1 >::value == 1, "oops" );
    static_assert( partial_accumulate< op::plus, 2, int, 1, 2, 3 >::value == 3, "oops" );

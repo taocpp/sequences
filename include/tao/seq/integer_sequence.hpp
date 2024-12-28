@@ -11,7 +11,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
 #ifdef TAO_SEQ_USE_STD_INTEGER_SEQUENCE
 
@@ -36,7 +36,7 @@ namespace tao
 
 #endif
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

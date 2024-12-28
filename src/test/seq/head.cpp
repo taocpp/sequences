@@ -8,7 +8,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    static_assert( head< int, 0 >::value == 0, "oops" );
    static_assert( head< int, 0, 42 >::value == 0, "oops" );

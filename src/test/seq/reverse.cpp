@@ -8,7 +8,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    static_assert( std::is_same< reverse_t< long >, integer_sequence< long > >::value, "oops" );
    static_assert( std::is_same< reverse_t< int, 1 >, integer_sequence< int, 1 > >::value, "oops" );

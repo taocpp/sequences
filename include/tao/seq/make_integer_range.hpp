@@ -10,7 +10,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       namespace impl
       {
@@ -37,7 +37,7 @@ namespace tao
       template< std::size_t N, std::size_t M >
       using make_index_range = make_integer_range< std::size_t, N, M >;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

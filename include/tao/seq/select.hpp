@@ -12,7 +12,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< std::size_t I, typename T, T... Ns >
       struct select
@@ -26,7 +26,7 @@ namespace tao
       {
       };
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

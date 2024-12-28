@@ -7,7 +7,7 @@
 
 int main()
 {
-   using namespace tao::seq;
+   using namespace tao::sequence;
 
    static_assert( std::is_same< at_index_t< 0, void >, void >::value, "oops" );
    static_assert( std::is_same< at_index_t< 0, void* >, void* >::value, "oops" );

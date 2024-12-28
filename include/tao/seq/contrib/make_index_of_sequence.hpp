@@ -11,7 +11,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename, typename >
       struct make_index_of_sequence;
@@ -25,7 +25,7 @@ namespace tao
       template< typename A, typename B >
       using make_index_of_sequence_t = typename make_index_of_sequence< A, B >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

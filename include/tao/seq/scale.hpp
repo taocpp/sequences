@@ -9,7 +9,7 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       namespace impl
       {
@@ -41,7 +41,7 @@ namespace tao
       template< typename T, typename impl::element_type< T >::type S, T... Ns >
       using scale_t = typename scale< T, S, Ns... >::type;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 

@@ -9,12 +9,12 @@
 
 namespace tao
 {
-   namespace seq
+   namespace sequence
    {
       template< typename T, T... Ns >
       using max = reduce< op::max, T, Ns... >;
 
-   }  // namespace seq
+   }  // namespace sequence
 
 }  // namespace tao
 
