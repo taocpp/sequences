@@ -45,7 +45,7 @@ namespace tao
          {
          };
 
-#if( __cplusplus >= 201402L )
+#if ( __cplusplus >= 201402L )
          template< typename... Ts >
          constexpr impl::indexer< index_sequence_for< Ts... >, Ts... > index_value{};
 #endif
@@ -55,7 +55,7 @@ namespace tao
 
       }  // namespace impl
 
-#if( __cplusplus >= 201402L )
+#if ( __cplusplus >= 201402L )
 
       template< std::size_t I, typename... Ts >
       using at_index = decltype( impl::select< I >( impl::index_value< Ts... > ) );

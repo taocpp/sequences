@@ -13,7 +13,7 @@ namespace tao
    {
       namespace impl
       {
-#if( __cplusplus >= 201402L )
+#if ( __cplusplus >= 201402L )
 
          template< typename OP, typename T, T V, T... Ns >
          constexpr auto exclusive_impl( integer_sequence< T, Ns... > /*unused*/, integer_sequence< T > /*unused*/ ) noexcept
