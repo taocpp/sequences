@@ -1,0 +1,41 @@
+name: Linux
+
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  linux-next:
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - g++-13
+          - g++-14
+          - clang++-16
+          - clang++-17
+          - clang++-18
+        build_type: [Debug, Release]
+
+    runs-on: ubuntu-24.04
+
+    env:
+      CXX: ${{ matrix.compiler }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - run: cmake -E make_directory build
+
+    - working-directory: build/
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+
+    - working-directory: build/
+      run: cmake --build .
+
+    - working-directory: build/
+      run: ctest --output-on-failure

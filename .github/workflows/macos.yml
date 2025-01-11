@@ -1,0 +1,33 @@
+name: macOS
+
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  xcode-macos-14:
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode: ['15']
+        build_type: [Debug, Release]
+
+    runs-on: macos-14
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - run: cmake -E make_directory build
+
+    - working-directory: build/
+      run: cmake $GITHUB_WORKSPACE
+
+    - working-directory: build/
+      run: cmake --build . --config ${{ matrix.build_type }}
+
+    - working-directory: build/
+      run: ctest --output-on-failure

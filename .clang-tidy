@@ -1,5 +1,18 @@
+# The Art of C++
+# https://github.com/taocpp
+
+# Copyright (c) 2016-2025 Dr. Colin Hirsch and Daniel Frey
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE_1_0.txt or copy at https://www.boost.org/LICENSE_1_0.txt)
+
+# Note: The misc-include-cleaner is generally useful,
+# but produces false positives with Oid/InvalidOid and libpq-fe.h.
+# For that reason it is disabled, but it should be enabled
+# manually from time to time.
+
 Checks: >-
   bugprone-*,
+  -bugprone-easily-swappable-parameters,
   cppcoreguidelines-slicing,
   cppcoreguidelines-special-member-functions,
   google-build-explicit-make-pair,
@@ -7,10 +20,11 @@ Checks: >-
   google-default-arguments,
   google-global-names-in-headers,
   google-readability-casting,
+  llvm-*,
   misc-*,
+  -misc-include-cleaner,
   -misc-non-private-member-variables-in-classes,
   -misc-unused-alias-decls,
-  llvm-*,
   modernize-*,
   -modernize-avoid-c-arrays,
   -modernize-concat-nested-namespaces,
@@ -18,7 +32,10 @@ Checks: >-
   performance-*,
   readability-*,
   -readability-avoid-const-params-in-decls,
+  -readability-function-cognitive-complexity,
+  -readability-identifier-length,
   -readability-magic-numbers,
+  -readability-non-const-parameter,
 
 CheckOptions:
   - { key: readability-identifier-naming.ClassCase,     value: lower_case }

@@ -1,9 +1,9 @@
 # The Art of C++ / Sequences
 
 [![Release](https://img.shields.io/github/release/taocpp/sequences.svg)](https://github.com/taocpp/sequences/releases/latest)
-[![Download](https://api.bintray.com/packages/conan/conan-center/taocpp-sequences%3A_/images/download.svg)](https://bintray.com/conan/conan-center/taocpp-sequences%3A_/_latestVersion)
-[![TravisCI](https://travis-ci.org/taocpp/sequences.svg)](https://travis-ci.org/taocpp/sequences)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/taocpp/sequences?svg=true)](https://ci.appveyor.com/project/taocpp/sequences)
+[![Windows CI](https://github.com/taocpp/sequences/workflows/Windows/badge.svg)](https://github.com/taocpp/sequences/actions?query=workflow%3AWindows)
+[![macOS CI](https://github.com/taocpp/sequences/workflows/macOS/badge.svg)](https://github.com/taocpp/sequences/actions?query=workflow%3AmacOS)
+[![Linux CI](https://github.com/taocpp/sequences/workflows/Linux/badge.svg)](https://github.com/taocpp/sequences/actions?query=workflow%3ALinux)
 
 [The Art of C++](https://taocpp.github.io/) / Sequences is a zero-dependency C++11 header-only library that provides efficient algorithms to generate and work on variadic templates and [`std::integer_sequence`](http://en.cppreference.com/w/cpp/utility/integer_sequence).
 
