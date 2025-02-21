@@ -56,7 +56,8 @@ Only if we don't know if the STL's versions are at least O(log N) we provide our
 Our own implementation has O(log N) instantiation depth.
 This allows for very large sequences without the need to increase the compiler's default instantiation depth limits.
 For example, GCC and Clang generate `index_sequence<10000>` in ~0.15s (on my machine, of course).
-The standard library version from libstdc++, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
+The standard library version from libstdc++ prior to version 8, when trying to create `index_sequence<5000>` and with its O(N) implementation, requires ~30s, >3GB of RAM and `-ftemplate-depth=5100`.
+Modern versions of libc++ and libstdc++ use compiler intrinsics and are used when available.
 
 #### Header `tao/seq/make_integer_range.hpp`
 
