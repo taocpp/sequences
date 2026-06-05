@@ -435,6 +435,12 @@ If the version is out-of-date, please [create an issue or pull request](https://
 
 ## Changelog
 
+### 3.0.1
+
+Release 2026-06-07
+
+* Add release tag for 3.0.1, as there was no tag for 3.0.0 by accident. Oops.
+
 ### 3.0.0
 
 Released 2024-12-28
